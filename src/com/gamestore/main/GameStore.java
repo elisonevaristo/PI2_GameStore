@@ -7,7 +7,7 @@ package com.gamestore.main;
 
 import com.gamestore.interfaces.IncluirCliente;
 import com.gamestore.interfaces.ListarCliente;
-import java.awt.Dimension;
+import com.gamestore.interfaces.ListarProduto;
 
 /**
  *
@@ -31,14 +31,12 @@ public class GameStore extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        incluirCliente1 = new com.gamestore.interfaces.IncluirCliente();
         backgroundPanel = new javax.swing.JPanel();
         buttonsPanel = new javax.swing.JPanel();
         botaoCadastroClientes = new javax.swing.JButton();
         botaoCadastroProdutos = new javax.swing.JButton();
         botaoVendas = new javax.swing.JButton();
         botaoRelatorios = new javax.swing.JButton();
-        incluirCliente2 = new com.gamestore.interfaces.IncluirCliente();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Game Store");
@@ -76,33 +74,19 @@ public class GameStore extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(incluirCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(incluirCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroClientesActionPerformed
-        buttonsPanel.setVisible(false);
-        
-        javax.swing.JPanel cliente = new ListarCliente();
-        
-        backgroundPanel.add(cliente);
-               
-        cliente.setSize(cliente.getWidth(), this.getHeight());
+        buttonsPanel.setVisible(false);        
+        javax.swing.JPanel cliente = new ListarCliente();        
+        backgroundPanel.add(cliente);               
         cliente.setVisible(true);
     }//GEN-LAST:event_botaoCadastroClientesActionPerformed
 
@@ -148,7 +132,5 @@ public class GameStore extends javax.swing.JFrame {
     private javax.swing.JButton botaoRelatorios;
     private javax.swing.JButton botaoVendas;
     private javax.swing.JPanel buttonsPanel;
-    private com.gamestore.interfaces.IncluirCliente incluirCliente1;
-    private com.gamestore.interfaces.IncluirCliente incluirCliente2;
     // End of variables declaration//GEN-END:variables
 }
