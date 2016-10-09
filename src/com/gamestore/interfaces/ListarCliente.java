@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.gamestore.interfaces;
-
 import com.gamestore.main.GameStore;
 
 /**
@@ -12,7 +11,7 @@ import com.gamestore.main.GameStore;
  * @author Roger
  */
 public class ListarCliente extends javax.swing.JPanel {
-
+    
     GameStore parent;
     
     /**
@@ -138,9 +137,8 @@ public class ListarCliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoIncluirNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovoActionPerformed
-        parent.exibirInclusaoDeNovoCliente();
+        parent.exibirPainel("incluirCliente");
     }//GEN-LAST:event_botaoIncluirNovoActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoIncluirNovo;
