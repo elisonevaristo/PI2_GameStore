@@ -7,7 +7,8 @@ package com.gamestore.main;
 
 import com.gamestore.interfaces.IncluirCliente;
 import com.gamestore.interfaces.ListarCliente;
-import com.gamestore.interfaces.ListarProduto;
+import java.awt.Component;
+import javax.swing.JPanel;
 
 /**
  *
@@ -84,12 +85,35 @@ public class GameStore extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroClientesActionPerformed
-        buttonsPanel.setVisible(false);        
-        javax.swing.JPanel cliente = new ListarCliente();        
-        backgroundPanel.add(cliente);               
-        cliente.setVisible(true);
+        exibirListaDeClientes();        
     }//GEN-LAST:event_botaoCadastroClientesActionPerformed
 
+    //<editor-fold defaultstate="collapsed" desc="Métodos para controle de interface">
+    
+    public void exibirInclusaoDeNovoCliente()
+    {
+        exibirPainel(new IncluirCliente());
+    }
+    
+    public void exibirListaDeClientes()
+    {
+        exibirPainel(new ListarCliente(this));
+    }
+    
+    private void exibirPainel(JPanel panel)
+    {        
+        Component[] components = backgroundPanel.getComponents();        
+        
+        for (Component component : components) {
+            component.setVisible(false);
+        }
+        
+        backgroundPanel.add(panel);               
+        panel.setVisible(true);
+    }    
+    
+    //</editor-fold>
+    
     /**
      * @param args the command line arguments
      */

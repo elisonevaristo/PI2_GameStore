@@ -5,17 +5,23 @@
  */
 package com.gamestore.interfaces;
 
+import com.gamestore.main.GameStore;
+
 /**
  *
  * @author Roger
  */
 public class ListarCliente extends javax.swing.JPanel {
 
+    GameStore parent;
+    
     /**
      * Creates new form ListarCliente
+     * @Param parent é o form pai, usado quando for necessário alternar as telas
      */
-    public ListarCliente() {
+    public ListarCliente(GameStore parent) {
         initComponents();
+        this.parent = parent;
     }
 
     /**
@@ -38,7 +44,7 @@ public class ListarCliente extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(825, 370));
+        setPreferredSize(new java.awt.Dimension(825, 500));
 
         tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object[][]
@@ -54,6 +60,11 @@ public class ListarCliente extends javax.swing.JPanel {
     botaoIncluirNovo.setBackground(new java.awt.Color(255, 255, 255));
     botaoIncluirNovo.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
     botaoIncluirNovo.setText("INCLUIR NOVO CLIENTE");
+    botaoIncluirNovo.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            botaoIncluirNovoActionPerformed(evt);
+        }
+    });
 
     jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -125,6 +136,10 @@ public class ListarCliente extends javax.swing.JPanel {
             .addContainerGap())
     );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botaoIncluirNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovoActionPerformed
+        parent.exibirInclusaoDeNovoCliente();
+    }//GEN-LAST:event_botaoIncluirNovoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
