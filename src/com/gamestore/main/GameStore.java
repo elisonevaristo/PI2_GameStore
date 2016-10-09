@@ -6,6 +6,7 @@
 package com.gamestore.main;
 
 import com.gamestore.interfaces.IncluirCliente;
+import com.gamestore.interfaces.ListarCliente;
 import java.awt.Dimension;
 
 /**
@@ -97,7 +98,7 @@ public class GameStore extends javax.swing.JFrame {
     private void botaoCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroClientesActionPerformed
         buttonsPanel.setVisible(false);
         
-        javax.swing.JPanel cliente = new IncluirCliente();
+        javax.swing.JPanel cliente = new ListarCliente();
         
         backgroundPanel.add(cliente);
                
