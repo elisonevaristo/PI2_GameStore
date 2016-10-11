@@ -38,9 +38,11 @@ public class SelecaoInicial extends javax.swing.JPanel {
         botaoVendas = new javax.swing.JButton();
         botaoRelatorios = new javax.swing.JButton();
 
+        buttonsPanel.setBackground(new java.awt.Color(255, 255, 255));
         buttonsPanel.setPreferredSize(new java.awt.Dimension(600, 300));
-        buttonsPanel.setLayout(new java.awt.GridLayout());
+        buttonsPanel.setLayout(new java.awt.GridLayout(1, 0));
 
+        botaoCadastroClientes.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         botaoCadastroClientes.setText("CLIENTES");
         botaoCadastroClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,13 +51,31 @@ public class SelecaoInicial extends javax.swing.JPanel {
         });
         buttonsPanel.add(botaoCadastroClientes);
 
+        botaoCadastroProdutos.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         botaoCadastroProdutos.setText("PRODUTOS");
+        botaoCadastroProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCadastroProdutosActionPerformed(evt);
+            }
+        });
         buttonsPanel.add(botaoCadastroProdutos);
 
+        botaoVendas.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         botaoVendas.setText("VENDAS");
+        botaoVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoVendasActionPerformed(evt);
+            }
+        });
         buttonsPanel.add(botaoVendas);
 
+        botaoRelatorios.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         botaoRelatorios.setText("RELATÓRIOS");
+        botaoRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRelatoriosActionPerformed(evt);
+            }
+        });
         buttonsPanel.add(botaoRelatorios);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -83,6 +103,18 @@ public class SelecaoInicial extends javax.swing.JPanel {
     private void botaoCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroClientesActionPerformed
         parent.exibirPainel("listarCliente");
     }//GEN-LAST:event_botaoCadastroClientesActionPerformed
+
+    private void botaoCadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroProdutosActionPerformed
+        parent.exibirPainel("listarProduto");
+    }//GEN-LAST:event_botaoCadastroProdutosActionPerformed
+
+    private void botaoVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVendasActionPerformed
+        parent.exibirPainel("novaVenda");
+    }//GEN-LAST:event_botaoVendasActionPerformed
+
+    private void botaoRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRelatoriosActionPerformed
+        parent.exibirPainel("exibirRelatorio");
+    }//GEN-LAST:event_botaoRelatoriosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

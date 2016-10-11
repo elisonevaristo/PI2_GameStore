@@ -30,8 +30,10 @@ public class GameStore extends javax.swing.JFrame {
      
     private void initComponentsForReal(){
         listarCliente = new com.gamestore.interfaces.ListarCliente(this);
+        listarProduto = new com.gamestore.interfaces.ListarProduto(this);
         selecaoInicial = new com.gamestore.interfaces.SelecaoInicial(this);
         backgroundPanel.add(listarCliente, "listarCliente");
+        backgroundPanel.add(listarProduto, "listarProduto");
         backgroundPanel.add(selecaoInicial, "selecaoInicial");
     }
     
@@ -52,7 +54,7 @@ public class GameStore extends javax.swing.JFrame {
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
 
         backgroundPanel.setBackground(new java.awt.Color(255, 255, 255));
-        backgroundPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
+        backgroundPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         backgroundPanel.setLayout(new java.awt.CardLayout());
         backgroundPanel.add(incluirProduto, "incluirProduto");
         backgroundPanel.add(iniciarVenda, "iniciarVenda");
@@ -61,7 +63,7 @@ public class GameStore extends javax.swing.JFrame {
         backgroundPanel.add(incluirCliente, "incluirCliente");
 
         leftPanel.setBackground(new java.awt.Color(255, 255, 255));
-        leftPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
+        leftPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -75,7 +77,7 @@ public class GameStore extends javax.swing.JFrame {
         );
 
         leftPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        leftPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
+        leftPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         javax.swing.GroupLayout leftPanel1Layout = new javax.swing.GroupLayout(leftPanel1);
         leftPanel1.setLayout(leftPanel1Layout);
@@ -101,7 +103,7 @@ public class GameStore extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+            .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
             .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(leftPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -164,5 +166,6 @@ public class GameStore extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private com.gamestore.interfaces.ListarCliente listarCliente;
+    private com.gamestore.interfaces.ListarProduto listarProduto;
     private com.gamestore.interfaces.SelecaoInicial selecaoInicial;
 }
