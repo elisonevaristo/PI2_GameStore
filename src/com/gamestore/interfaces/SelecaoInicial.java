@@ -32,15 +32,12 @@ public class SelecaoInicial extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonsPanel = new javax.swing.JPanel();
         botaoCadastroClientes = new javax.swing.JButton();
-        botaoCadastroProdutos = new javax.swing.JButton();
-        botaoVendas = new javax.swing.JButton();
         botaoRelatorios = new javax.swing.JButton();
+        botaoVendas = new javax.swing.JButton();
+        botaoCadastroProdutos = new javax.swing.JButton();
 
-        buttonsPanel.setBackground(new java.awt.Color(255, 255, 255));
-        buttonsPanel.setPreferredSize(new java.awt.Dimension(600, 300));
-        buttonsPanel.setLayout(new java.awt.GridLayout(1, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         botaoCadastroClientes.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         botaoCadastroClientes.setText("CLIENTES");
@@ -49,25 +46,6 @@ public class SelecaoInicial extends javax.swing.JPanel {
                 botaoCadastroClientesActionPerformed(evt);
             }
         });
-        buttonsPanel.add(botaoCadastroClientes);
-
-        botaoCadastroProdutos.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
-        botaoCadastroProdutos.setText("PRODUTOS");
-        botaoCadastroProdutos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCadastroProdutosActionPerformed(evt);
-            }
-        });
-        buttonsPanel.add(botaoCadastroProdutos);
-
-        botaoVendas.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
-        botaoVendas.setText("VENDAS");
-        botaoVendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoVendasActionPerformed(evt);
-            }
-        });
-        buttonsPanel.add(botaoVendas);
 
         botaoRelatorios.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         botaoRelatorios.setText("RELATÓRIOS");
@@ -76,27 +54,48 @@ public class SelecaoInicial extends javax.swing.JPanel {
                 botaoRelatoriosActionPerformed(evt);
             }
         });
-        buttonsPanel.add(botaoRelatorios);
+
+        botaoVendas.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
+        botaoVendas.setText("VENDAS");
+        botaoVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoVendasActionPerformed(evt);
+            }
+        });
+
+        botaoCadastroProdutos.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
+        botaoCadastroProdutos.setText("PRODUTOS");
+        botaoCadastroProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCadastroProdutosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoCadastroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoCadastroProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoCadastroProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoCadastroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -122,6 +121,5 @@ public class SelecaoInicial extends javax.swing.JPanel {
     private javax.swing.JButton botaoCadastroProdutos;
     private javax.swing.JButton botaoRelatorios;
     private javax.swing.JButton botaoVendas;
-    private javax.swing.JPanel buttonsPanel;
     // End of variables declaration//GEN-END:variables
 }
