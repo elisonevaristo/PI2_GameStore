@@ -50,6 +50,7 @@ public class GameStore extends javax.swing.JFrame {
         backgroundPanel = new javax.swing.JPanel();
         leftPanel = new javax.swing.JPanel();
         leftPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         labelTitulo = new javax.swing.JLabel();
 
@@ -70,7 +71,7 @@ public class GameStore extends javax.swing.JFrame {
         leftPanel.setLayout(leftPanelLayout);
         leftPanelLayout.setHorizontalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
+            .addGap(0, 204, Short.MAX_VALUE)
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,15 +81,29 @@ public class GameStore extends javax.swing.JFrame {
         leftPanel1.setBackground(new java.awt.Color(255, 255, 255));
         leftPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        jButton1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        jButton1.setText("ENCERRAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout leftPanel1Layout = new javax.swing.GroupLayout(leftPanel1);
         leftPanel1.setLayout(leftPanel1Layout);
         leftPanel1Layout.setHorizontalGroup(
             leftPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 204, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanel1Layout.createSequentialGroup()
+                .addContainerGap(115, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         leftPanel1Layout.setVerticalGroup(
             leftPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(leftPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(459, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -101,9 +116,9 @@ public class GameStore extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(300, Short.MAX_VALUE)
                 .addComponent(labelTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +136,7 @@ public class GameStore extends javax.swing.JFrame {
                 .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
+                    .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addComponent(leftPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -132,11 +147,15 @@ public class GameStore extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
+                .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="Métodos para controle de interface">
         
@@ -150,9 +169,6 @@ public class GameStore extends javax.swing.JFrame {
     public void alterarTitulo(String painel)
     {
         switch (painel) {
-            case "selecaoInicial":
-                labelTitulo.setText("GAME STORE");
-                break;
             case "listarCliente":
                 labelTitulo.setText("LISTA DE CLIENTES");
                 break;
@@ -164,6 +180,12 @@ public class GameStore extends javax.swing.JFrame {
                 break;                
             case "incluirProduto":
                 labelTitulo.setText("CADASTRO DE PRODUTOS");
+                break;
+            case "iniciarVenda":
+                labelTitulo.setText("NOVO PEDIDO");
+                break;    
+            default:
+                labelTitulo.setText("GAME STORE");
                 break;
         }
     }
@@ -207,6 +229,7 @@ public class GameStore extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel backgroundPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JPanel leftPanel;
