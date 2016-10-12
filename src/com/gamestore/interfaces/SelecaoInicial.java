@@ -109,7 +109,7 @@ public class SelecaoInicial extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoCadastroProdutosActionPerformed
 
     private void botaoVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVendasActionPerformed
-        parent.exibirPainel("novaVenda");
+        parent.exibirPainel("iniciarVenda");
     }//GEN-LAST:event_botaoVendasActionPerformed
 
     private void botaoRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRelatoriosActionPerformed

@@ -34,12 +34,14 @@ public class GameStore extends javax.swing.JFrame {
         listarProduto = new com.gamestore.interfaces.ListarProduto(this);
         incluirCliente = new com.gamestore.interfaces.IncluirCliente(this);
         incluirProduto = new com.gamestore.interfaces.IncluirProduto(this);
+        iniciarVenda = new com.gamestore.interfaces.IniciarVenda(this);
         
         backgroundPanel.add(selecaoInicial, "selecaoInicial");
         backgroundPanel.add(listarCliente, "listarCliente");
         backgroundPanel.add(listarProduto, "listarProduto");
         backgroundPanel.add(incluirCliente, "incluirCliente");
         backgroundPanel.add(incluirProduto, "incluirProduto");
+        backgroundPanel.add(iniciarVenda, "iniciarVenda");
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -68,7 +70,7 @@ public class GameStore extends javax.swing.JFrame {
         leftPanel.setLayout(leftPanelLayout);
         leftPanelLayout.setHorizontalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
+            .addGap(0, 210, Short.MAX_VALUE)
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +84,7 @@ public class GameStore extends javax.swing.JFrame {
         leftPanel1.setLayout(leftPanel1Layout);
         leftPanel1Layout.setHorizontalGroup(
             leftPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 224, Short.MAX_VALUE)
+            .addGap(0, 204, Short.MAX_VALUE)
         );
         leftPanel1Layout.setVerticalGroup(
             leftPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +121,7 @@ public class GameStore extends javax.swing.JFrame {
                 .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
+                    .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addComponent(leftPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -130,7 +132,7 @@ public class GameStore extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
+                .addComponent(backgroundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
         );
 
         pack();
