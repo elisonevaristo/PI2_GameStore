@@ -35,6 +35,7 @@ public class GameStore extends javax.swing.JFrame {
         incluirCliente = new com.gamestore.interfaces.IncluirCliente(this);
         incluirProduto = new com.gamestore.interfaces.IncluirProduto(this);
         iniciarVenda = new com.gamestore.interfaces.IniciarVenda(this);
+        exibirRelatorio = new com.gamestore.interfaces.Relatorio(this);
         
         backgroundPanel.add(selecaoInicial, "selecaoInicial");
         backgroundPanel.add(listarCliente, "listarCliente");
@@ -42,6 +43,7 @@ public class GameStore extends javax.swing.JFrame {
         backgroundPanel.add(incluirCliente, "incluirCliente");
         backgroundPanel.add(incluirProduto, "incluirProduto");
         backgroundPanel.add(iniciarVenda, "iniciarVenda");
+        backgroundPanel.add(exibirRelatorio, "exibirRelatorio");
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -51,6 +53,7 @@ public class GameStore extends javax.swing.JFrame {
         leftPanel = new javax.swing.JPanel();
         leftPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         labelTitulo = new javax.swing.JLabel();
 
@@ -89,13 +92,23 @@ public class GameStore extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        jButton2.setText("INÍCIO");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout leftPanel1Layout = new javax.swing.GroupLayout(leftPanel1);
         leftPanel1.setLayout(leftPanel1Layout);
         leftPanel1Layout.setHorizontalGroup(
             leftPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanel1Layout.createSequentialGroup()
+            .addGroup(leftPanel1Layout.createSequentialGroup()
                 .addContainerGap(115, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(leftPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         leftPanel1Layout.setVerticalGroup(
@@ -103,7 +116,9 @@ public class GameStore extends javax.swing.JFrame {
             .addGroup(leftPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(459, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(377, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -157,6 +172,10 @@ public class GameStore extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        exibirPainel("selecaoInicial");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     //<editor-fold defaultstate="collapsed" desc="Métodos para controle de interface">
         
     public void exibirPainel(String painel)
@@ -184,6 +203,9 @@ public class GameStore extends javax.swing.JFrame {
             case "iniciarVenda":
                 labelTitulo.setText("NOVO PEDIDO");
                 break;    
+            case "exibirRelatorio":
+                labelTitulo.setText("RELATÓRIO DE VENDAS");
+                break;        
             default:
                 labelTitulo.setText("GAME STORE");
                 break;
@@ -230,6 +252,7 @@ public class GameStore extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel backgroundPanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JPanel leftPanel;
