@@ -6,6 +6,9 @@
 package com.gamestore.interfaces;
 
 import com.gamestore.main.GameStore;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.border.MatteBorder;
 
 /**
  *
@@ -51,9 +54,8 @@ public class ListarProduto extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        listaProdutos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
 
         jLabel7.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel7.setText("Plataforma");
@@ -165,18 +167,38 @@ public class ListarProduto extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        listaProdutos.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, "Destiny", "Bungie", "Xbox One",  new Double(230.0),  new Integer(60)},
+                {null, "Final Fantasy XV", "Square-Enix", "PC",  new Double(300.0),  new Integer(0)},
+                {null, "Gears of War 3", "Epic Games", "Xbox 360",  new Double(159.99),  new Integer(53)},
+                {null, "Halo 5", "343 Industries", "Xbox One",  new Double(200.0),  new Integer(45)},
+                {null, "Uncharted 2", "Naugthy Dog", "Playstation 3",  new Double(139.99),  new Integer(340)},
+                {null, "Uncharted 4", "Naugthy Dog", "Playstation 4",  new Double(249.99),  new Integer(120)}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "", "Título", "Desenvolvedora", "Plataforma", "Preço", "Estoque"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        listaProdutos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        listaProdutos.getTableHeader().setFont(new Font("Calibri Light", Font.BOLD, 15));
+        jScrollPane1.setViewportView(listaProdutos);
 
         jButton1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jButton1.setText("INSERIR NOVO PRODUTO");
@@ -185,9 +207,6 @@ public class ListarProduto extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jLabel11.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jLabel11.setText("EAN");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -200,11 +219,6 @@ public class ListarProduto extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(54, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(250, 250, 250)
-                    .addComponent(jLabel11)
-                    .addContainerGap(551, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,18 +230,13 @@ public class ListarProduto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(269, 269, 269)
-                    .addComponent(jLabel11)
-                    .addContainerGap(214, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         parent.exibirPainel("incluirProduto");
     }//GEN-LAST:event_jButton1ActionPerformed
-
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -238,7 +247,6 @@ public class ListarProduto extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -247,10 +255,10 @@ public class ListarProduto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTable listaProdutos;
     // End of variables declaration//GEN-END:variables
 }
