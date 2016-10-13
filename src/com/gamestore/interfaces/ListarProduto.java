@@ -55,7 +55,9 @@ public class ListarProduto extends javax.swing.JPanel {
         jTextField10 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaProdutos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        botaoIncluirNovo2 = new javax.swing.JButton();
+        botaoIncluirNovo = new javax.swing.JButton();
+        botaoIncluirNovo1 = new javax.swing.JButton();
 
         jLabel7.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel7.setText("Plataforma");
@@ -123,7 +125,7 @@ public class ListarProduto extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                            .addComponent(jTextField2)
                             .addComponent(jTextField1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,11 +202,30 @@ public class ListarProduto extends javax.swing.JPanel {
         listaProdutos.getTableHeader().setFont(new Font("Calibri Light", Font.BOLD, 15));
         jScrollPane1.setViewportView(listaProdutos);
 
-        jButton1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jButton1.setText("INSERIR NOVO PRODUTO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoIncluirNovo2.setBackground(new java.awt.Color(255, 255, 255));
+        botaoIncluirNovo2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoIncluirNovo2.setText("EXCLUIR SELECIONADOS");
+        botaoIncluirNovo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoIncluirNovo2ActionPerformed(evt);
+            }
+        });
+
+        botaoIncluirNovo.setBackground(new java.awt.Color(255, 255, 255));
+        botaoIncluirNovo.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoIncluirNovo.setText("EDITAR SELECIONADO");
+        botaoIncluirNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIncluirNovoActionPerformed(evt);
+            }
+        });
+
+        botaoIncluirNovo1.setBackground(new java.awt.Color(255, 255, 255));
+        botaoIncluirNovo1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoIncluirNovo1.setText("INCLUIR NOVO PRODUTO");
+        botaoIncluirNovo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIncluirNovo1ActionPerformed(evt);
             }
         });
 
@@ -212,14 +233,22 @@ public class ListarProduto extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botaoIncluirNovo2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoIncluirNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoIncluirNovo1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoIncluirNovo, botaoIncluirNovo1, botaoIncluirNovo2});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -228,18 +257,34 @@ public class ListarProduto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(botaoIncluirNovo1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIncluirNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIncluirNovo2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botaoIncluirNovo, botaoIncluirNovo1, botaoIncluirNovo2});
+
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoIncluirNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoIncluirNovo2ActionPerformed
+
+    private void botaoIncluirNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovoActionPerformed
         parent.exibirPainel("incluirProduto");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botaoIncluirNovoActionPerformed
+
+    private void botaoIncluirNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoIncluirNovo1ActionPerformed
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botaoIncluirNovo;
+    private javax.swing.JButton botaoIncluirNovo1;
+    private javax.swing.JButton botaoIncluirNovo2;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;

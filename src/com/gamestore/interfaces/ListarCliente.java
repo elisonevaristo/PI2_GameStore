@@ -6,6 +6,8 @@
 package com.gamestore.interfaces;
 import com.gamestore.main.GameStore;
 import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 
 /**
  *
@@ -42,10 +44,13 @@ public class ListarCliente extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        botaoIncluirNovo1 = new javax.swing.JButton();
+        botaoIncluirNovo2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(825, 500));
 
+        tableClientes.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, "Kauã Costa Lima", "720.683.736-02",  new Integer(23),  new Integer(4)},
@@ -77,7 +82,7 @@ public class ListarCliente extends javax.swing.JPanel {
 
         botaoIncluirNovo.setBackground(new java.awt.Color(255, 255, 255));
         botaoIncluirNovo.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        botaoIncluirNovo.setText("INCLUIR NOVO CLIENTE");
+        botaoIncluirNovo.setText("EDITAR SELECIONADO");
         botaoIncluirNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIncluirNovoActionPerformed(evt);
@@ -115,7 +120,7 @@ public class ListarCliente extends javax.swing.JPanel {
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,6 +135,24 @@ public class ListarCliente extends javax.swing.JPanel {
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
+        botaoIncluirNovo1.setBackground(new java.awt.Color(255, 255, 255));
+        botaoIncluirNovo1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoIncluirNovo1.setText("INCLUIR NOVO CLIENTE");
+        botaoIncluirNovo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIncluirNovo1ActionPerformed(evt);
+            }
+        });
+
+        botaoIncluirNovo2.setBackground(new java.awt.Color(255, 255, 255));
+        botaoIncluirNovo2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoIncluirNovo2.setText("EXCLUIR SELECIONADOS");
+        botaoIncluirNovo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIncluirNovo2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,32 +160,57 @@ public class ListarCliente extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(botaoIncluirNovo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addComponent(botaoIncluirNovo2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoIncluirNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoIncluirNovo1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoIncluirNovo, botaoIncluirNovo1, botaoIncluirNovo2});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                .addGap(11, 11, 11)
-                .addComponent(botaoIncluirNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(botaoIncluirNovo1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIncluirNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIncluirNovo2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botaoIncluirNovo, botaoIncluirNovo1, botaoIncluirNovo2});
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoIncluirNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovoActionPerformed
         parent.exibirPainel("incluirCliente");
     }//GEN-LAST:event_botaoIncluirNovoActionPerformed
 
+    private void botaoIncluirNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoIncluirNovo1ActionPerformed
+
+    private void botaoIncluirNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoIncluirNovo2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoIncluirNovo;
+    private javax.swing.JButton botaoIncluirNovo1;
+    private javax.swing.JButton botaoIncluirNovo2;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
