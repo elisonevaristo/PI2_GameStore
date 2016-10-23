@@ -6,6 +6,14 @@
 package com.gamestore.interfaces;
 
 import com.gamestore.main.GameStore;
+import com.gamestore.models.Cliente;
+import com.gamestore.models.PreferenciaContato;
+import com.gamestore.models.Sexo;
+import com.gamestore.services.ServicoCliente;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 /**
  *
  * @author Roger
@@ -13,13 +21,15 @@ import com.gamestore.main.GameStore;
 public class IncluirCliente extends javax.swing.JPanel {
 
     GameStore parent;
+    ServicoCliente servico;
     
     /**
      * Creates new form Cliente
      */
-    public IncluirCliente(GameStore parent) {
+    public IncluirCliente(GameStore parent, ServicoCliente servico) {
         initComponents();
         this.parent = parent;
+        this.servico = servico;
     }
 
     /**
@@ -38,49 +48,49 @@ public class IncluirCliente extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        textNome = new javax.swing.JTextField();
+        textRg = new javax.swing.JTextField();
+        textApelido = new javax.swing.JTextField();
+        textSobreNome = new javax.swing.JTextField();
+        textNascimento = new javax.swing.JTextField();
+        textCpf = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboEstadoCivil = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboSexo = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        textCep = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        textLogradouro = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        textNumero = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        textComplemento = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        textBairro = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        textCidade = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        textUf = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
+        textEmail = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        textFoneRes = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        textFoneCel = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
+        textFoneCom = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        radioCelular = new javax.swing.JRadioButton();
+        radioEmail = new javax.swing.JRadioButton();
+        radioResidencial = new javax.swing.JRadioButton();
+        botaoCancelar = new javax.swing.JButton();
+        botaoSalvar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -104,32 +114,17 @@ public class IncluirCliente extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel5.setText("Nascimento");
 
-        jTextField1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        textNome.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
+        textRg.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        textApelido.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        textSobreNome.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
-        jTextField5.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
+        textNascimento.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
-        jTextField6.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        textCpf.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel6.setText("Estado Civil");
@@ -137,14 +132,14 @@ public class IncluirCliente extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel7.setText("RG");
 
-        jComboBox1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Não informado", "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+        comboEstadoCivil.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        comboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Não informado", "Solteiro", "Casado", "Divorciado", "Viúvo" }));
 
         jLabel16.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel16.setText("Sexo");
 
-        jComboBox2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[Selecione...]", "Masculino", "Feminino", "Indefinido" }));
+        comboSexo.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[Selecione...]", "Masculino", "Feminino", "Indefinido" }));
 
         jLabel17.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gamestore/resources/will-smith.jpg"))); // NOI18N
@@ -152,72 +147,37 @@ public class IncluirCliente extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel8.setText("CEP");
 
-        jTextField7.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
+        textCep.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel9.setText("Logradouro");
 
-        jTextField8.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
-            }
-        });
+        textLogradouro.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel10.setText("Nº");
 
-        jTextField9.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
-            }
-        });
+        textNumero.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel14.setText("Complemento");
 
-        jTextField11.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
-            }
-        });
+        textComplemento.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel11.setText("Bairro");
 
-        jTextField12.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
-            }
-        });
+        textBairro.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel12.setText("Cidade");
 
-        jTextField13.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
-            }
-        });
+        textCidade.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel13.setText("Estado");
 
-        jTextField10.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
-            }
-        });
+        textUf.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel19.setForeground(new java.awt.Color(204, 204, 255));
         jLabel19.setText("_______________________________________________________________________________________________________________________________");
@@ -228,12 +188,7 @@ public class IncluirCliente extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel15.setText("E-mail");
 
-        jTextField14.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
-            }
-        });
+        textEmail.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel25.setFont(new java.awt.Font("Calibri Light", 1, 14)); // NOI18N
         jLabel25.setText("Telefones");
@@ -241,52 +196,32 @@ public class IncluirCliente extends javax.swing.JPanel {
         jLabel23.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel23.setText("Residencial");
 
-        jTextField16.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField16ActionPerformed(evt);
-            }
-        });
+        textFoneRes.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel24.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel24.setText("Celular");
 
-        jTextField15.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField15ActionPerformed(evt);
-            }
-        });
+        textFoneCel.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel27.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel27.setText("Comercial");
 
-        jTextField17.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTextField17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField17ActionPerformed(evt);
-            }
-        });
+        textFoneCom.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel26.setFont(new java.awt.Font("Calibri Light", 1, 14)); // NOI18N
         jLabel26.setText("Preferencia de contato");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("celular");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
+        radioCelular.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radioCelular);
+        radioCelular.setText("celular");
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("e-mail");
+        radioEmail.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radioEmail);
+        radioEmail.setText("e-mail");
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("telefone residencial");
+        radioResidencial.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radioResidencial);
+        radioResidencial.setText("telefone residencial");
 
         javax.swing.GroupLayout panelDadosPessoaisLayout = new javax.swing.GroupLayout(panelDadosPessoais);
         panelDadosPessoais.setLayout(panelDadosPessoaisLayout);
@@ -304,40 +239,40 @@ public class IncluirCliente extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(43, 43, 43)
                                         .addComponent(jLabel12)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(textCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
                                 .addComponent(jLabel25)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel23)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textFoneRes, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textFoneCel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel27)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(textFoneCom, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
                                 .addComponent(jLabel26)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2)
+                                .addComponent(radioEmail)
                                 .addGap(2, 2, 2)
-                                .addComponent(jRadioButton3)
+                                .addComponent(radioResidencial)
                                 .addGap(2, 2, 2)
-                                .addComponent(jRadioButton1))
+                                .addComponent(radioCelular))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
                                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addGap(4, 4, 4)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textCep, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel9))
                                     .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
@@ -351,33 +286,33 @@ public class IncluirCliente extends javax.swing.JPanel {
                                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(10, 10, 10)
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textRg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textSobreNome, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(comboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
                                                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(jLabel13)
                                                     .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(textNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(jLabel14)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jTextField11)
-                                                    .addComponent(jTextField10)))))
+                                                    .addComponent(textComplemento)
+                                                    .addComponent(textUf)))))
                                     .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                            .addComponent(jTextField6)
-                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTextField1))
+                                            .addComponent(textApelido, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                            .addComponent(textCpf)
+                                            .addComponent(comboEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(textNome))
                                         .addGap(18, 18, 18)
                                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -392,11 +327,11 @@ public class IncluirCliente extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField3, jTextField6});
+        panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textApelido, textCpf, textNome});
 
-        panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField2, jTextField4, jTextField5});
+        panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textNascimento, textRg, textSobreNome});
 
-        panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField15, jTextField16, jTextField17});
+        panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textFoneCel, textFoneCom, textFoneRes});
 
         panelDadosPessoaisLayout.setVerticalGroup(
             panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,27 +341,27 @@ public class IncluirCliente extends javax.swing.JPanel {
                         .addGap(51, 51, 51)
                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textApelido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textSobreNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel6)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(textNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -434,22 +369,22 @@ public class IncluirCliente extends javax.swing.JPanel {
                 .addComponent(jLabel19)
                 .addGap(23, 23, 23)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -457,37 +392,42 @@ public class IncluirCliente extends javax.swing.JPanel {
                     .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel15))
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel25)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFoneRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFoneCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFoneCom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel26)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton1))
+                    .addComponent(radioEmail)
+                    .addComponent(radioResidencial)
+                    .addComponent(radioCelular))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jButton1.setText("CANCELAR");
+        botaoCancelar.setText("CANCELAR");
 
-        jButton2.setText("SALVAR");
+        botaoSalvar.setText("SALVAR");
+        botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(botaoSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(panelDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -496,78 +436,41 @@ public class IncluirCliente extends javax.swing.JPanel {
                 .addComponent(panelDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(botaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
+        try
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = sdf.parse(textNascimento.getText());
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+            Calendar nascimento = Calendar.getInstance();
+            nascimento.setTime(date);
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
-
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
-
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
-
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14ActionPerformed
-
-    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField15ActionPerformed
-
-    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField16ActionPerformed
-
-    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+            Cliente cliente = new Cliente(textNome.getText(), textSobreNome.getText(), Sexo.masculino, textCpf.getText(), nascimento, PreferenciaContato.email);
+            
+            servico.CadastrarCliente(cliente);
+        }
+        catch(ParseException pex)
+        {
+            
+        }
+        catch(Exception ex)
+        {
+        
+        }
+    }//GEN-LAST:event_botaoSalvarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoCancelar;
+    private javax.swing.JButton botaoSalvar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> comboEstadoCivil;
+    private javax.swing.JComboBox<String> comboSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -592,26 +495,26 @@ public class IncluirCliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel panelDadosPessoais;
+    private javax.swing.JRadioButton radioCelular;
+    private javax.swing.JRadioButton radioEmail;
+    private javax.swing.JRadioButton radioResidencial;
+    private javax.swing.JTextField textApelido;
+    private javax.swing.JTextField textBairro;
+    private javax.swing.JTextField textCep;
+    private javax.swing.JTextField textCidade;
+    private javax.swing.JTextField textComplemento;
+    private javax.swing.JTextField textCpf;
+    private javax.swing.JTextField textEmail;
+    private javax.swing.JTextField textFoneCel;
+    private javax.swing.JTextField textFoneCom;
+    private javax.swing.JTextField textFoneRes;
+    private javax.swing.JTextField textLogradouro;
+    private javax.swing.JTextField textNascimento;
+    private javax.swing.JTextField textNome;
+    private javax.swing.JTextField textNumero;
+    private javax.swing.JTextField textRg;
+    private javax.swing.JTextField textSobreNome;
+    private javax.swing.JTextField textUf;
     // End of variables declaration//GEN-END:variables
 }

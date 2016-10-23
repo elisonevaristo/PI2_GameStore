@@ -29,10 +29,14 @@ public class GameStore extends javax.swing.JFrame {
      */
      
     private void initComponentsForReal(){        
+        
+        /* Inicializa os serviços */        
+        servicoCliente = new com.gamestore.services.ServicoCliente();
+        
         selecaoInicial = new com.gamestore.interfaces.SelecaoInicial(this);
         listarCliente = new com.gamestore.interfaces.ListarCliente(this);
         listarProduto = new com.gamestore.interfaces.ListarProduto(this);
-        incluirCliente = new com.gamestore.interfaces.IncluirCliente(this);
+        incluirCliente = new com.gamestore.interfaces.IncluirCliente(this, servicoCliente);
         incluirProduto = new com.gamestore.interfaces.IncluirProduto(this);
         iniciarVenda = new com.gamestore.interfaces.IniciarVenda(this);
         exibirRelatorio = new com.gamestore.interfaces.Relatorio(this);
@@ -266,4 +270,9 @@ public class GameStore extends javax.swing.JFrame {
     private com.gamestore.interfaces.IncluirProduto incluirProduto;
     private com.gamestore.interfaces.IniciarVenda iniciarVenda;
     private com.gamestore.interfaces.Relatorio exibirRelatorio;
+    
+    private com.gamestore.services.ServicoCliente servicoCliente;
+    private com.gamestore.services.ServicoProduto servicoProduto;
+    private com.gamestore.services.ServicoPedido servicoPedido;
+    private com.gamestore.services.ServicoRelatorio servicoRelatorio;
 }
