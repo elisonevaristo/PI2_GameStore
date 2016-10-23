@@ -6,6 +6,7 @@
 package com.gamestore.interfaces;
 
 import com.gamestore.main.GameStore;
+import com.gamestore.database.teste;
 /**
  *
  * @author Roger
@@ -479,6 +480,11 @@ public class IncluirCliente extends javax.swing.JPanel {
         jButton1.setText("CANCELAR");
 
         jButton2.setText("SALVAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -560,6 +566,10 @@ public class IncluirCliente extends javax.swing.JPanel {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        teste tst = new teste();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
