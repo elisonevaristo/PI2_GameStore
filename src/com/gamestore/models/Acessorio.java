@@ -9,12 +9,6 @@ package com.gamestore.models;
  *
  * @author roger
  */
-public class Produto implements IProduto {
-    private int id;
-    private String descricao;
-    private java.awt.Image foto;
-    private float preco;
-    private float valor;
-    private int quantidade;
-    private String codigoEan;    
+public class Acessorio extends Produto implements IProduto {
+    
 }

@@ -20,6 +20,8 @@ public class Cliente {
     private String sobreNome;
     private String apelido;
     
+    private java.awt.Image foto;
+    
     private String cpf;
     private String rg;    
     
@@ -251,6 +253,18 @@ public class Cliente {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
-    
-    
+
+    /**
+     * @return the foto
+     */
+    public java.awt.Image getFoto() {
+        return foto;
+    }
+
+    /**
+     * @param foto the foto to set
+     */
+    public void setFoto(java.awt.Image foto) {
+        this.foto = foto;
+    }    
 }
