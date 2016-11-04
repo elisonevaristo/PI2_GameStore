@@ -5,9 +5,12 @@
  */
 package com.gamestore.interfaces;
 import com.gamestore.main.GameStore;
+import com.gamestore.models.Cliente;
+import com.gamestore.services.ServicoCliente;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,14 +19,17 @@ import javax.swing.JCheckBox;
 public class ListarCliente extends javax.swing.JPanel {
     
     GameStore parent;
+    ServicoCliente servico;
     
     /**
      * Creates new form ListarCliente
      * @Param parent é o form pai, usado quando for necessário alternar as telas
      */
-    public ListarCliente(GameStore parent) {
+    public ListarCliente(GameStore parent, ServicoCliente servico) {
         initComponents();
         this.parent = parent;
+        this.servico = servico;
+        AtualizarTabela();
     }
 
     /**
@@ -37,15 +43,15 @@ public class ListarCliente extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableClientes = new javax.swing.JTable();
-        botaoIncluirNovo = new javax.swing.JButton();
+        botaoEditar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        botaoIncluirNovo1 = new javax.swing.JButton();
-        botaoIncluirNovo2 = new javax.swing.JButton();
+        txtCpf = new javax.swing.JTextField();
+        botaoBuscar = new javax.swing.JButton();
+        botaoIncluir = new javax.swing.JButton();
+        botaoExcluir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(825, 500));
@@ -53,20 +59,17 @@ public class ListarCliente extends javax.swing.JPanel {
         tableClientes.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, "Kauã Costa Lima", "720.683.736-02",  new Integer(23),  new Integer(4)},
-                {null, "Laura Castro Gomes", "682.373.891-07",  new Integer(27),  new Integer(2)},
-                {null, "Rafael Cavalcanti Barbosa", "806.840.038-99",  new Integer(45),  new Integer(18)},
-                {null, "Vitoria Melo Pinto", "415.526.462-54",  new Integer(17),  new Integer(3)}
+
             },
             new String [] {
                 "", "Nome", "CPF", "Idade (anos)", "Compras Realizadas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -80,12 +83,12 @@ public class ListarCliente extends javax.swing.JPanel {
         tableClientes.getTableHeader().setFont(new Font("Calibri Light", Font.BOLD, 15));
         jScrollPane1.setViewportView(tableClientes);
 
-        botaoIncluirNovo.setBackground(new java.awt.Color(255, 255, 255));
-        botaoIncluirNovo.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        botaoIncluirNovo.setText("EDITAR SELECIONADO");
-        botaoIncluirNovo.addActionListener(new java.awt.event.ActionListener() {
+        botaoEditar.setBackground(new java.awt.Color(255, 255, 255));
+        botaoEditar.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoEditar.setText("EDITAR SELECIONADO");
+        botaoEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoIncluirNovoActionPerformed(evt);
+                botaoEditarActionPerformed(evt);
             }
         });
 
@@ -94,16 +97,21 @@ public class ListarCliente extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel2.setText("NOME");
 
-        jTextField1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        txtNome.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel4.setText("CPF");
 
-        jTextField2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        txtCpf.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jButton2.setText("BUSCAR");
+        botaoBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        botaoBuscar.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoBuscar.setText("BUSCAR");
+        botaoBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,13 +121,13 @@ public class ListarCliente extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(botaoBuscar)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -128,28 +136,28 @@ public class ListarCliente extends javax.swing.JPanel {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoBuscar))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        botaoIncluirNovo1.setBackground(new java.awt.Color(255, 255, 255));
-        botaoIncluirNovo1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        botaoIncluirNovo1.setText("INCLUIR NOVO CLIENTE");
-        botaoIncluirNovo1.addActionListener(new java.awt.event.ActionListener() {
+        botaoIncluir.setBackground(new java.awt.Color(255, 255, 255));
+        botaoIncluir.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoIncluir.setText("INCLUIR NOVO CLIENTE");
+        botaoIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoIncluirNovo1ActionPerformed(evt);
+                botaoIncluirActionPerformed(evt);
             }
         });
 
-        botaoIncluirNovo2.setBackground(new java.awt.Color(255, 255, 255));
-        botaoIncluirNovo2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        botaoIncluirNovo2.setText("EXCLUIR SELECIONADOS");
-        botaoIncluirNovo2.addActionListener(new java.awt.event.ActionListener() {
+        botaoExcluir.setBackground(new java.awt.Color(255, 255, 255));
+        botaoExcluir.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoExcluir.setText("EXCLUIR SELECIONADOS");
+        botaoExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoIncluirNovo2ActionPerformed(evt);
+                botaoExcluirActionPerformed(evt);
             }
         });
 
@@ -162,19 +170,19 @@ public class ListarCliente extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(botaoIncluirNovo2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoIncluirNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoIncluirNovo1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botaoIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoIncluirNovo, botaoIncluirNovo1, botaoIncluirNovo2});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoEditar, botaoExcluir, botaoIncluir});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,39 +193,76 @@ public class ListarCliente extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(botaoIncluirNovo1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoIncluirNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoIncluirNovo2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botaoIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botaoIncluirNovo, botaoIncluirNovo1, botaoIncluirNovo2});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botaoEditar, botaoExcluir, botaoIncluir});
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoIncluirNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovoActionPerformed
+    public void AtualizarTabela(){
+        List<Cliente> clientes = servico.ObterClientes(txtNome.getText(), txtCpf.getText());
+        DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+        model.setRowCount(0);
+                       
+        int size = clientes.size();        
+        
+        for (int i = 0; i < size; i++){
+            Cliente cli = clientes.get(i);
+            if (cli != null) {
+                Object[] row = new Object[5];
+                row[0] = cli.getId();
+                row[1] = cli.getNome() + " " + cli.getSobreNome();
+                row[2] = cli.getCpf();
+                row[3] = cli.getIdade();
+                row[4] = cli.getNumeroPedidos();
+                model.addRow(row);                
+            }            
+        }
+    }
+    
+    private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
+        
+        if (tableClientes.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Não há registro selecionado.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+        
+        int id = Integer.parseInt(model.getValueAt(tableClientes.getSelectedRow(), 0).toString());
+        
+        servico.iniciarEdicao(id);
+        
         parent.exibirPainel("incluirCliente");
-    }//GEN-LAST:event_botaoIncluirNovoActionPerformed
+    }//GEN-LAST:event_botaoEditarActionPerformed
 
-    private void botaoIncluirNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoIncluirNovo1ActionPerformed
+    private void botaoIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirActionPerformed
+        parent.exibirPainel("incluirCliente");
+    }//GEN-LAST:event_botaoIncluirActionPerformed
 
-    private void botaoIncluirNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirNovo2ActionPerformed
+    private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoIncluirNovo2ActionPerformed
+    }//GEN-LAST:event_botaoExcluirActionPerformed
+
+    private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
+        AtualizarTabela();
+    }//GEN-LAST:event_botaoBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoIncluirNovo;
-    private javax.swing.JButton botaoIncluirNovo1;
-    private javax.swing.JButton botaoIncluirNovo2;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botaoBuscar;
+    private javax.swing.JButton botaoEditar;
+    private javax.swing.JButton botaoExcluir;
+    private javax.swing.JButton botaoIncluir;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tableClientes;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

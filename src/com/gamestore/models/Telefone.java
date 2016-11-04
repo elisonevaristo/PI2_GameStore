@@ -15,6 +15,12 @@ public class Telefone {
     private String ddd;
     private String numero;    
     
+    public Telefone(TipoTelefone tipo, String numero)
+    {
+        this.tipo = tipo;
+        this.numero = numero;
+    }
+    
     public Telefone(TipoTelefone tipo, String ddd, String numero)
     {
         this.tipo = tipo;

@@ -13,7 +13,7 @@ public enum Sexo {
     
     private char id;
     private String descricao;
-    
+        
     Sexo(char id, String descricao)
     {
         this.id = id;
@@ -28,5 +28,19 @@ public enum Sexo {
     public String getDescricao()
     {
         return this.descricao;
+    }
+    
+    public static Sexo getById(char id)
+    {
+        switch (id) {
+            case 'M':
+                return Sexo.masculino;
+            case 'F':
+                return Sexo.feminino;
+            case 'I':
+                return Sexo.indefinido;
+            default:
+                throw new AssertionError("Sexo inválido.");
+        }
     }
 }

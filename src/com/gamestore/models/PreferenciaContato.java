@@ -11,7 +11,10 @@ package com.gamestore.models;
  */
 public enum PreferenciaContato {
     email(1, "Email"),
-    telefone(2, "Telefone");
+    residencial(2, "Telefone Residencial"),
+    celular(3, "Telefone Celular"),
+    comercial(4, "Telefone Comercial"),
+    nenhuma(0, "Nenhuma");
     
     private int id;
     private String descricao;
@@ -20,5 +23,21 @@ public enum PreferenciaContato {
     {
         this.id = id;
         this.descricao = descricao;
+    }
+    
+    public static PreferenciaContato getById(int id)
+    {
+        switch (id) {
+            case 1:
+                return PreferenciaContato.email;
+            case 2:
+                return PreferenciaContato.residencial;
+            case 3:
+                return PreferenciaContato.celular;
+            case 4:
+                return PreferenciaContato.comercial;
+            default:
+                return PreferenciaContato.nenhuma;
+        }
     }
 }

@@ -7,6 +7,7 @@ package com.gamestore.models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -29,7 +30,7 @@ public class Cliente {
     private EstadoCivil estadoCivil;
     private Calendar nascimento;
     private Endereco endereco;
-    private ArrayList<Telefone> telefones;
+    private List<Telefone> telefones;
     private String email;
     private PreferenciaContato preferencia;
     
@@ -176,6 +177,14 @@ public class Cliente {
     public Calendar getNascimento() {
         return nascimento;
     }
+    
+    public String getIdade(){
+        
+        int anoNascimento = nascimento.get(Calendar.YEAR);        
+        int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+        
+        return String.format("%s anos", anoAtual - anoNascimento);
+    }
 
     /**
      * @param nascimento the nascimento to set
@@ -201,15 +210,24 @@ public class Cliente {
     /**
      * @return the telefones
      */
-    public ArrayList<Telefone> getTelefones() {
+    public List<Telefone> getTelefones() {
         return telefones;
     }
 
     /**
      * @param telefones the telefones to set
      */
-    public void setTelefones(ArrayList<Telefone> telefones) {
+    public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
+    }
+    
+    public String getTelefone(TipoTelefone tipo){
+        for (Telefone tel : this.telefones) {
+            if (tel.getTipo().equals(tipo))
+                return tel.getNumero();
+        }
+        
+        return "";
     }
 
     /**
@@ -231,6 +249,10 @@ public class Cliente {
      */
     public PreferenciaContato getPreferencia() {
         return preferencia;
+    }
+    
+    public int getNumeroPedidos(){
+        return 0;
     }
 
     /**
