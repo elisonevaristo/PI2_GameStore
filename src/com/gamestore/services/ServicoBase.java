@@ -15,6 +15,7 @@ import java.util.Date;
  * @author roger
  */
 public class ServicoBase {
+        
     protected Calendar getDateFromString(String stringDate) throws ParseException { 
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -23,5 +24,31 @@ public class ServicoBase {
         calendarDate.setTime(date);
         
         return calendarDate;
+    }
+    
+    protected Boolean validarInteger(String numero){
+        try
+        {
+            Integer.parseInt(numero);
+            
+            return true;
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+    }
+    
+    protected Boolean validarFloat(String numero){
+        try
+        {
+            Float.parseFloat(numero);
+            
+            return true;
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
     }
 }

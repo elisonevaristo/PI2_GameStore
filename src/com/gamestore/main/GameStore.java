@@ -32,12 +32,13 @@ public class GameStore extends javax.swing.JFrame {
         
         /* Inicializa os serviços */        
         servicoCliente = new com.gamestore.services.ServicoCliente();
+        servicoProduto = new com.gamestore.services.ServicoProduto();
         
         selecaoInicial = new com.gamestore.interfaces.SelecaoInicial(this);
         listarCliente = new com.gamestore.interfaces.ListarCliente(this, servicoCliente);
-        listarProduto = new com.gamestore.interfaces.ListarProduto(this);
+        listarProduto = new com.gamestore.interfaces.ListarProduto(this, servicoProduto);
         incluirCliente = new com.gamestore.interfaces.IncluirCliente(this, servicoCliente);
-        incluirProduto = new com.gamestore.interfaces.IncluirProduto(this);
+        incluirProduto = new com.gamestore.interfaces.IncluirProduto(this, servicoProduto);
         iniciarVenda = new com.gamestore.interfaces.IniciarVenda(this);
         exibirRelatorio = new com.gamestore.interfaces.Relatorio(this);
         
@@ -198,6 +199,7 @@ public class GameStore extends javax.swing.JFrame {
                 break;
             case "listarProduto":
                 labelTitulo.setText("LISTA DE PRODUTOS");
+                listarProduto.AtualizarTabela();
                 break;                
             case "incluirCliente":
                 labelTitulo.setText("CADASTRO DE CLIENTES");
@@ -205,6 +207,7 @@ public class GameStore extends javax.swing.JFrame {
                 break;                
             case "incluirProduto":
                 labelTitulo.setText("CADASTRO DE PRODUTOS");
+                incluirProduto.carregarFormulario();
                 break;
             case "iniciarVenda":
                 labelTitulo.setText("NOVO PEDIDO");

@@ -9,6 +9,6 @@ package com.gamestore.models;
  *
  * @author roger
  */
-public class Console extends Produto implements IProduto {
-    private String fabricante;    
-}
+//public class Console extends Produto implements IProduto {
+//    private String fabricante;    
+//}

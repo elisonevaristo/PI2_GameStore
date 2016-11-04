@@ -9,6 +9,6 @@ package com.gamestore.models;
  *
  * @author roger
  */
-public class Acessorio extends Produto implements IProduto {
-    
-}
+//public class Acessorio extends Produto implements IProduto {
+//    
+//}
