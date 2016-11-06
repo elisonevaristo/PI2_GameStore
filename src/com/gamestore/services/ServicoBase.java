@@ -102,7 +102,7 @@ public class ServicoBase<T extends ItemComId> {
     protected Boolean validarFloat(String numero){
         try
         {
-            Float.parseFloat(numero);
+            Float.parseFloat(numero.replace(",", "."));
             
             return true;
         }

@@ -185,14 +185,14 @@ public class ListarProduto extends javax.swing.JPanel {
 
             },
             new String [] {
-                "", "Título", "Desenvolvedora", "Plataforma", "Preço", "Estoque"
+                "Código", "Nome", "Fabricante", "Plataforma", "Preço", "Estoque"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -239,7 +239,7 @@ public class ListarProduto extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,7 +249,7 @@ public class ListarProduto extends javax.swing.JPanel {
                         .addComponent(botaoIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoEditar, botaoExcluir, botaoIncluir});
@@ -283,11 +283,11 @@ public class ListarProduto extends javax.swing.JPanel {
         for (int i = 0; i < size; i++){
             Produto pro = produtos.get(i);
             if (pro != null) {
-                Object[] row = new Object[5];
+                Object[] row = new Object[6];
                 row[0] = pro.getId();
                 row[1] = pro.getNome();
-                row[2] = "";
-                row[3] = "";
+                row[2] = pro.getFabricante();
+                row[3] = pro.getPlataforma();
                 row[4] = pro.getPreco();
                 row[5] = pro.getQuantidade();
                 model.addRow(row);                

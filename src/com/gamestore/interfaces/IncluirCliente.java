@@ -564,7 +564,10 @@ public class IncluirCliente extends javax.swing.JPanel {
         textRg.setText(selecionado.getRg());
         textCpf.setText(selecionado.getCpf());
         textNascimento.setText(selecionado.getNascimento().toString());
-
+        
+        comboSexo.setSelectedItem(selecionado.getSexo().getDescricao());
+        comboEstadoCivil.setSelectedItem(selecionado.getEstadoCivil().getDescricao());
+        
         Endereco endereco = selecionado.getEndereco();        
         
         textCep.setText(endereco.getCep());

@@ -43,7 +43,7 @@ public class ServicoProduto extends ServicoBase<Produto> {
         if (quantidade.isEmpty() || !validarInteger(quantidade))
             throw new Exception("É obrigatório informar a quantidade em estoque do produto.");                
         
-        Produto novoProduto = new Produto(nome, fabricante, Float.parseFloat(custo), Float.parseFloat(preco), Integer.parseInt(quantidade), categoria, genero, plataforma, classificacao, garantia, codigoEan, descricao);
+        Produto novoProduto = new Produto(nome, fabricante, Float.parseFloat(custo.replace(",", ".")), Float.parseFloat(preco.replace(",", ".")), Integer.parseInt(quantidade), categoria, genero, plataforma, classificacao, garantia, codigoEan, descricao);
                         
         return novoProduto;        
     }    
