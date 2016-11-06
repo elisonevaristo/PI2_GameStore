@@ -9,30 +9,42 @@ package com.gamestore.models;
  *
  * @author roger
  */
-public class Produto implements IProduto {
+public class Produto implements IProduto, ItemComId {
     private int id;
     private String nome;
-    private String descricao;
-    //private java.awt.Image foto;
+    private String fabricante;
+    private float custo;
     private float preco;
-    private float valor;
-    private int quantidade;
+    private int quantidade;//em estoque
+    private String categoria;
+    private String genero;
+    private String plataforma;
+    private String classificacao;
+    private String garantiaFornecedor;
     private String codigoEan;    
-    
+    private String descricao;
+    //private java.awt.Image foto;    
     private Boolean ativo;
     
-    public Produto(String nome, String descricao, float preco, float valor, int quantidade, String codigoEan){
+    public Produto(String nome, String fabricante, float custo, float preco, int quantidade, String categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){
         setNome(nome);
-        setDescricao(descricao);
+        setFabricante(fabricante);
+        setCusto(custo);
         setPreco(preco);
-        setValor(valor);
         setQuantidade(quantidade);
+        setCategoria(categoria);
+        setGenero(genero);
+        setPlataforma(plataforma);
+        setClassificacao(classificacao);
+        setGarantiaFornecedor(garantia);
         setCodigoEan(codigoEan);
+        setDescricao(descricao);
     }
 
     /**
      * @return the id
      */
+    @Override
     public int getId() {
         return id;
     }
@@ -70,20 +82,6 @@ public class Produto implements IProduto {
      */
     public void setPreco(float preco) {
         this.preco = preco;
-    }
-
-    /**
-     * @return the valor
-     */
-    public float getValor() {
-        return valor;
-    }
-
-    /**
-     * @param valor the valor to set
-     */
-    public void setValor(float valor) {
-        this.valor = valor;
     }
 
     /**
@@ -140,5 +138,103 @@ public class Produto implements IProduto {
      */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    /**
+     * @return the plataforma
+     */
+    public String getPlataforma() {
+        return plataforma;
+    }
+
+    /**
+     * @param plataforma the plataforma to set
+     */
+    public void setPlataforma(String plataforma) {
+        this.plataforma = plataforma;
+    }
+
+    /**
+     * @return the fabricante
+     */
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    /**
+     * @param fabricante the fabricante to set
+     */
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    /**
+     * @return the custo
+     */
+    public float getCusto() {
+        return custo;
+    }
+
+    /**
+     * @param custo the custo to set
+     */
+    public void setCusto(float custo) {
+        this.custo = custo;
+    }
+
+    /**
+     * @return the categoria
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * @param categoria the categoria to set
+     */
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    /**
+     * @return the genero
+     */
+    public String getGenero() {
+        return genero;
+    }
+
+    /**
+     * @param genero the genero to set
+     */
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    /**
+     * @return the classificacao
+     */
+    public String getClassificacao() {
+        return classificacao;
+    }
+
+    /**
+     * @param classificacao the classificacao to set
+     */
+    public void setClassificacao(String classificacao) {
+        this.classificacao = classificacao;
+    }
+
+    /**
+     * @return the garantiaFornecedor
+     */
+    public String getGarantiaFornecedor() {
+        return garantiaFornecedor;
+    }
+
+    /**
+     * @param garantiaFornecedor the garantiaFornecedor to set
+     */
+    public void setGarantiaFornecedor(String garantiaFornecedor) {
+        this.garantiaFornecedor = garantiaFornecedor;
     }
 }

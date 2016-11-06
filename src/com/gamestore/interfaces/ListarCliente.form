@@ -35,12 +35,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="botaoIncluir" linkSize="6" min="-2" pref="275" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>

@@ -531,14 +531,14 @@ public class IncluirCliente extends javax.swing.JPanel {
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         try
         {            
-            Cliente cliente = servico.validarCliente(textNome.getText(), textSobreNome.getText(), comboSexo.getSelectedItem().toString(), textCpf.getText(), textNascimento.getText(), preferencia,
+            Cliente cliente = servico.validarCliente(textApelido.getText(), textNome.getText(), textSobreNome.getText(), comboSexo.getSelectedItem().toString(), textCpf.getText(), textNascimento.getText(), preferencia,
                     textCep.getText(), textLogradouro.getText(), textNumero.getText(), textComplemento.getText(), textBairro.getText(), textCidade.getText(), textUf.getText(), textEmail.getText(),
                     textTelefoneResidencial.getText(), textTelefoneCelular.getText(), textTelefoneComercial.getText());
             
-            if (!servico.verificarEdicao())
-                servico.CadastrarCliente(cliente);
+            if (!servico.validarExisteSelecionado())
+                servico.CadastrarItem(cliente);
             else
-                servico.AtualizarCadastroCliente(cliente);
+                servico.AtualizarCadastroItem(cliente);
             
             limparFormulario();
             
@@ -556,7 +556,7 @@ public class IncluirCliente extends javax.swing.JPanel {
 
     public void carregarFormulario(){
     
-        Cliente selecionado = servico.getClienteSelecionado();
+        Cliente selecionado = servico.obterSelecionado();
     
         textApelido.setText(selecionado.getApelido());
         textNome.setText(selecionado.getNome());
@@ -623,7 +623,7 @@ public class IncluirCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_radioPreferenciaActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
-        servico.cancelarManutencao();
+        servico.cancelarSelecao();
         limparFormulario();
         parent.exibirPainel("listarCliente");
     }//GEN-LAST:event_botaoCancelarActionPerformed

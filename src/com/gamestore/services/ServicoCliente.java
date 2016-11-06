@@ -19,57 +19,16 @@ import java.util.List;
  *
  * @author roger
  */
-public class ServicoCliente extends ServicoBase {
-    
-    List<Cliente> clientes = new ArrayList<>();
-              
-    Cliente clienteEmManutencao;
-    
+public class ServicoCliente extends ServicoBase<Cliente> {
+        
     public List<Cliente> ObterClientes(String nome, String cpf){
-        return clientes;
-    }
-    
-    public Cliente getClienteSelecionado(){
-        return clienteEmManutencao;
-    }
-    
-    public void CadastrarCliente(Cliente novoCliente) throws Exception
-    {        
-        int size = clientes.size();
-        int id = size == 0 ? size : clientes.get(clientes.size() - 1).getId();
-        
-        novoCliente.setId(id + 1);
-        clientes.add(novoCliente);
-    }
-    
-    public void AtualizarCadastroCliente(Cliente cliente) throws Exception
-    {                
-        Cliente antigoCliente = obterClientePorId(cliente.getId());
-        
-        clientes.remove(antigoCliente);
-        clientes.add(cliente);
-    }
-    
-    public void InativarCadastroCliente(int id) throws Exception
-    {
-        Cliente cliente = obterClientePorId(id);
-        cliente.setAtivo(false);
+        return itens;
     }    
-    
-    private Cliente obterClientePorId(int id)
-    {
-        for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).getId() == id)
-                return clientes.get(i);                
-        }
-        
-        return null;
-    }
     
     /*
         Valida se as informações obrigatórias foram preenchidas corretamente
     */
-    public Cliente validarCliente(String nome, String sobreNome, String sexo, String cpf, String nascimento, String preferencia, String cep, String logradouro, String numero, String complemento, String bairro, 
+    public Cliente validarCliente(String apelido, String nome, String sobreNome, String sexo, String cpf, String nascimento, String preferencia, String cep, String logradouro, String numero, String complemento, String bairro, 
             String cidade, String uf, String email, String foneResidencial, String foneCelular, String foneComercial) throws Exception {                
         
         if (nome.isEmpty())
@@ -93,7 +52,7 @@ public class ServicoCliente extends ServicoBase {
         if (preferencia.isEmpty() || !validarPreferencia(preferencia))
             throw new Exception("É obrigatório informar a preferencia de contato do cliente.");                
         
-        Cliente novoCliente = new Cliente(nome, sobreNome, Sexo.getById(sexo.toUpperCase().charAt(0)), cpfFormatado, getDateFromString(nascimento), PreferenciaContato.getById(Integer.parseInt(preferencia)));
+        Cliente novoCliente = new Cliente(apelido, nome, sobreNome, Sexo.getById(sexo.toUpperCase().charAt(0)), cpfFormatado, getDateFromString(nascimento), PreferenciaContato.getById(Integer.parseInt(preferencia)));
         
         Endereco endereco = new Endereco();
         endereco.setCep(cep);
@@ -125,19 +84,7 @@ public class ServicoCliente extends ServicoBase {
     public void excluirItens(int[] ids){
         
     }
-    
-    public void iniciarEdicao(int id){
-        clienteEmManutencao = obterClientePorId(id);
-    }
-    
-    public Boolean verificarEdicao(){        
-        return clienteEmManutencao != null && clienteEmManutencao.getId() != 0;
-    }
-    
-    public void cancelarManutencao(){        
-        clienteEmManutencao = null;
-    }
-    
+        
     private static Boolean validarSexo(String sexo) {
         char id = sexo.toUpperCase().charAt(0);
         

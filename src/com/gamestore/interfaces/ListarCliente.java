@@ -235,7 +235,7 @@ public class ListarCliente extends javax.swing.JPanel {
         
         int id = Integer.parseInt(model.getValueAt(tableClientes.getSelectedRow(), 0).toString());
         
-        servico.iniciarEdicao(id);
+        servico.selecionar(id);
         
         parent.exibirPainel("incluirCliente");
     }//GEN-LAST:event_botaoEditarActionPerformed

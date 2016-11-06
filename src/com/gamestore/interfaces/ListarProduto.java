@@ -309,7 +309,7 @@ public class ListarProduto extends javax.swing.JPanel {
         
         int id = Integer.parseInt(model.getValueAt(tableProdutos.getSelectedRow(), 0).toString());
         
-        servico.iniciarEdicao(id);        
+        servico.selecionar(id);        
         parent.exibirPainel("incluirProduto");
     }//GEN-LAST:event_botaoEditarActionPerformed
 

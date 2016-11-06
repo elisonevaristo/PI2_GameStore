@@ -5,7 +5,6 @@
  */
 package com.gamestore.models;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  *
  * @author roger
  */
-public class Cliente {
+public class Cliente implements ItemComId {
     
     private int id;    
     
@@ -36,9 +35,10 @@ public class Cliente {
     
     private Boolean ativo;
     
-    public Cliente(int id, String nome, String sobreNome, Sexo sexo, String cpf, Calendar nascimento, PreferenciaContato preferencia)
+    public Cliente(int id, String apelido, String nome, String sobreNome, Sexo sexo, String cpf, Calendar nascimento, PreferenciaContato preferencia)
     {
         setId(id);
+        setApelido(apelido);
         setNome(nome);
         setSobreNome(sobreNome);
         setSexo(sexo);
@@ -48,8 +48,9 @@ public class Cliente {
         setAtivo(true);
     }
     
-    public Cliente(String nome, String sobreNome, Sexo sexo, String cpf, Calendar nascimento, PreferenciaContato preferencia)
+    public Cliente(String apelido, String nome, String sobreNome, Sexo sexo, String cpf, Calendar nascimento, PreferenciaContato preferencia)
     {
+        setApelido(apelido);
         setNome(nome);
         setSobreNome(sobreNome);
         setSexo(sexo);
@@ -62,6 +63,7 @@ public class Cliente {
     /**
      * @return the id
      */
+    @Override
     public int getId() {
         return id;
     }
@@ -69,6 +71,7 @@ public class Cliente {
     /**
      * @param id the id to set
      */
+    @Override
     public void setId(int id) {
         this.id = id;
     }
