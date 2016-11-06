@@ -21,6 +21,19 @@ import java.util.List;
  */
 public class ServicoCliente extends ServicoBase<Cliente> {
         
+    public List<Cliente> obterClientes(String nome){
+        
+        List<Cliente> listaResultado = new ArrayList<>();        
+        if (itens != null && nome != null) {
+            for (Cliente pro : itens) {
+                if (pro != null && pro.getNome().toUpperCase().contains(nome.toUpperCase())) {
+                    listaResultado.add(pro);
+                }
+            }
+        }        
+        return listaResultado;
+    }
+    
     public List<Cliente> ObterClientes(String nome, String cpf){
         return itens;
     }    
@@ -80,11 +93,7 @@ public class ServicoCliente extends ServicoBase<Cliente> {
                 
         return novoCliente;        
     }
-    
-    public void excluirItens(int[] ids){
-        
-    }
-        
+            
     private static Boolean validarSexo(String sexo) {
         char id = sexo.toUpperCase().charAt(0);
         

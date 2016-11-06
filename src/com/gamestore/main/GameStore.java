@@ -5,7 +5,15 @@
  */
 package com.gamestore.main;
 
+import com.gamestore.models.Cliente;
+import com.gamestore.models.PreferenciaContato;
+import com.gamestore.models.Produto;
+import com.gamestore.models.Sexo;
 import java.awt.CardLayout;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -33,13 +41,14 @@ public class GameStore extends javax.swing.JFrame {
         /* Inicializa os serviços */        
         servicoCliente = new com.gamestore.services.ServicoCliente();
         servicoProduto = new com.gamestore.services.ServicoProduto();
+        servicoPedido = new com.gamestore.services.ServicoPedido();
         
         selecaoInicial = new com.gamestore.interfaces.SelecaoInicial(this);
         listarCliente = new com.gamestore.interfaces.ListarCliente(this, servicoCliente);
         listarProduto = new com.gamestore.interfaces.ListarProduto(this, servicoProduto);
         incluirCliente = new com.gamestore.interfaces.IncluirCliente(this, servicoCliente);
         incluirProduto = new com.gamestore.interfaces.IncluirProduto(this, servicoProduto);
-        iniciarVenda = new com.gamestore.interfaces.IniciarVenda(this);
+        iniciarVenda = new com.gamestore.interfaces.IniciarVenda(this, servicoPedido, servicoCliente, servicoProduto);
         exibirRelatorio = new com.gamestore.interfaces.Relatorio(this);
         
         backgroundPanel.add(selecaoInicial, "selecaoInicial");
@@ -49,6 +58,8 @@ public class GameStore extends javax.swing.JFrame {
         backgroundPanel.add(incluirProduto, "incluirProduto");
         backgroundPanel.add(iniciarVenda, "iniciarVenda");
         backgroundPanel.add(exibirRelatorio, "exibirRelatorio");
+        
+        teste();
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -181,6 +192,51 @@ public class GameStore extends javax.swing.JFrame {
         exibirPainel("selecaoInicial");
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //Preenchendo dados para teste, desabilitar antes de enviar
+    private void teste(){
+        
+        try
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = sdf.parse("10/01/1986");
+            Calendar calendarDate = Calendar.getInstance();
+            calendarDate.setTime(date);
+        
+            Cliente c1 = new Cliente(1, "Roger", "Roger", "Rodrigues de Oliveira", Sexo.masculino, "00000000000", calendarDate, PreferenciaContato.email);
+            Cliente c2 = new Cliente(2, "Mario", "Mario", "Mario Pereira", Sexo.masculino, "11111111111", calendarDate, PreferenciaContato.comercial);
+            Cliente c3 = new Cliente(3, "Maria", "Maria", "Maria de Oliveira", Sexo.feminino, "22222222222", calendarDate, PreferenciaContato.residencial);
+            Cliente c4 = new Cliente(4, "Stênio", "Stênio", "Stênio de Oliveira", Sexo.masculino, "33333333333", calendarDate, PreferenciaContato.comercial);
+            Cliente c5 = new Cliente(5, "Diego", "Diego", "Diego de Oliveira", Sexo.masculino, "44444444444", calendarDate, PreferenciaContato.email);
+            
+            servicoCliente.CadastrarItem(c1);
+            servicoCliente.CadastrarItem(c2);
+            servicoCliente.CadastrarItem(c3);
+            servicoCliente.CadastrarItem(c4);
+            servicoCliente.CadastrarItem(c5);
+            
+            Produto p1 = new Produto("Uncharted 2", "Naugthy Dog", 230f, 250f, 100, "", "", "", "", "", "", "");
+            Produto p2 = new Produto("Uncharted 3", "Naugthy Dog", 150f, 180f, 10, "", "", "", "", "", "", "");
+            Produto p3 = new Produto("Uncharted 4", "Naugthy Dog", 130f, 150f, 150, "", "", "", "", "", "", "");
+            Produto p4 = new Produto("Bioshock 2", "2K", 100f, 120f, 100, "", "", "", "", "", "", "");
+            Produto p5 = new Produto("Civilization VI", "Sei lá", 250f, 300f, 100, "", "", "", "", "", "", "");
+            
+            servicoProduto.CadastrarItem(p1);
+            servicoProduto.CadastrarItem(p2);
+            servicoProduto.CadastrarItem(p3);
+            servicoProduto.CadastrarItem(p4);
+            servicoProduto.CadastrarItem(p5);            
+        }
+        catch(ParseException pe)
+        {
+            System.out.println(pe);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    
+    
     //<editor-fold defaultstate="collapsed" desc="Métodos para controle de interface">
         
     public void exibirPainel(String painel)

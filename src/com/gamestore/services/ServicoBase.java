@@ -66,7 +66,7 @@ public class ServicoBase<T extends ItemComId> {
         
     }        
     
-    protected T obterItemPorId(int id)
+    public T obterItemPorId(int id)
     {
         for (int i = 0; i < itens.size(); i++) {
             if (itens.get(i).getId() == id)

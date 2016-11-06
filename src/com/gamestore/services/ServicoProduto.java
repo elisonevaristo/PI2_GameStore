@@ -10,6 +10,7 @@ package com.gamestore.services;
 //import com.gamestore.models.IProduto;
 //import com.gamestore.models.Jogo;
 import com.gamestore.models.Produto;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,19 @@ import java.util.List;
  */
 public class ServicoProduto extends ServicoBase<Produto> {
             
+    public List<Produto> ObterProdutos(String nome){
+        
+        List<Produto> listaResultado = new ArrayList<>();        
+        if (itens != null && nome != null) {
+            for (Produto pro : itens) {
+                if (pro != null && pro.getNome().toUpperCase().contains(nome.toUpperCase())) {
+                    listaResultado.add(pro);
+                }
+            }
+        }        
+        return listaResultado;
+    }
+    
     public List<Produto> ObterProdutos(String nome, String plataforma, String fabricante, String categoria, String ean){
         return itens;
     }
