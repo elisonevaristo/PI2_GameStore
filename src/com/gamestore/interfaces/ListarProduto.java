@@ -296,7 +296,24 @@ public class ListarProduto extends javax.swing.JPanel {
     }
     
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            if (tableProdutos.getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(this, "Não há registros selecionados.");
+                return;
+            }
+
+            DefaultTableModel model = (DefaultTableModel) tableProdutos.getModel();
+
+            int id = Integer.parseInt(model.getValueAt(tableProdutos.getSelectedRow(), 0).toString());
+
+            servico.excluir(id);
+            AtualizarTabela();
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Não foi possível excluir o produto.");
+        }
     }//GEN-LAST:event_botaoExcluirActionPerformed
 
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed

@@ -245,7 +245,24 @@ public class ListarCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoIncluirActionPerformed
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            if (tableClientes.getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(this, "Não há registros selecionados.");
+                return;
+            }
+
+            DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+
+            int id = Integer.parseInt(model.getValueAt(tableClientes.getSelectedRow(), 0).toString());
+
+            servico.excluir(id);
+            AtualizarTabela();
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Não foi possível excluir o cliente.");
+        }
     }//GEN-LAST:event_botaoExcluirActionPerformed
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed

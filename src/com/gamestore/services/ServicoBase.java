@@ -61,8 +61,18 @@ public class ServicoBase<T extends ItemComId> {
         item.setAtivo(false);
     }
     
-    public void excluir(int[] ids){
+    public void excluir(int id){
+        int index = -1;
         
+        for (int i = 0; i < itens.size(); i++) {
+            if (itens.get(i).getId() == id)
+                index = i;
+        }
+        
+        if (index == -1)
+            return;
+        
+        itens.remove(itens.get(index));
     }        
     
     public T obterItemPorId(int id) {
