@@ -315,9 +315,9 @@ public class IncluirProduto extends javax.swing.JPanel {
                     comboGenero.getSelectedItem().toString(), comboPlataforma.getSelectedItem().toString(), comboClassificacao.getSelectedItem().toString(), textGarantia.getText(), textCodigoEan.getText(), textDescricao.getText());
             
             if (!servico.validarExisteSelecionado())
-                servico.CadastrarItem(produto);
+                servico.cadastrarItem(produto);
             else
-                servico.AtualizarCadastroItem(produto);
+                servico.atualizarCadastroItem(produto);
             
             limparFormulario();
             

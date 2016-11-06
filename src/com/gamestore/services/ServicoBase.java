@@ -40,7 +40,7 @@ public class ServicoBase<T extends ItemComId> {
         selecionado = null;
     }
     
-    public void CadastrarItem(T item) throws Exception {
+    public void cadastrarItem(T item) throws Exception {
         int size = itens.size();
         int id = size == 0 ? size : itens.get(itens.size() - 1).getId();
         
@@ -48,7 +48,7 @@ public class ServicoBase<T extends ItemComId> {
         itens.add(item);
     }    
     
-    public void AtualizarCadastroItem(T item) throws Exception
+    public void atualizarCadastroItem(T item) throws Exception
     {                
         T antigoItem = obterItemPorId(item.getId());
         
@@ -56,7 +56,7 @@ public class ServicoBase<T extends ItemComId> {
         itens.add(item);
     }
     
-    public void InativarCadastroItem(int id) throws Exception {
+    public void inativarCadastroItem(int id) throws Exception {
         T item = obterItemPorId(id);
         item.setAtivo(false);
     }

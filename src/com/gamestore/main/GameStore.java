@@ -210,11 +210,11 @@ public class GameStore extends javax.swing.JFrame {
             Cliente c4 = new Cliente(4, "Stênio", "Stênio", "Stênio de Oliveira", Sexo.masculino, "33333333333", calendarDate, PreferenciaContato.comercial);
             Cliente c5 = new Cliente(5, "Diego", "Diego", "Diego de Oliveira", Sexo.masculino, "44444444444", calendarDate, PreferenciaContato.email);
             
-            servicoCliente.CadastrarItem(c1);
-            servicoCliente.CadastrarItem(c2);
-            servicoCliente.CadastrarItem(c3);
-            servicoCliente.CadastrarItem(c4);
-            servicoCliente.CadastrarItem(c5);
+            servicoCliente.cadastrarItem(c1);
+            servicoCliente.cadastrarItem(c2);
+            servicoCliente.cadastrarItem(c3);
+            servicoCliente.cadastrarItem(c4);
+            servicoCliente.cadastrarItem(c5);
             
             Produto p1 = new Produto("Uncharted 2", "Naugthy Dog", 230f, 250f, 100, "", "", "", "", "", "", "");
             Produto p2 = new Produto("Uncharted 3", "Naugthy Dog", 150f, 180f, 10, "", "", "", "", "", "", "");
@@ -222,11 +222,11 @@ public class GameStore extends javax.swing.JFrame {
             Produto p4 = new Produto("Bioshock 2", "2K", 100f, 120f, 100, "", "", "", "", "", "", "");
             Produto p5 = new Produto("Civilization VI", "Sei lá", 250f, 300f, 100, "", "", "", "", "", "", "");
             
-            servicoProduto.CadastrarItem(p1);
-            servicoProduto.CadastrarItem(p2);
-            servicoProduto.CadastrarItem(p3);
-            servicoProduto.CadastrarItem(p4);
-            servicoProduto.CadastrarItem(p5);      
+            servicoProduto.cadastrarItem(p1);
+            servicoProduto.cadastrarItem(p2);
+            servicoProduto.cadastrarItem(p3);
+            servicoProduto.cadastrarItem(p4);
+            servicoProduto.cadastrarItem(p5);      
                         
             servicoPedido.novoPedido(c1);
             servicoPedido.adicionarItem(p1, 1);

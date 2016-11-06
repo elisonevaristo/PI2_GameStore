@@ -536,9 +536,9 @@ public class IncluirCliente extends javax.swing.JPanel {
                     textTelefoneResidencial.getText(), textTelefoneCelular.getText(), textTelefoneComercial.getText());
             
             if (!servico.validarExisteSelecionado())
-                servico.CadastrarItem(cliente);
+                servico.cadastrarItem(cliente);
             else
-                servico.AtualizarCadastroItem(cliente);
+                servico.atualizarCadastroItem(cliente);
             
             limparFormulario();
             

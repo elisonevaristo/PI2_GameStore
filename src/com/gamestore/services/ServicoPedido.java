@@ -66,6 +66,7 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
             throw new Exception("É obrigatório informar o cliente ao iniciar um novo pedido.");
                                 
         pedidoPendente = new Pedido(cliente);
+        cadastrarItem(pedidoPendente);
     }
     
     public void adicionarItem(Produto produto, int quantidade) throws Exception {
