@@ -33,7 +33,33 @@ public class ServicoProduto extends ServicoBase<Produto> {
     }
     
     public List<Produto> ObterProdutos(String nome, String plataforma, String fabricante, String categoria, String ean){
-        return itens;
+        List<Produto> resultado = new ArrayList<>();
+        
+        for (Produto p : itens){
+            if (!nome.isEmpty())
+                if(!p.getNome().toUpperCase().contains(nome.toUpperCase()))
+                    continue;
+            
+            if (!plataforma.trim().isEmpty())
+                if (!p.getPlataforma().equalsIgnoreCase(plataforma))
+                    continue;
+            
+            if (!fabricante.isEmpty())
+                if (!p.getFabricante().toUpperCase().contains(fabricante.toUpperCase()))
+                    continue;
+            
+            if (!categoria.trim().isEmpty())
+                if (!p.getCategoria().equalsIgnoreCase(categoria))
+                    continue;
+            
+            if (!ean.isEmpty())
+                if (!p.getCodigoEan().equalsIgnoreCase(ean))
+                    continue;
+            
+            resultado.add(p);                                
+        }
+        
+        return resultado;
     }
     
     /*

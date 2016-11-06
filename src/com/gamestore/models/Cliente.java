@@ -96,6 +96,10 @@ public class Cliente implements ItemComId {
     public String getSobreNome() {
         return sobreNome;
     }
+    
+    public String getNomeCompleto(){
+        return nome + " " + sobreNome;
+    }
 
     /**
      * @param sobreNome the sobreNome to set

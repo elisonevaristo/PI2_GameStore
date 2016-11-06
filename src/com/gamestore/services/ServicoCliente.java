@@ -35,7 +35,22 @@ public class ServicoCliente extends ServicoBase<Cliente> {
     }
     
     public List<Cliente> ObterClientes(String nome, String cpf){
-        return itens;
+        
+        List<Cliente> resultado = new ArrayList<>();
+        
+        for (Cliente c : itens){
+            if (!nome.isEmpty())
+                if(!c.getNomeCompleto().toUpperCase().contains(nome.toUpperCase()))
+                    continue;
+            
+            if (!cpf.isEmpty())
+                if (!c.getCpf().equalsIgnoreCase(cpf))
+                    continue;
+            
+            resultado.add(c);                                
+        }
+        
+        return resultado;
     }    
     
     /*

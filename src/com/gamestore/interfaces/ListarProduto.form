@@ -264,10 +264,11 @@
               <Font name="Calibri Light" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Console"/>
-                <StringItem index="1" value="Jogo"/>
-                <StringItem index="2" value="Acess&#xf3;rio"/>
+              <StringArray count="4">
+                <StringItem index="0" value=" "/>
+                <StringItem index="1" value="Console"/>
+                <StringItem index="2" value="Jogo"/>
+                <StringItem index="3" value="Acess&#xf3;rio"/>
               </StringArray>
             </Property>
           </Properties>
@@ -289,14 +290,15 @@
               <Font name="Calibri Light" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="7">
-                <StringItem index="0" value="PC"/>
-                <StringItem index="1" value="Playstation 4"/>
-                <StringItem index="2" value="XBox One"/>
-                <StringItem index="3" value="Playstation 3"/>
-                <StringItem index="4" value="XBox 360"/>
-                <StringItem index="5" value="Wii"/>
-                <StringItem index="6" value="Wii U"/>
+              <StringArray count="8">
+                <StringItem index="0" value=" "/>
+                <StringItem index="1" value="PC"/>
+                <StringItem index="2" value="Playstation 4"/>
+                <StringItem index="3" value="XBox One"/>
+                <StringItem index="4" value="Playstation 3"/>
+                <StringItem index="5" value="XBox 360"/>
+                <StringItem index="6" value="Wii"/>
+                <StringItem index="7" value="Wii U"/>
               </StringArray>
             </Property>
           </Properties>

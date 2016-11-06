@@ -108,13 +108,13 @@ public class ListarProduto extends javax.swing.JPanel {
         jLabel14.setText("Categoria");
 
         comboCategoria.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Console", "Jogo", "Acessório" }));
+        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Console", "Jogo", "Acessório" }));
 
         jLabel8.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel8.setText("Plataforma");
 
         comboPlataforma.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        comboPlataforma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PC", "Playstation 4", "XBox One", "Playstation 3", "XBox 360", "Wii", "Wii U" }));
+        comboPlataforma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "PC", "Playstation 4", "XBox One", "Playstation 3", "XBox 360", "Wii", "Wii U" }));
 
         jLabel12.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel12.setText("EAN");
