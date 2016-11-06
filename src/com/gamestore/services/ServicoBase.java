@@ -56,8 +56,7 @@ public class ServicoBase<T extends ItemComId> {
         itens.add(item);
     }
     
-    public void InativarCadastroItem(int id) throws Exception
-    {
+    public void InativarCadastroItem(int id) throws Exception {
         T item = obterItemPorId(id);
         item.setAtivo(false);
     }
@@ -66,8 +65,8 @@ public class ServicoBase<T extends ItemComId> {
         
     }        
     
-    public T obterItemPorId(int id)
-    {
+    public T obterItemPorId(int id) {
+        
         for (int i = 0; i < itens.size(); i++) {
             if (itens.get(i).getId() == id)
                 return itens.get(i);                
@@ -84,6 +83,10 @@ public class ServicoBase<T extends ItemComId> {
         calendarDate.setTime(date);
         
         return calendarDate;
+    }
+    
+    protected String getStringFromDate(Calendar date){        
+        return new SimpleDateFormat("dd/MM/yyyy").format(date.getTime());
     }
     
     protected Boolean validarInteger(String numero){

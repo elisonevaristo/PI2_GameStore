@@ -6,6 +6,8 @@
 package com.gamestore.main;
 
 import com.gamestore.models.Cliente;
+import com.gamestore.models.ItemPedido;
+import com.gamestore.models.Pedido;
 import com.gamestore.models.PreferenciaContato;
 import com.gamestore.models.Produto;
 import com.gamestore.models.Sexo;
@@ -224,7 +226,19 @@ public class GameStore extends javax.swing.JFrame {
             servicoProduto.CadastrarItem(p2);
             servicoProduto.CadastrarItem(p3);
             servicoProduto.CadastrarItem(p4);
-            servicoProduto.CadastrarItem(p5);            
+            servicoProduto.CadastrarItem(p5);      
+                        
+            servicoPedido.novoPedido(c1);
+            servicoPedido.adicionarItem(p1, 1);
+            servicoPedido.adicionarItem(p2, 1);
+            servicoPedido.adicionarItem(p3, 1);
+            servicoPedido.salvarPedido();
+            
+            servicoPedido.novoPedido(c3);
+            servicoPedido.adicionarItem(p4, 1);
+            servicoPedido.adicionarItem(p5, 10);
+            servicoPedido.adicionarItem(p3, 1);
+            servicoPedido.salvarPedido();
         }
         catch(ParseException pe)
         {

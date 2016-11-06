@@ -11,7 +11,6 @@ import com.gamestore.models.ItemRelatorio;
 import com.gamestore.models.Pedido;
 import com.gamestore.models.Produto;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -51,7 +50,7 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
                     if(!i.getProduto().getNome().toUpperCase().contains(produto.toUpperCase()))
                         continue;
                 
-                itensRelatorio.add(new ItemRelatorio(String.valueOf(p.getId()), p.getCliente().getNome(), i.getProduto().getNome(), String.valueOf(i.getQuantidade()), p.getData().toString(), String.valueOf(i.getProduto().getPreco()), "100"));
+                itensRelatorio.add(new ItemRelatorio(String.valueOf(p.getId()), p.getCliente().getNome(), i.getProduto().getNome(), String.valueOf(i.getQuantidade()), getStringFromDate(p.getData()), String.valueOf(i.getProduto().getPreco()), "100"));
             }
         }
                 
