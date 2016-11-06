@@ -6,6 +6,11 @@
 package com.gamestore.interfaces;
 
 import com.gamestore.main.GameStore;
+import com.gamestore.models.ItemRelatorio;
+import com.gamestore.services.ServicoPedido;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,13 +19,17 @@ import com.gamestore.main.GameStore;
 public class Relatorio extends javax.swing.JPanel {
 
     GameStore parent;
+    ServicoPedido servico;
     
     /**
      * Creates new form Relatorio
+     * @param parent
+     * @param servico
      */
-    public Relatorio(GameStore parent) {
+    public Relatorio(GameStore parent, ServicoPedido servico) {
         initComponents();
         this.parent = parent;
+        this.servico = servico;
     }
 
     /**
@@ -37,21 +46,19 @@ public class Relatorio extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jTextField4 = new javax.swing.JTextField();
+        scrollPanePedidos = new javax.swing.JScrollPane();
+        tablePedidos = new javax.swing.JTable();
+        radio24Horas = new javax.swing.JRadioButton();
+        radio1Semana = new javax.swing.JRadioButton();
+        radioMensal = new javax.swing.JRadioButton();
+        radioPeriodo = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboPlataforma = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        comboCategoria = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        textProduto = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jRadioButton5 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
@@ -59,8 +66,10 @@ public class Relatorio extends javax.swing.JPanel {
         jRadioButton8 = new javax.swing.JRadioButton();
         jRadioButton9 = new javax.swing.JRadioButton();
         jRadioButton10 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        botaoGerarRelatorio = new javax.swing.JButton();
+        labelTotalVendas = new javax.swing.JLabel();
+        textDataInicial = new javax.swing.JFormattedTextField();
+        textDataFinal = new javax.swing.JFormattedTextField();
 
         jTextField3.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
@@ -78,21 +87,17 @@ public class Relatorio extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePedidos.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                { new Integer(10010101), "Rafael Cavalcanti Barbosa", "Uncharted 4",  new Integer(3), "01/01/2010",  new Double(250.0),  new Double(750.0)},
-                { new Integer(10010101), "Rafael Cavalcanti Barbosa", "Uncharted 2",  new Integer(1), "01/01/2010",  new Double(150.0),  new Double(150.0)},
-                { new Integer(10010102), "Pedro Cardoso Cunha", "Xbox 360",  new Integer(1), "03/02/2010",  new Double(1350.0),  new Double(1350.0)},
-                { new Integer(10010102), "Pedro Cardoso Cunha", "Gears of War 3",  new Integer(1), "03/02/2010",  new Double(130.0),  new Double(130.0)}
+                {null, null, null, null, null, null, null}
             },
             new String [] {
                 "Pedido Nº", "Cliente", "Produto", "Quantidade", "Data", "Valor Unitário", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -106,47 +111,43 @@ public class Relatorio extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        scrollPanePedidos.setViewportView(tablePedidos);
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jRadioButton1.setText("24 horas");
+        radio24Horas.setBackground(new java.awt.Color(255, 255, 255));
+        radio24Horas.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        radio24Horas.setText("24 horas");
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jRadioButton2.setText("1 semana");
+        radio1Semana.setBackground(new java.awt.Color(255, 255, 255));
+        radio1Semana.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        radio1Semana.setText("1 semana");
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton3.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jRadioButton3.setText("Mensal");
+        radioMensal.setBackground(new java.awt.Color(255, 255, 255));
+        radioMensal.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        radioMensal.setText("Mensal");
 
-        jRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton4.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jRadioButton4.setText("Periodo de");
-
-        jTextField4.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        radioPeriodo.setBackground(new java.awt.Color(255, 255, 255));
+        radioPeriodo.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        radioPeriodo.setText("Periodo de");
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel1.setText("até");
 
-        jTextField6.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-
         jLabel7.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel7.setText("Plataforma");
 
-        jComboBox2.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PC", "Playstation 4", "XBox One", "Playstation 3", "XBox 360", "Wii", "Wii U" }));
+        comboPlataforma.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        comboPlataforma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "PC", "Playstation 4", "XBox One", "Playstation 3", "XBox 360", "Wii", "Wii U" }));
 
         jLabel13.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel13.setText("Categoria");
 
-        jComboBox5.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Console", "Jogo", "Acessório" }));
+        comboCategoria.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Console", "Jogo", "Acessório" }));
 
         jLabel8.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel8.setText("Produto");
 
-        jTextField5.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        textProduto.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel9.setText("Agrupar por");
@@ -175,58 +176,73 @@ public class Relatorio extends javax.swing.JPanel {
         jRadioButton10.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jRadioButton10.setText("Plataforma");
 
-        jButton1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jButton1.setText("GERAR RELATÓRIO");
+        botaoGerarRelatorio.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        botaoGerarRelatorio.setText("GERAR RELATÓRIO");
+        botaoGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoGerarRelatorioActionPerformed(evt);
+            }
+        });
 
-        jLabel10.setFont(new java.awt.Font("Calibri Light", 1, 24)); // NOI18N
-        jLabel10.setText("TOTAL DE VENDAS DO PERÍODO: R$ 2380,00");
+        labelTotalVendas.setFont(new java.awt.Font("Calibri Light", 1, 24)); // NOI18N
+        labelTotalVendas.setText("TOTAL DE VENDAS DO PERÍODO: R$ 2380,00");
+
+        try {
+            textDataInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            textDataFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(scrollPanePedidos)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(97, 97, 97)
-                        .addComponent(jRadioButton2)
+                        .addComponent(radio1Semana)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButton3))
+                        .addComponent(radioMensal))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jRadioButton1)))
+                        .addComponent(radio24Horas)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                .addComponent(labelTotalVendas)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
-                    .addComponent(jRadioButton4))
+                    .addComponent(radioPeriodo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
+                            .addComponent(comboPlataforma, 0, 175, Short.MAX_VALUE)
+                            .addComponent(textDataInicial))
+                        .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox5, 0, 169, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField6))))
-                    .addComponent(jTextField5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 35, Short.MAX_VALUE)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboCategoria, 0, 169, Short.MAX_VALUE)
+                            .addComponent(textDataFinal)))
+                    .addComponent(textProduto))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoGerarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -246,27 +262,31 @@ public class Relatorio extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
+                    .addComponent(radio24Horas)
+                    .addComponent(radio1Semana)
+                    .addComponent(radioMensal)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(radioPeriodo)
+                                    .addComponent(jLabel1)
+                                    .addComponent(textDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(textDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboPlataforma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -281,45 +301,75 @@ public class Relatorio extends javax.swing.JPanel {
                             .addComponent(jRadioButton8)
                             .addComponent(jRadioButton10))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(botaoGerarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addComponent(scrollPanePedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel10)
+                .addComponent(labelTotalVendas)
                 .addGap(8, 8, 8))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botaoGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarRelatorioActionPerformed
+        try
+        {                        
+            List<ItemRelatorio> pedidos = servico.ObterRelatorio(textDataInicial.getText(), textDataFinal.getText(), comboPlataforma.getSelectedItem().toString(), comboCategoria.getSelectedItem().toString(), textProduto.getText());
+            DefaultTableModel model = (DefaultTableModel) tablePedidos.getModel();
+            model.setRowCount(0);
+
+            int size = pedidos.size();        
+
+            for (int i = 0; i < size; i++){
+                ItemRelatorio pro = pedidos.get(i);
+                if (pro != null) {
+                    Object[] row = new Object[7];
+                    row[0] = pro.getPedidoId();
+                    row[1] = pro.getClienteNome();
+                    row[2] = pro.getProdutoNome();
+                    row[3] = pro.getQuantidade();
+                    row[4] = pro.getData();
+                    row[5] = pro.getValorUnitario();
+                    row[6] = pro.getValorTotal();
+                    model.addRow(row);                
+                }            
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Não foi possível exibir o relatório.");
+        }
+    }//GEN-LAST:event_botaoGerarRelatorioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botaoGerarRelatorio;
+    private javax.swing.JComboBox<String> comboCategoria;
+    private javax.swing.JComboBox<String> comboPlataforma;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JRadioButton jRadioButton9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel labelTotalVendas;
+    private javax.swing.JRadioButton radio1Semana;
+    private javax.swing.JRadioButton radio24Horas;
+    private javax.swing.JRadioButton radioMensal;
+    private javax.swing.JRadioButton radioPeriodo;
+    private javax.swing.JScrollPane scrollPanePedidos;
+    private javax.swing.JTable tablePedidos;
+    private javax.swing.JFormattedTextField textDataFinal;
+    private javax.swing.JFormattedTextField textDataInicial;
+    private javax.swing.JTextField textProduto;
     // End of variables declaration//GEN-END:variables
 }

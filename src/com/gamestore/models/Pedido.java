@@ -23,11 +23,12 @@ public class Pedido implements ItemComId {
 
     public Pedido(Cliente cliente){
         setCliente(cliente);
+        setData(Calendar.getInstance());
     }
     
-    public Pedido(Cliente cliente, List<ItemPedido> itens){
-        setCliente(cliente);
-        setItens(itens);
+    public Pedido(Cliente cliente, List<ItemPedido> itens) {        
+        this(cliente);
+        setItens(itens);        
     }
     
     public void adicionarItem(ItemPedido item){
