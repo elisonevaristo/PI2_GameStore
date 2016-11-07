@@ -81,7 +81,28 @@ public class ServicoProduto extends ServicoBase<Produto> {
             throw new Exception("É obrigatório informar um preço para o produto.");
                 
         if (quantidade.isEmpty() || !validarInteger(quantidade))
-            throw new Exception("É obrigatório informar a quantidade em estoque do produto.");                
+            throw new Exception("É obrigatório informar a quantidade em estoque do produto.");     
+        
+        if (categoria.isEmpty())
+            throw new Exception("É obrigatório informar a categoria do produto.");
+        
+        if (genero.isEmpty())
+            throw new Exception("É obrigatório informar o genêro do produto.");
+        
+        if (plataforma.isEmpty())
+            throw new Exception("É obrigatório informar a plataforma do produto.");
+        
+        if (classificacao.isEmpty())
+            throw new Exception("É obrigatório informar a classificação indicativa do produto.");
+        
+        if (garantia.isEmpty())
+            throw new Exception("É obrigatório informar a garantia do produto.");
+        
+        if (codigoEan.isEmpty())
+            throw new Exception("É obrigatório informar o código EAN do produto.");
+        
+        if (fabricante.isEmpty())
+            throw new Exception("É obrigatório informar o fabricante do produto.");
         
         Produto novoProduto = new Produto(nome, fabricante, Float.parseFloat(custo.replace(",", ".")), Float.parseFloat(preco.replace(",", ".")), Integer.parseInt(quantidade), categoria, genero, plataforma, classificacao, garantia, codigoEan, descricao);
                         

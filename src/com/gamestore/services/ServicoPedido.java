@@ -90,7 +90,7 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
         
         for (ItemPedido i : pedidoPendente.getItens()) {
             if (i.getProduto().getId() == produto.getId())
-            {
+            {                
                 i.setQuantidade(i.getQuantidade() + 1);
                 return true;
             }
@@ -100,7 +100,7 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
         
         return false;
     }
-    
+        
     public float obterTotalPedido(){
         if (pedidoPendente == null)
             return 0;

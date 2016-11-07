@@ -61,7 +61,7 @@ public class GameStore extends javax.swing.JFrame {
         backgroundPanel.add(iniciarVenda, "iniciarVenda");
         backgroundPanel.add(exibirRelatorio, "exibirRelatorio");
         
-        teste();
+        //teste();
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
