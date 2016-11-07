@@ -209,7 +209,7 @@ public class ListarProduto extends javax.swing.JPanel {
 
         botaoExcluir.setBackground(new java.awt.Color(255, 255, 255));
         botaoExcluir.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        botaoExcluir.setText("EXCLUIR SELECIONADOS");
+        botaoExcluir.setText("EXCLUIR SELECIONADO");
         botaoExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoExcluirActionPerformed(evt);

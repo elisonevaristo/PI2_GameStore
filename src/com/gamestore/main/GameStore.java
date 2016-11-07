@@ -229,15 +229,15 @@ public class GameStore extends javax.swing.JFrame {
             servicoProduto.cadastrarItem(p5);      
                         
             servicoPedido.novoPedido(c1);
-            servicoPedido.adicionarItem(p1, 1);
-            servicoPedido.adicionarItem(p2, 1);
-            servicoPedido.adicionarItem(p3, 1);
+            servicoPedido.adicionarItem(p1);
+            servicoPedido.adicionarItem(p2);
+            servicoPedido.adicionarItem(p3);
             servicoPedido.salvarPedido();
             
             servicoPedido.novoPedido(c3);
-            servicoPedido.adicionarItem(p4, 1);
-            servicoPedido.adicionarItem(p5, 10);
-            servicoPedido.adicionarItem(p3, 1);
+            servicoPedido.adicionarItem(p4);
+            servicoPedido.adicionarItem(p5);
+            servicoPedido.adicionarItem(p3);
             servicoPedido.salvarPedido();
         }
         catch(ParseException pe)

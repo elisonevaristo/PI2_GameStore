@@ -24,6 +24,7 @@ public class Pedido implements ItemComId {
     public Pedido(Cliente cliente){
         setCliente(cliente);
         setData(Calendar.getInstance());
+        itens = new ArrayList<>();
     }
     
     public Pedido(Cliente cliente, List<ItemPedido> itens) {        
@@ -121,5 +122,15 @@ public class Pedido implements ItemComId {
      */
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+    
+    public float obterValorTotal(){
+        float total = 0;
+        
+        for (ItemPedido i : itens) {
+            total += i.getQuantidade() * i.getProduto().getPreco();
+        }
+        
+        return total;
     }
 }

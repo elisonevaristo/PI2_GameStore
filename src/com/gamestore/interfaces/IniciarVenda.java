@@ -138,10 +138,10 @@ public class IniciarVenda extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -307,7 +307,7 @@ public class IniciarVenda extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addComponent(botaoIncluirCliente)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -339,6 +339,7 @@ public class IniciarVenda extends javax.swing.JPanel {
            
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         servico.cancelarPedido();            
+        limparFormulario();
         parent.exibirPainel("selecaoInicial");
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
@@ -395,15 +396,32 @@ public class IniciarVenda extends javax.swing.JPanel {
             
         DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
         
-        servico.adicionarItem(produto, 1);
-        
-        Object[] row = new Object[5];
-        row[0] = produto.getId();
-        row[1] = produto.getNome();
-        row[2] = produto.getPreco();
-        row[3] = 1;
-        row[4] = 1 * produto.getPreco();
-        model.addRow(row);                
+        if (servico.adicionarItem(produto))
+        {        
+            for (int i = 0; i < model.getRowCount(); i++) {
+                int id = Integer.parseInt(model.getValueAt(i, 0).toString());
+                int qtd = Integer.parseInt(model.getValueAt(i, 3).toString()) + 1;
+                if (id == produto.getId())
+                {                    
+                    model.setValueAt(qtd, i, 3);
+                    model.setValueAt(qtd * produto.getPreco(), i, 4);
+                    
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Object[] row = new Object[5];
+            row[0] = produto.getId();
+            row[1] = produto.getNome();
+            row[2] = produto.getPreco();
+            row[3] = 1;
+            row[4] = 1 * produto.getPreco();
+            model.addRow(row);               
+        }
+
+        labelTotal.setText(String.format("TOTAL: R$ %.2f", servico.obterTotalPedido()));
     }
     
     private void listaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaClientesMouseClicked

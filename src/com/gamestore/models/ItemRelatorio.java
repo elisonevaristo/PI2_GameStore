@@ -14,19 +14,17 @@ public class ItemRelatorio {
     private String pedidoId;
     private String clienteNome;
     private String produtoNome;
-    private String quantidade;
+    private int quantidade;
     private String data;
-    private String valorUnitario;
-    private String valorTotal;
+    private float valorUnitario;
     
-    public ItemRelatorio(String pedidoId, String clienteNome, String produtoNome, String quantidade, String data, String valorUnitario, String valorTotal){
+    public ItemRelatorio(String pedidoId, String clienteNome, String produtoNome, int quantidade, String data, float valorUnitario){
         setPedidoId(pedidoId);
         setClienteNome(clienteNome);
         setProdutoNome(produtoNome);
         setQuantidade(quantidade);
         setData(data);
         setValorUnitario(valorUnitario);
-        setValorTotal(valorTotal);
     }
 
     /**
@@ -74,14 +72,14 @@ public class ItemRelatorio {
     /**
      * @return the quantidade
      */
-    public String getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
     /**
      * @param quantidade the quantidade to set
      */
-    public void setQuantidade(String quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -102,28 +100,21 @@ public class ItemRelatorio {
     /**
      * @return the valorUnitario
      */
-    public String getValorUnitario() {
+    public float getValorUnitario() {
         return valorUnitario;
     }
 
     /**
      * @param valorUnitario the valorUnitario to set
      */
-    public void setValorUnitario(String valorUnitario) {
+    public void setValorUnitario(float valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 
     /**
      * @return the valortotal
      */
-    public String getValorTotal() {
-        return valorTotal;
-    }
-
-    /**
-     * @param valortotal the valortotal to set
-     */
-    public void setValorTotal(String valortotal) {
-        this.valorTotal = valortotal;
+    public float getValorTotal() {
+        return this.quantidade * this.valorUnitario;
     }
 }

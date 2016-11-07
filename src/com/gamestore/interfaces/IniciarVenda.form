@@ -128,7 +128,7 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="panelCliente" max="32767" attributes="0"/>
+                  <Component id="panelCliente" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -220,7 +220,7 @@
                     <Column editable="false" title="C&#xf3;digo" type="java.lang.Integer"/>
                     <Column editable="false" title="Nome" type="java.lang.String"/>
                     <Column editable="false" title="Valor unit&#xe1;rio" type="java.lang.String"/>
-                    <Column editable="false" title="Quantidade" type="java.lang.String"/>
+                    <Column editable="true" title="Quantidade" type="java.lang.Integer"/>
                     <Column editable="false" title="Valor Total" type="java.lang.String"/>
                   </Table>
                 </Property>

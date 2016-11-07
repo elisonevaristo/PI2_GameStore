@@ -11,6 +11,7 @@ import com.gamestore.models.ItemRelatorio;
 import com.gamestore.models.Pedido;
 import com.gamestore.models.Produto;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -32,10 +33,14 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
         if (dataInicial.trim().isEmpty() || dataFinal.trim().isEmpty())
             throw new Exception("A data é obrigatória para gerar o relatório.");
                 
+        Calendar dataFim = getDateFromString(dataFinal);
+        dataFim.add(Calendar.DATE, 1);
+        
+        
         for (Pedido p : itens) {
             for (ItemPedido i : p.getItens()) {
                                 
-                if (!p.getData().after(getDateFromString(dataInicial)) || !p.getData().before(getDateFromString(dataFinal)))
+                if (!p.getData().after(getDateFromString(dataInicial)) || !p.getData().before(dataFim))
                     continue;
                 
                 if (!plataforma.trim().isEmpty())
@@ -50,7 +55,7 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
                     if(!i.getProduto().getNome().toUpperCase().contains(produto.toUpperCase()))
                         continue;
                 
-                itensRelatorio.add(new ItemRelatorio(String.valueOf(p.getId()), p.getCliente().getNome(), i.getProduto().getNome(), String.valueOf(i.getQuantidade()), getStringFromDate(p.getData()), String.valueOf(i.getProduto().getPreco()), "100"));
+                itensRelatorio.add(new ItemRelatorio(String.valueOf(p.getId()), p.getCliente().getNome(), i.getProduto().getNome(), i.getQuantidade(), getStringFromDate(p.getData()), i.getProduto().getPreco()));
             }
         }
                 
@@ -69,7 +74,13 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
         cadastrarItem(pedidoPendente);
     }
     
-    public void adicionarItem(Produto produto, int quantidade) throws Exception {
+    /**
+     * 
+     * @param produto O produto a ser incluído.
+     * @return True quando o produto já tiver sido incluído anteriormente. Falso quando for a primeira vez.
+     * @throws Exception 
+     */
+    public Boolean adicionarItem(Produto produto) throws Exception {
         
         if (pedidoPendente == null)
             throw new Exception("É obrigatório informar o cliente ao iniciar um novo pedido.");
@@ -77,10 +88,24 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
         if (produto == null)
             throw new Exception("Informe um produto válido.");
         
-        if (quantidade <= 0)
-            throw new Exception("Quantidade deve ser um valor maior que zero.");
+        for (ItemPedido i : pedidoPendente.getItens()) {
+            if (i.getProduto().getId() == produto.getId())
+            {
+                i.setQuantidade(i.getQuantidade() + 1);
+                return true;
+            }
+        }
         
-        pedidoPendente.adicionarItem(new ItemPedido(pedidoPendente, produto, quantidade));
+        pedidoPendente.adicionarItem(new ItemPedido(pedidoPendente, produto, 1));
+        
+        return false;
+    }
+    
+    public float obterTotalPedido(){
+        if (pedidoPendente == null)
+            return 0;
+        
+        return pedidoPendente.obterValorTotal();
     }
     
     public void excluirItem(int produtoId){
@@ -97,8 +122,6 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
         
         if (pedidoPendente.getItens().isEmpty())
             throw new Exception("Um pedido sem itens não pode ser salvo!");
-        
-        itens.add(pedidoPendente);
         
         pedidoPendente = null;
     }
