@@ -7,6 +7,7 @@ package com.gamestore.services;
 
 import com.gamestore.models.Cliente;
 import com.gamestore.models.Endereco;
+import com.gamestore.models.EstadoCivil;
 import com.gamestore.models.PreferenciaContato;
 import com.gamestore.models.Sexo;
 import com.gamestore.models.Telefone;
@@ -57,7 +58,7 @@ public class ServicoCliente extends ServicoBase<Cliente> {
         Valida se as informações obrigatórias foram preenchidas corretamente
     */
     public Cliente validarCliente(String apelido, String nome, String sobreNome, String sexo, String cpf, String nascimento, String preferencia, String cep, String logradouro, String numero, String complemento, String bairro, 
-            String cidade, String uf, String email, String foneResidencial, String foneCelular, String foneComercial) throws Exception {                
+            String cidade, String uf, String email, String foneResidencial, String foneCelular, String foneComercial, String estadoCivil) throws Exception {                
         
         if (nome.isEmpty())
             throw new Exception("É obrigatório informar o nome do cliente.");
@@ -104,7 +105,9 @@ public class ServicoCliente extends ServicoBase<Cliente> {
         if (!foneComercial.isEmpty())
             telefones.add(new Telefone(TipoTelefone.comercial, foneComercial));
             
-        novoCliente.setTelefones(telefones);
+        novoCliente.setTelefones(telefones);        
+        
+        novoCliente.setEstadoCivil(EstadoCivil.getByDescricao(estadoCivil));
                 
         return novoCliente;        
     }

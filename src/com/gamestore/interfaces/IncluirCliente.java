@@ -12,6 +12,7 @@ import com.gamestore.models.PreferenciaContato;
 import com.gamestore.models.TipoTelefone;
 import com.gamestore.services.ServicoCliente;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 /**
@@ -533,12 +534,14 @@ public class IncluirCliente extends javax.swing.JPanel {
         {            
             Cliente cliente = servico.validarCliente(textApelido.getText(), textNome.getText(), textSobreNome.getText(), comboSexo.getSelectedItem().toString(), textCpf.getText(), textNascimento.getText(), preferencia,
                     textCep.getText(), textLogradouro.getText(), textNumero.getText(), textComplemento.getText(), textBairro.getText(), textCidade.getText(), textUf.getText(), textEmail.getText(),
-                    textTelefoneResidencial.getText(), textTelefoneCelular.getText(), textTelefoneComercial.getText());
+                    textTelefoneResidencial.getText(), textTelefoneCelular.getText(), textTelefoneComercial.getText(), comboEstadoCivil.getSelectedItem().toString());
             
             if (!servico.validarExisteSelecionado())
                 servico.cadastrarItem(cliente);
-            else
+            else{
+                cliente.setId(servico.obterSelecionado().getId());
                 servico.atualizarCadastroItem(cliente);
+            }
             
             limparFormulario();
             
@@ -557,26 +560,30 @@ public class IncluirCliente extends javax.swing.JPanel {
     public void carregarFormulario(){
     
         Cliente selecionado = servico.obterSelecionado();
-    
+                    
         textApelido.setText(selecionado.getApelido());
         textNome.setText(selecionado.getNome());
         textSobreNome.setText(selecionado.getSobreNome());
         textRg.setText(selecionado.getRg());
         textCpf.setText(selecionado.getCpf());
-        textNascimento.setText(selecionado.getNascimento().toString());
+        textNascimento.setText(new SimpleDateFormat("dd/MM/yyyy").format(selecionado.getNascimento().getTime()));
         
-        comboSexo.setSelectedItem(selecionado.getSexo().getDescricao());
-        comboEstadoCivil.setSelectedItem(selecionado.getEstadoCivil().getDescricao());
+        if (selecionado.getSexo() != null)
+            comboSexo.setSelectedItem(selecionado.getSexo().getDescricao());
+        if (selecionado.getEstadoCivil() != null)
+            comboEstadoCivil.setSelectedItem(selecionado.getEstadoCivil().getDescricao());
         
         Endereco endereco = selecionado.getEndereco();        
         
-        textCep.setText(endereco.getCep());
-        textLogradouro.setText(endereco.getLogradouro());
-        textNumero.setText(endereco.getNumero());
-        textComplemento.setText(endereco.getComplemento());
-        textBairro.setText(endereco.getBairro());
-        textCidade.setText(endereco.getCidade());
-        textUf.setText(endereco.getUf());
+        if (endereco != null){
+            textCep.setText(endereco.getCep());
+            textLogradouro.setText(endereco.getLogradouro());
+            textNumero.setText(endereco.getNumero());
+            textComplemento.setText(endereco.getComplemento());
+            textBairro.setText(endereco.getBairro());
+            textCidade.setText(endereco.getCidade());
+            textUf.setText(endereco.getUf());
+        }
         
         textEmail.setText(selecionado.getEmail());        
         textTelefoneResidencial.setText(selecionado.getTelefone(TipoTelefone.residencial));
@@ -589,7 +596,8 @@ public class IncluirCliente extends javax.swing.JPanel {
         radioResidencial.setSelected(preferenciaSelecionado == PreferenciaContato.residencial);
         radioCelular.setSelected(preferenciaSelecionado == PreferenciaContato.celular);
         radioComercial.setSelected(preferenciaSelecionado == PreferenciaContato.comercial);
-
+        
+        preferencia = String.format("%s", preferenciaSelecionado.getId());
     }
     
     private void limparFormulario(){
@@ -612,6 +620,9 @@ public class IncluirCliente extends javax.swing.JPanel {
         textTelefoneResidencial.setText("");
         textTelefoneCelular.setText("");
         textTelefoneComercial.setText("");
+        
+        comboSexo.setSelectedIndex(0);
+        comboEstadoCivil.setSelectedIndex(0);
         
         radioEmail.setSelected(false);
         radioResidencial.setSelected(false);

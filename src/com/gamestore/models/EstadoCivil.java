@@ -13,7 +13,9 @@ public enum EstadoCivil {
     solteiro(1, "Solteiro"),
     casado(2, "Casado"),
     divorciado(3, "Divorciado"),
-    viuvo(4, "Viúvo");
+    viuvo(4, "Viúvo"),
+    naoInformado(5, "Não Informado")
+    ;
     
     private final int id;
     private final String descricao;
@@ -32,5 +34,21 @@ public enum EstadoCivil {
     public String getDescricao()
     {
         return this.descricao;
+    }
+    
+        public static EstadoCivil getByDescricao(String descricao)
+    {
+        switch (descricao) {
+            case "Solteiro":
+                return EstadoCivil.solteiro;
+            case "Casado":
+                return EstadoCivil.casado;
+            case "Divorciado":
+                return EstadoCivil.divorciado;
+            case "Viúvo":
+                return EstadoCivil.viuvo;                    
+            default:
+                return EstadoCivil.naoInformado;
+        }
     }
 }

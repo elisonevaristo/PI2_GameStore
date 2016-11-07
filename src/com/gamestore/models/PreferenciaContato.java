@@ -40,4 +40,8 @@ public enum PreferenciaContato {
                 return PreferenciaContato.nenhuma;
         }
     }
+    
+    public int getId(){
+        return this.id;
+    }
 }

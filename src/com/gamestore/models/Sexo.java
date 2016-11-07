@@ -7,9 +7,9 @@ package com.gamestore.models;
  */
 public enum Sexo {
     
-    masculino('M', "MASCULINO"),
-    feminino('F', "FEMININO"),
-    indefinido('I', "INDEFINIDO");
+    masculino('M', "Masculino"),
+    feminino('F', "Feminino"),
+    indefinido('I', "Indefinido");
     
     private char id;
     private String descricao;

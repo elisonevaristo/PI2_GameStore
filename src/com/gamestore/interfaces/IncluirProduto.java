@@ -317,7 +317,10 @@ public class IncluirProduto extends javax.swing.JPanel {
             if (!servico.validarExisteSelecionado())
                 servico.cadastrarItem(produto);
             else
+            {
+                produto.setId(servico.obterSelecionado().getId());
                 servico.atualizarCadastroItem(produto);
+            }
             
             limparFormulario();
             

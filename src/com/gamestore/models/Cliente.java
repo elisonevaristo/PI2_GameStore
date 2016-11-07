@@ -229,6 +229,9 @@ public class Cliente implements ItemComId {
     }
     
     public String getTelefone(TipoTelefone tipo){
+        if (telefones == null)
+            return "";
+        
         for (Telefone tel : this.telefones) {
             if (tel.getTipo().equals(tipo))
                 return tel.getNumero();
