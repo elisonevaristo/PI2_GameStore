@@ -5,7 +5,17 @@
  */
 package com.gamestore.main;
 
+import com.gamestore.models.Cliente;
+import com.gamestore.models.ItemPedido;
+import com.gamestore.models.Pedido;
+import com.gamestore.models.PreferenciaContato;
+import com.gamestore.models.Produto;
+import com.gamestore.models.Sexo;
 import java.awt.CardLayout;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -29,13 +39,19 @@ public class GameStore extends javax.swing.JFrame {
      */
      
     private void initComponentsForReal(){        
+        
+        /* Inicializa os serviços */        
+        servicoCliente = new com.gamestore.services.ServicoCliente();
+        servicoProduto = new com.gamestore.services.ServicoProduto();
+        servicoPedido = new com.gamestore.services.ServicoPedido();
+        
         selecaoInicial = new com.gamestore.interfaces.SelecaoInicial(this);
-        listarCliente = new com.gamestore.interfaces.ListarCliente(this);
-        listarProduto = new com.gamestore.interfaces.ListarProduto(this);
-        incluirCliente = new com.gamestore.interfaces.IncluirCliente(this);
-        incluirProduto = new com.gamestore.interfaces.IncluirProduto(this);
-        iniciarVenda = new com.gamestore.interfaces.IniciarVenda(this);
-        exibirRelatorio = new com.gamestore.interfaces.Relatorio(this);
+        listarCliente = new com.gamestore.interfaces.ListarCliente(this, servicoCliente);
+        listarProduto = new com.gamestore.interfaces.ListarProduto(this, servicoProduto);
+        incluirCliente = new com.gamestore.interfaces.IncluirCliente(this, servicoCliente);
+        incluirProduto = new com.gamestore.interfaces.IncluirProduto(this, servicoProduto);
+        iniciarVenda = new com.gamestore.interfaces.IniciarVenda(this, servicoPedido, servicoCliente, servicoProduto);
+        exibirRelatorio = new com.gamestore.interfaces.Relatorio(this, servicoPedido);
         
         backgroundPanel.add(selecaoInicial, "selecaoInicial");
         backgroundPanel.add(listarCliente, "listarCliente");
@@ -44,6 +60,8 @@ public class GameStore extends javax.swing.JFrame {
         backgroundPanel.add(incluirProduto, "incluirProduto");
         backgroundPanel.add(iniciarVenda, "iniciarVenda");
         backgroundPanel.add(exibirRelatorio, "exibirRelatorio");
+        
+        //teste();
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -176,6 +194,63 @@ public class GameStore extends javax.swing.JFrame {
         exibirPainel("selecaoInicial");
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //Preenchendo dados para teste, desabilitar antes de enviar
+    private void teste(){
+        
+        try
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = sdf.parse("10/01/1986");
+            Calendar calendarDate = Calendar.getInstance();
+            calendarDate.setTime(date);
+        
+            Cliente c1 = new Cliente(1, "Roger", "Roger", "Rodrigues de Oliveira", Sexo.masculino, "00000000000", calendarDate, PreferenciaContato.email);
+            Cliente c2 = new Cliente(2, "Mario", "Mario", "Mario Pereira", Sexo.masculino, "11111111111", calendarDate, PreferenciaContato.comercial);
+            Cliente c3 = new Cliente(3, "Maria", "Maria", "Maria de Oliveira", Sexo.feminino, "22222222222", calendarDate, PreferenciaContato.residencial);
+            Cliente c4 = new Cliente(4, "Stênio", "Stênio", "Stênio de Oliveira", Sexo.masculino, "33333333333", calendarDate, PreferenciaContato.comercial);
+            Cliente c5 = new Cliente(5, "Diego", "Diego", "Diego de Oliveira", Sexo.masculino, "44444444444", calendarDate, PreferenciaContato.email);
+            
+            servicoCliente.cadastrarItem(c1);
+            servicoCliente.cadastrarItem(c2);
+            servicoCliente.cadastrarItem(c3);
+            servicoCliente.cadastrarItem(c4);
+            servicoCliente.cadastrarItem(c5);
+            
+            Produto p1 = new Produto("Uncharted 2", "Naugthy Dog", 230f, 250f, 100, "", "", "", "", "", "", "");
+            Produto p2 = new Produto("Uncharted 3", "Naugthy Dog", 150f, 180f, 10, "", "", "", "", "", "", "");
+            Produto p3 = new Produto("Uncharted 4", "Naugthy Dog", 130f, 150f, 150, "", "", "", "", "", "", "");
+            Produto p4 = new Produto("Bioshock 2", "2K", 100f, 120f, 100, "", "", "", "", "", "", "");
+            Produto p5 = new Produto("Civilization VI", "Sei lá", 250f, 300f, 100, "", "", "", "", "", "", "");
+            
+            servicoProduto.cadastrarItem(p1);
+            servicoProduto.cadastrarItem(p2);
+            servicoProduto.cadastrarItem(p3);
+            servicoProduto.cadastrarItem(p4);
+            servicoProduto.cadastrarItem(p5);      
+                        
+            servicoPedido.novoPedido(c1);
+            servicoPedido.adicionarItem(p1);
+            servicoPedido.adicionarItem(p2);
+            servicoPedido.adicionarItem(p3);
+            servicoPedido.salvarPedido();
+            
+            servicoPedido.novoPedido(c3);
+            servicoPedido.adicionarItem(p4);
+            servicoPedido.adicionarItem(p5);
+            servicoPedido.adicionarItem(p3);
+            servicoPedido.salvarPedido();
+        }
+        catch(ParseException pe)
+        {
+            System.out.println(pe);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    
+    
     //<editor-fold defaultstate="collapsed" desc="Métodos para controle de interface">
         
     public void exibirPainel(String painel)
@@ -190,15 +265,19 @@ public class GameStore extends javax.swing.JFrame {
         switch (painel) {
             case "listarCliente":
                 labelTitulo.setText("LISTA DE CLIENTES");
+                listarCliente.AtualizarTabela();
                 break;
             case "listarProduto":
                 labelTitulo.setText("LISTA DE PRODUTOS");
+                listarProduto.AtualizarTabela();
                 break;                
             case "incluirCliente":
                 labelTitulo.setText("CADASTRO DE CLIENTES");
+                incluirCliente.carregarFormulario();
                 break;                
             case "incluirProduto":
                 labelTitulo.setText("CADASTRO DE PRODUTOS");
+                incluirProduto.carregarFormulario();
                 break;
             case "iniciarVenda":
                 labelTitulo.setText("NOVO PEDIDO");
@@ -266,4 +345,8 @@ public class GameStore extends javax.swing.JFrame {
     private com.gamestore.interfaces.IncluirProduto incluirProduto;
     private com.gamestore.interfaces.IniciarVenda iniciarVenda;
     private com.gamestore.interfaces.Relatorio exibirRelatorio;
+    
+    private com.gamestore.services.ServicoCliente servicoCliente;
+    private com.gamestore.services.ServicoProduto servicoProduto;
+    private com.gamestore.services.ServicoPedido servicoPedido;
 }
