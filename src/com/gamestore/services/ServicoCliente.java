@@ -15,6 +15,9 @@ import com.gamestore.models.TipoTelefone;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import com.gamestore.database.DaoCliente;
+import com.gamestore.database.ConnectionUtils;
+import com.gamestore.exceptions.DataAccessException;
 
 /**
  *
@@ -22,6 +25,20 @@ import java.util.List;
  */
 public class ServicoCliente extends ServicoBase<Cliente> {
         
+    DaoCliente dao = null;
+    ConnectionUtils conn = null;
+            
+    public ServicoCliente(ConnectionUtils conn){
+        this.conn = conn;
+    }
+    
+    public void cadastrar(Cliente cliente) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoCliente(conn);
+        
+        dao.insert(cliente);
+    }
+    
     public List<Cliente> obterClientes(String nome){
         
         List<Cliente> listaResultado = new ArrayList<>();        

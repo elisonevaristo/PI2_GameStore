@@ -11,6 +11,9 @@ import com.gamestore.models.Pedido;
 import com.gamestore.models.PreferenciaContato;
 import com.gamestore.models.Produto;
 import com.gamestore.models.Sexo;
+
+import com.gamestore.database.ConnectionUtils;
+
 import java.awt.CardLayout;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,8 +43,10 @@ public class GameStore extends javax.swing.JFrame {
      
     private void initComponentsForReal(){        
         
+        conn = new ConnectionUtils();
+        
         /* Inicializa os serviços */        
-        servicoCliente = new com.gamestore.services.ServicoCliente();
+        servicoCliente = new com.gamestore.services.ServicoCliente(conn);
         servicoProduto = new com.gamestore.services.ServicoProduto();
         servicoPedido = new com.gamestore.services.ServicoPedido();
         
@@ -77,9 +82,9 @@ public class GameStore extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Game Store");
-        setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        setMinimumSize(new java.awt.Dimension(1200, 600));
 
         backgroundPanel.setBackground(new java.awt.Color(255, 255, 255));
         backgroundPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -297,11 +302,8 @@ public class GameStore extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Windows look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -349,4 +351,6 @@ public class GameStore extends javax.swing.JFrame {
     private com.gamestore.services.ServicoCliente servicoCliente;
     private com.gamestore.services.ServicoProduto servicoProduto;
     private com.gamestore.services.ServicoPedido servicoPedido;
+    
+    private com.gamestore.database.ConnectionUtils conn;
 }

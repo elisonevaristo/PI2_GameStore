@@ -537,7 +537,7 @@ public class IncluirCliente extends javax.swing.JPanel {
                     textTelefoneResidencial.getText(), textTelefoneCelular.getText(), textTelefoneComercial.getText(), comboEstadoCivil.getSelectedItem().toString());
             
             if (!servico.validarExisteSelecionado())
-                servico.cadastrarItem(cliente);
+                servico.cadastrar(cliente);
             else{
                 cliente.setId(servico.obterSelecionado().getId());
                 servico.atualizarCadastroItem(cliente);
@@ -560,7 +560,10 @@ public class IncluirCliente extends javax.swing.JPanel {
     public void carregarFormulario(){
     
         Cliente selecionado = servico.obterSelecionado();
-                    
+        
+        if (selecionado == null)
+            return;
+        
         textApelido.setText(selecionado.getApelido());
         textNome.setText(selecionado.getNome());
         textSobreNome.setText(selecionado.getSobreNome());

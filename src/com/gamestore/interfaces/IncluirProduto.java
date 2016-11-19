@@ -345,6 +345,9 @@ public class IncluirProduto extends javax.swing.JPanel {
     public void carregarFormulario(){    
         Produto selecionado = servico.obterSelecionado();
     
+        if (selecionado == null)
+            return;
+        
         textCodigoEan.setText(selecionado.getCodigoEan());
         textCusto.setText(String.format("%s", selecionado.getCusto()));
         textDescricao.setText(selecionado.getDescricao());
