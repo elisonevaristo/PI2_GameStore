@@ -39,36 +39,18 @@ public class ServicoCliente extends ServicoBase<Cliente> {
         dao.insert(cliente);
     }
     
-    public List<Cliente> obterClientes(String nome){
+    public List<Cliente> obterClientes(String nome) throws DataAccessException {        
+        if (dao == null)
+            dao = new DaoCliente(conn);
         
-        List<Cliente> listaResultado = new ArrayList<>();        
-        if (itens != null && nome != null) {
-            for (Cliente pro : itens) {
-                if (pro != null && pro.getNome().toUpperCase().contains(nome.toUpperCase())) {
-                    listaResultado.add(pro);
-                }
-            }
-        }        
-        return listaResultado;
+        return dao.obterLista(nome, null);
     }
     
-    public List<Cliente> ObterClientes(String nome, String cpf){
+    public List<Cliente> ObterClientes(String nome, String cpf) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoCliente(conn);
         
-        List<Cliente> resultado = new ArrayList<>();
-        
-        for (Cliente c : itens){
-            if (!nome.isEmpty())
-                if(!c.getNomeCompleto().toUpperCase().contains(nome.toUpperCase()))
-                    continue;
-            
-            if (!cpf.isEmpty())
-                if (!c.getCpf().equalsIgnoreCase(cpf))
-                    continue;
-            
-            resultado.add(c);                                
-        }
-        
-        return resultado;
+        return dao.obterLista(nome, cpf);
     }    
     
     /*

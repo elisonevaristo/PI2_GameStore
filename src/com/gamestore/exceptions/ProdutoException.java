@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gamestore.models;
+package com.gamestore.exceptions;
 
 /**
  *
- * @author roger
+ * @author Roger
  */
-//public class Console extends Produto implements IProduto {
-//    private String fabricante;    
-//}
+public class ProdutoException extends Exception {
+    public ProdutoException(String message){
+        super(message);
+    }
+}

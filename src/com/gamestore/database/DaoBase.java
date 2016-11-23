@@ -30,9 +30,7 @@ public abstract class DaoBase<T> {
     }
     
     protected PreparedStatement obterStatement(String command) throws java.sql.SQLException, Exception {
-        if (connection == null)
-            this.connection = connUtil.getConnection();        
-        
+        validarConexao();                
         return connection.prepareStatement(command);
     }    
     
@@ -42,16 +40,19 @@ public abstract class DaoBase<T> {
     }
     
     protected void saveOrUpdate(String command) throws java.sql.SQLException {
-        
-        if (connection == null)
-            this.connection = connUtil.getConnection();        
-        
+        validarConexao();        
         Statement statement = connection.createStatement();        
         statement.execute(command);
     }
     
-    protected ResultSet getList(String query) throws java.sql.SQLException {        
+    protected ResultSet getList(String query) throws java.sql.SQLException {                
+        validarConexao();        
         return connection.createStatement().executeQuery(query);
+    }
+    
+    private void validarConexao() throws java.sql.SQLException {
+        if (connection == null || connection.isClosed())
+            this.connection = connUtil.getConnection();        
     }
     
     protected abstract void insert(T obj) throws DataAccessException;

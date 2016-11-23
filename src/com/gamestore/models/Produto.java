@@ -5,26 +5,28 @@
  */
 package com.gamestore.models;
 
+import com.gamestore.exceptions.ProdutoException;
+
 /**
  *
  * @author roger
  */
-public class Produto implements IProduto, ItemComId {
+public class Produto implements ItemComId {
     private int id;
     private String nome;
     private String fabricante;
     private float custo;
-    private float preco;
-    private int quantidade;//em estoque
+    private float preco;    
+    private String descricao;
+    private String codigoEan;        
+    private Boolean ativo;
     private String categoria;
+    private int quantidade;//em estoque
     private String genero;
     private String plataforma;
     private String classificacao;
     private String garantiaFornecedor;
-    private String codigoEan;    
-    private String descricao;
     //private java.awt.Image foto;    
-    private Boolean ativo;
     
     public Produto(String nome, String fabricante, float custo, float preco, int quantidade, String categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){
         setNome(nome);
@@ -236,5 +238,16 @@ public class Produto implements IProduto, ItemComId {
      */
     public void setGarantiaFornecedor(String garantiaFornecedor) {
         this.garantiaFornecedor = garantiaFornecedor;
+    }
+    
+    public void retirarEstoque(int quantidade) throws ProdutoException {
+        if (quantidade > this.quantidade){
+            throw new ProdutoException(String.format("O saldo em estoque do produto %s "
+                    + "é inferior à quantidade solicitada. "
+                    + "\n Solicitado: %s "
+                    + "\n Disponível: %s", this.nome, this.quantidade, quantidade));
+        }
+        
+        this.quantidade -= quantidade;
     }
 }

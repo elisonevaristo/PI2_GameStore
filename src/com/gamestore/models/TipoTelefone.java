@@ -24,4 +24,8 @@ public enum TipoTelefone {
         this.descricao = descricao;
         this.abreviatura = abreviatura;
     }
+    
+    public int getId(){
+        return this.id;
+    }
 }

@@ -5,6 +5,7 @@
  */
 package com.gamestore.interfaces;
 
+import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.main.GameStore;
 import com.gamestore.models.Cliente;
 import com.gamestore.models.Produto;
@@ -15,7 +16,6 @@ import java.awt.CardLayout;
 import java.text.ParseException;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -429,29 +429,36 @@ public class IniciarVenda extends javax.swing.JPanel {
     }//GEN-LAST:event_listaClientesMouseClicked
 
     private void textClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textClienteKeyReleased
-        DefaultListModel model = (DefaultListModel) listaClientes.getModel();
-        model.setSize(0);
-        
-        panelCliente.setVisible(false);
-        
-        if (textCliente.getText().length() <= 3)
-            return;
-        
-        List<Cliente> clientes = servicoCliente.obterClientes(textCliente.getText());
-                              
-        int size = clientes.size();        
-        
-        for (int i = 0; i < size; i++){
-            Cliente cli = clientes.get(i);
-            if (cli != null) {
-                model.addElement(String.format("%s - %s", cli.getId(), cli.getNome()));                
-            }            
-        }        
-                
-        panelCliente.setVisible(true);
-        controlarPainelCliente("card3");
-        
-        revalidate();
+        try
+        {
+            DefaultListModel model = (DefaultListModel) listaClientes.getModel();
+            model.setSize(0);
+
+            panelCliente.setVisible(false);
+
+            if (textCliente.getText().length() <= 3)
+                return;
+
+            List<Cliente> clientes = servicoCliente.obterClientes(textCliente.getText());
+
+            int size = clientes.size();        
+
+            for (int i = 0; i < size; i++){
+                Cliente cli = clientes.get(i);
+                if (cli != null) {
+                    model.addElement(String.format("%s - %s", cli.getId(), cli.getNome()));                
+                }            
+            }        
+
+            panelCliente.setVisible(true);
+            controlarPainelCliente("card3");
+
+            revalidate();
+        }
+        catch(DataAccessException dae)
+        {
+            JOptionPane.showMessageDialog(parent, dae.getMessage());
+        }
     }//GEN-LAST:event_textClienteKeyReleased
 
     private void botaoIncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirClienteActionPerformed

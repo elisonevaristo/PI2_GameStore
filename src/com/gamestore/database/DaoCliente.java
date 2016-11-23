@@ -9,7 +9,6 @@ import com.gamestore.models.Cliente;
 import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.models.PreferenciaContato;
 import com.gamestore.models.Sexo;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -46,10 +45,11 @@ public class DaoCliente extends DaoBase<Cliente> {
                         + "estado_civil, "
                         + "nascimento, "
                         + "preferencia_contato, "
-                        + "ativo"
+                        + "ativo,"
+                        + "nome_completo"
                     + ") "
                     + "values "
-                    + "(?,?,?,?,?,?,?,?,?)";
+                    + "(?,?,?,?,?,?,?,?,?,?)";
 
             stt = obterStatement(command);
             
@@ -62,6 +62,7 @@ public class DaoCliente extends DaoBase<Cliente> {
             stt.setDate(7, new java.sql.Date(obj.getNascimento().getTimeInMillis()));  
             stt.setInt(8, obj.getPreferencia().getId());  
             stt.setBoolean(9, true);  
+            stt.setString(10, String.format("%s %s", obj.getNome(), obj.getSobreNome()));
             
             stt.execute();
         }
@@ -100,15 +101,16 @@ public class DaoCliente extends DaoBase<Cliente> {
         {
             String command = 
                     "update cliente set "
-                        + "nome = ? "
-                        + "sobrenome = ? "
-                        + "cpf = ? "
-                        + "rg = ? "
-                        + "sexo = ? "
-                        + "estado_civil = ? "
-                        + "nascimento = ? "
-                        + "preferencia_contato = ? "
-                        + "ativo = ? "
+                        + "nome = ?, "
+                        + "sobrenome = ?, "
+                        + "cpf = ?, "
+                        + "rg = ?, "
+                        + "sexo = ?, "
+                        + "estado_civil = ?, "
+                        + "nascimento = ?, "
+                        + "preferencia_contato = ?, "
+                        + "ativo = ?, "
+                        + "nome_completo = ? "
                     + "where "
                     + "codigo = ?";
 
@@ -123,7 +125,8 @@ public class DaoCliente extends DaoBase<Cliente> {
             stt.setDate(7, new java.sql.Date(obj.getNascimento().getTimeInMillis()));  
             stt.setInt(8, obj.getPreferencia().getId());  
             stt.setBoolean(9, obj.getAtivo());  
-            stt.setInt(10, obj.getId());  
+            stt.setString(10, String.format("%s %s", obj.getNome(), obj.getSobreNome()));  
+            stt.setInt(11, obj.getId());  
             
             stt.execute();
         }
@@ -165,18 +168,30 @@ public class DaoCliente extends DaoBase<Cliente> {
                 return new ArrayList<>();
             
             String command = 
-                    "select codigo, apelido, nome, sobrenome, cpf, rg, sexo, estado_civil, nascimento from cliente where ativo = ? ";
+                    "select "
+                    + "codigo, "
+                    + "apelido, "
+                    + "nome, "
+                    + "sobrenome, "
+                    + "cpf, "
+                    + "rg, "
+                    + "sexo, "
+                    + "estado_civil, "
+                    + "nascimento, "
+                    + "preferencia_contato "
+                    + "from "
+                    + "cliente "
+                    + "where ativo = 1 ";
             
-            command += cpf.isEmpty() ? "?" : " and cpf = ? ";            
-            command += nome.isEmpty() ? "?" : " and UPPER(nome) || UPPER(sobrenome) like UPPER(?) ";
+            if (!cpf.isEmpty())            
+                command += " and cpf = " + cpf;            
             
-            stt = obterStatement(command);
+            if (!nome.isEmpty())            
+            command += " and UPPER(nome_completo) like UPPER('%" + nome + "%') ";
+                        
+            System.out.println(command);
             
-            stt.setBoolean(1, true);
-            stt.setString(2, cpf);
-            stt.setString(3, nome);
-            
-            result  = stt.executeQuery();
+            result  = getList(command);
             
             ArrayList lista = new ArrayList<>();
             
@@ -190,8 +205,8 @@ public class DaoCliente extends DaoBase<Cliente> {
                 PreferenciaContato pref = PreferenciaContato.getById(result.getInt("preferencia_contato"));
                 
                 Cliente cliente = new Cliente(
-                        result.getInt("cliente_id"),
-                        null,
+                        result.getInt("codigo"),
+                        result.getString("apelido"),
                         result.getString("nome"),
                         result.getString("sobrenome"),
                         sexo,
@@ -208,6 +223,9 @@ public class DaoCliente extends DaoBase<Cliente> {
         catch(java.sql.SQLException sqlex)
         {
             sqlex.printStackTrace();
+            
+            System.out.println(sqlex.getMessage());
+            
             throw new DataAccessException("Não foi possível obter a lista de clientes.");
         }
         catch(Exception e)
