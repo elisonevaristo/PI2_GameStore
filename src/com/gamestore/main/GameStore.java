@@ -47,7 +47,7 @@ public class GameStore extends javax.swing.JFrame {
         
         /* Inicializa os serviços */        
         servicoCliente = new com.gamestore.services.ServicoCliente(conn);
-        servicoProduto = new com.gamestore.services.ServicoProduto();
+        servicoProduto = new com.gamestore.services.ServicoProduto(conn);
         servicoPedido = new com.gamestore.services.ServicoPedido();
         
         selecaoInicial = new com.gamestore.interfaces.SelecaoInicial(this);

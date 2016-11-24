@@ -5,12 +5,10 @@
  */
 package com.gamestore.services;
 
-//import com.gamestore.models.Acessorio;
-//import com.gamestore.models.Console;
-//import com.gamestore.models.IProduto;
-//import com.gamestore.models.Jogo;
+import com.gamestore.database.ConnectionUtils;
+import com.gamestore.database.DaoProduto;
+import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.models.Produto;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,47 +17,32 @@ import java.util.List;
  */
 public class ServicoProduto extends ServicoBase<Produto> {
             
-    public List<Produto> ObterProdutos(String nome){
-        
-        List<Produto> listaResultado = new ArrayList<>();        
-        if (itens != null && nome != null) {
-            for (Produto pro : itens) {
-                if (pro != null && pro.getNome().toUpperCase().contains(nome.toUpperCase())) {
-                    listaResultado.add(pro);
-                }
-            }
-        }        
-        return listaResultado;
+    DaoProduto dao = null;
+    ConnectionUtils conn = null;
+    
+    public ServicoProduto(ConnectionUtils conn){
+        this.conn = conn;
     }
     
-    public List<Produto> ObterProdutos(String nome, String plataforma, String fabricante, String categoria, String ean){
-        List<Produto> resultado = new ArrayList<>();
+    public void cadastrar(Produto produto) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoProduto(conn);
         
-        for (Produto p : itens){
-            if (!nome.isEmpty())
-                if(!p.getNome().toUpperCase().contains(nome.toUpperCase()))
-                    continue;
-            
-            if (!plataforma.trim().isEmpty())
-                if (!p.getPlataforma().equalsIgnoreCase(plataforma))
-                    continue;
-            
-            if (!fabricante.isEmpty())
-                if (!p.getFabricante().toUpperCase().contains(fabricante.toUpperCase()))
-                    continue;
-            
-            if (!categoria.trim().isEmpty())
-                if (!p.getCategoria().equalsIgnoreCase(categoria))
-                    continue;
-            
-            if (!ean.isEmpty())
-                if (!p.getCodigoEan().equalsIgnoreCase(ean))
-                    continue;
-            
-            resultado.add(p);                                
-        }
+        dao.insert(produto);
+    }
+    
+    public List<Produto> ObterProdutos(String nome) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoProduto(conn);
         
-        return resultado;
+        return dao.obterLista(nome, null, null, null, null);
+    }
+    
+    public List<Produto> ObterProdutos(String nome, String plataforma, String fabricante, String categoria, String ean) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoProduto(conn);
+        
+        return dao.obterLista(nome, plataforma, fabricante, categoria, ean);
     }
     
     /*

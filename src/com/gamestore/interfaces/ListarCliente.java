@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.gamestore.interfaces;
+import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.main.GameStore;
 import com.gamestore.models.Cliente;
 import com.gamestore.services.ServicoCliente;
@@ -201,23 +202,30 @@ public class ListarCliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void AtualizarTabela(){
-        List<Cliente> clientes = servico.ObterClientes(txtNome.getText(), txtCpf.getText());
-        DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
-        model.setRowCount(0);
-                       
-        int size = clientes.size();        
-        
-        for (int i = 0; i < size; i++){
-            Cliente cli = clientes.get(i);
-            if (cli != null) {
-                Object[] row = new Object[5];
-                row[0] = cli.getId();
-                row[1] = cli.getNome() + " " + cli.getSobreNome();
-                row[2] = cli.getCpf();
-                row[3] = cli.getIdade();
-                row[4] = cli.getNumeroPedidos();
-                model.addRow(row);                
-            }            
+        try
+        {
+            List<Cliente> clientes = servico.ObterClientes(txtNome.getText(), txtCpf.getText());
+            DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+            model.setRowCount(0);
+
+            int size = clientes.size();        
+
+            for (int i = 0; i < size; i++){
+                Cliente cli = clientes.get(i);
+                if (cli != null) {
+                    Object[] row = new Object[5];
+                    row[0] = cli.getId();
+                    row[1] = cli.getNome() + " " + cli.getSobreNome();
+                    row[2] = cli.getCpf();
+                    row[3] = cli.getIdade();
+                    row[4] = cli.getNumeroPedidos();
+                    model.addRow(row);                
+                }            
+            }
+        }
+        catch(DataAccessException dae)
+        {
+            JOptionPane.showMessageDialog(parent, dae.getMessage());
         }
     }
     
