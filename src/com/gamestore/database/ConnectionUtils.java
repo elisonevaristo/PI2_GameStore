@@ -23,7 +23,8 @@ public class ConnectionUtils {
         {
             System.out.println("...tentando conectar...");
             
-            String dbURL = "jdbc:mysql://localhost:3306/gamestore?zeroDateTimeBehavior=convertToNull";            
+            String dbURL = "jdbc:mysql://localhost:3306/gamestore?zeroDateTimeBehavior=convertToNull";
+            //String dbURL = "jdbc:derby://localhost:1527/GameStoreDB";
             
             Properties properties = new Properties();
             properties.put("user", "root");
