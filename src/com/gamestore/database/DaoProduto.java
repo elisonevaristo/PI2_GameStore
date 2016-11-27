@@ -46,7 +46,7 @@ public class DaoProduto extends DaoBase<Produto> {
                         + "garantia_fornecedor"
                     + ") "
                     + "values "
-                    + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             stt = obterStatement(command);
             
@@ -166,7 +166,54 @@ public class DaoProduto extends DaoBase<Produto> {
         }
     }
     
-    public List<Produto> obterLista(String nome, String plataforma, String fabricante, String categoria, String ean) throws DataAccessException {        
+    public void updateSaldo(Produto obj) throws DataAccessException  {        
+        PreparedStatement stt = null;
+        
+        try
+        {            
+            String command = 
+                    "update "
+                    + "produto "
+                    + "set "
+                        + "quantidade = ? "
+                    + "where "
+                    + "codigo = ?";
+
+            stt = obterStatement(command);
+             
+            stt.setInt(1, obj.getQuantidade());            
+            stt.setInt(14, obj.getId());  
+            
+            stt.execute();
+        }
+        catch(java.sql.SQLException sqlex)
+        {
+            sqlex.printStackTrace();
+            throw new DataAccessException("Não foi possível atualizar a quantidade do produto.");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw new DataAccessException("Não foi possível atualizar a quantidade do produto.");
+        }
+        finally
+        {
+            try
+            {
+                if (stt != null && !stt.isClosed())
+                    stt.close();
+                
+                fecharConexao();
+            }
+            catch(Exception ex)
+            {
+                ex.printStackTrace();
+                throw new DataAccessException("Não foi possível atualizar o produto.");
+            }
+        }
+    }
+    
+    public Produto obterPorCodigo(int codigo) throws DataAccessException {        
         
         PreparedStatement stt = null;
         ResultSet result = null;
@@ -174,29 +221,10 @@ public class DaoProduto extends DaoBase<Produto> {
         try
         {            
             String command = 
-                    "select * from produto where ativo = 1 ";
-                       
-            if (!nome.isEmpty())            
-                command += " and UPPER(nome) like UPPER('%" + nome + "%') ";
-                        
-            if (!plataforma.isEmpty())            
-                command += " and plataforma = " + plataforma;            
-            
-            if (!fabricante.isEmpty())            
-                command += " and fabricante = " + fabricante;            
-            
-            if (!categoria.isEmpty())            
-                command += " and categoria = " + categoria;            
-            
-            if (!ean.isEmpty())            
-                command += " and ean = " + ean;            
-            
-            System.out.println(command);
+                    "select * from produto where codigo = " + codigo;
             
             result  = getList(command);
-            
-            ArrayList lista = new ArrayList<>();
-            
+                        
             while(result.next()){
                                
                 Produto produto = new Produto(
@@ -211,6 +239,90 @@ public class DaoProduto extends DaoBase<Produto> {
                         result.getString("classificacao"),
                         result.getString("garantia"),
                         result.getString("codigoEan"),
+                        result.getString("descricao")
+                );
+                
+                return produto;
+            }
+            
+            return null;
+        }
+        catch(java.sql.SQLException sqlex)
+        {
+            sqlex.printStackTrace();
+            
+            System.out.println(sqlex.getMessage());
+            
+            throw new DataAccessException("Não foi possível obter o produto.");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw new DataAccessException("Não foi possível obter o produto.");
+        }
+        finally
+        {
+            try
+            {
+                if (stt != null && !stt.isClosed())
+                    stt.close();
+                
+                fecharConexao();
+            }
+            catch(Exception ex)
+            {
+                ex.printStackTrace();
+                throw new DataAccessException("Não foi possível obter o produto.");
+            }
+        }
+    }
+    
+    public List<Produto> obterLista(String nome, String plataforma, String fabricante, String categoria, String ean) throws DataAccessException {        
+        
+        PreparedStatement stt = null;
+        ResultSet result = null;
+        
+        try
+        {            
+            String command = 
+                    "select * from produto where ativo = 1 ";
+                       
+            if (!nome.isEmpty())            
+                command += " and UPPER(nome) like UPPER('%" + nome + "%') ";
+                        
+            if (!plataforma.trim().isEmpty())            
+                command += " and plataforma = " + plataforma;            
+            
+            if (!fabricante.isEmpty())            
+                command += " and fabricante = " + fabricante;            
+            
+            if (!categoria.trim().isEmpty())            
+                command += " and categoria = " + categoria;            
+            
+            if (!ean.isEmpty())            
+                command += " and ean = " + ean;            
+            
+            System.out.println(command);
+            
+            result  = getList(command);
+            
+            ArrayList lista = new ArrayList<>();
+            
+            while(result.next()){
+                               
+                Produto produto = new Produto(
+                        result.getInt("codigo"),
+                        result.getString("nome"),
+                        result.getString("fabricante"),
+                        result.getFloat("custo"),
+                        result.getFloat("preco"),
+                        result.getInt("quantidade"),
+                        result.getString("categoria"),
+                        result.getString("genero"),
+                        result.getString("plataforma"),
+                        result.getString("classificacao"),
+                        result.getString("garantia_fornecedor"),
+                        result.getString("codigo_ean"),
                         result.getString("descricao")
                 );
                 

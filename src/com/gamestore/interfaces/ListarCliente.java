@@ -230,23 +230,44 @@ public class ListarCliente extends javax.swing.JPanel {
     }
     
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        
-        if (tableClientes.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, "Não há registro selecionado.");
-            return;
-        }
+        try
+        {            
+            if (tableClientes.getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(this, "Não há registro selecionado.");
+                return;
+            }
 
-        DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
-        
-        int id = Integer.parseInt(model.getValueAt(tableClientes.getSelectedRow(), 0).toString());
-        
-        servico.selecionar(id);
-        
-        parent.exibirPainel("incluirCliente");
+            DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+
+            int id = Integer.parseInt(model.getValueAt(tableClientes.getSelectedRow(), 0).toString());
+
+            servico.selecionar(id);
+
+            parent.exibirPainel("incluirCliente");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível obter os dados do cliente.");
+        }
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void botaoIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirActionPerformed
-        parent.exibirPainel("incluirCliente");
+        try
+        {            
+            parent.exibirPainel("incluirCliente");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível acessar a tela de inclusão de clientes.");
+        }
     }//GEN-LAST:event_botaoIncluirActionPerformed
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed

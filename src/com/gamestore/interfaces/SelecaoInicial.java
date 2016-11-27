@@ -5,7 +5,9 @@
  */
 package com.gamestore.interfaces;
 
+import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.main.GameStore;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -100,19 +102,63 @@ public class SelecaoInicial extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroClientesActionPerformed
-        parent.exibirPainel("listarCliente");
+        try
+        {            
+            parent.exibirPainel("listarCliente");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível acessar a tela de lista de clientes.");
+        }  
     }//GEN-LAST:event_botaoCadastroClientesActionPerformed
 
     private void botaoCadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroProdutosActionPerformed
-        parent.exibirPainel("listarProduto");
+        try
+        {            
+            parent.exibirPainel("listarProduto");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível acessar a tela de lista de clientes.");
+        }  
     }//GEN-LAST:event_botaoCadastroProdutosActionPerformed
 
     private void botaoVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVendasActionPerformed
-        parent.exibirPainel("iniciarVenda");
+        try
+        {            
+            parent.exibirPainel("iniciarVenda");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível acessar a tela de lista de clientes.");
+        }  
     }//GEN-LAST:event_botaoVendasActionPerformed
 
     private void botaoRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRelatoriosActionPerformed
-        parent.exibirPainel("exibirRelatorio");
+        try
+        {            
+            parent.exibirPainel("exibirRelatorio");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível acessar a tela de lista de clientes.");
+        }  
     }//GEN-LAST:event_botaoRelatoriosActionPerformed
 
 

@@ -28,6 +28,11 @@ public class Produto implements ItemComId {
     private String garantiaFornecedor;
     //private java.awt.Image foto;    
     
+    public Produto(int id, String nome, String fabricante, float custo, float preco, int quantidade, String categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){        
+        this(nome, fabricante, custo, preco, quantidade, categoria, genero, plataforma, classificacao, garantia, codigoEan, descricao);
+        setId(id);
+    }
+    
     public Produto(String nome, String fabricante, float custo, float preco, int quantidade, String categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){
         setNome(nome);
         setFabricante(fabricante);

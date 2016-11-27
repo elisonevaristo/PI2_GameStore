@@ -5,6 +5,7 @@
  */
 package com.gamestore.interfaces;
 
+import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.main.GameStore;
 import com.gamestore.models.Produto;
 import com.gamestore.services.ServicoProduto;
@@ -273,7 +274,7 @@ public class ListarProduto extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
-    public void AtualizarTabela(){
+    public void AtualizarTabela() throws DataAccessException {
         List<Produto> produtos = servico.ObterProdutos(textNome.getText(), comboPlataforma.getSelectedItem().toString(), textFabricante.getText(), comboCategoria.getSelectedItem().toString(), textEan.getText());
         DefaultTableModel model = (DefaultTableModel) tableProdutos.getModel();
         model.setRowCount(0);
@@ -317,25 +318,58 @@ public class ListarProduto extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoExcluirActionPerformed
 
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        if (tableProdutos.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, "Não há registro selecionado.");
-            return;
-        }
+        try
+        {            
+            if (tableProdutos.getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(this, "Não há registro selecionado.");
+                return;
+            }
 
-        DefaultTableModel model = (DefaultTableModel) tableProdutos.getModel();
-        
-        int id = Integer.parseInt(model.getValueAt(tableProdutos.getSelectedRow(), 0).toString());
-        
-        servico.selecionar(id);        
-        parent.exibirPainel("incluirProduto");
+            DefaultTableModel model = (DefaultTableModel) tableProdutos.getModel();
+
+            int id = Integer.parseInt(model.getValueAt(tableProdutos.getSelectedRow(), 0).toString());
+
+            servico.selecionar(id);        
+            parent.exibirPainel("incluirProduto");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível obter os dados do produto.");
+        }          
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void botaoIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirActionPerformed
-        parent.exibirPainel("incluirProduto");
+        try
+        {            
+            parent.exibirPainel("incluirProduto");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível acessar a tela de inclusão de clientes.");
+        }        
     }//GEN-LAST:event_botaoIncluirActionPerformed
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
-        AtualizarTabela();
+        try
+        {
+            AtualizarTabela();
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível carregar a lista de produtos.");
+        }
     }//GEN-LAST:event_botaoBuscarActionPerformed
    
 

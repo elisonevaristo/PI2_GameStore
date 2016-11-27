@@ -5,6 +5,7 @@
  */
 package com.gamestore.interfaces;
 
+import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.main.GameStore;
 import com.gamestore.models.Produto;
 import com.gamestore.services.ServicoProduto;
@@ -315,7 +316,7 @@ public class IncluirProduto extends javax.swing.JPanel {
                     comboGenero.getSelectedItem().toString(), comboPlataforma.getSelectedItem().toString(), comboClassificacao.getSelectedItem().toString(), textGarantia.getText(), textCodigoEan.getText(), textDescricao.getText());
             
             if (!servico.validarExisteSelecionado())
-                servico.cadastrarItem(produto);
+                servico.cadastrar(produto);
             else
             {
                 produto.setId(servico.obterSelecionado().getId());
@@ -337,9 +338,20 @@ public class IncluirProduto extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
-        servico.cancelarSelecao();
-        limparFormulario();
-        parent.exibirPainel("listarProduto");
+        try
+        {            
+            servico.cancelarSelecao();
+            limparFormulario();
+            parent.exibirPainel("listarProduto");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível cancelar a ação.");
+        }
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     public void carregarFormulario(){    

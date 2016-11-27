@@ -163,8 +163,8 @@ public class DaoCliente extends DaoBase<Cliente> {
         ResultSet result = null;
         
         try
-        {
-            if (nome.isEmpty() && cpf.isEmpty())
+        {            
+            if (nome == null && cpf == null)
                 return new ArrayList<>();
             
             String command = 
@@ -183,10 +183,10 @@ public class DaoCliente extends DaoBase<Cliente> {
                     + "cliente "
                     + "where ativo = 1 ";
             
-            if (!cpf.isEmpty())            
+            if (cpf != null && !cpf.isEmpty())            
                 command += " and cpf = " + cpf;            
             
-            if (!nome.isEmpty())            
+            if (nome != null && !nome.isEmpty())            
             command += " and UPPER(nome_completo) like UPPER('%" + nome + "%') ";
                         
             System.out.println(command);

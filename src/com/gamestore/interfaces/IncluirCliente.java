@@ -5,6 +5,7 @@
  */
 package com.gamestore.interfaces;
 
+import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.main.GameStore;
 import com.gamestore.models.Cliente;
 import com.gamestore.models.Endereco;
@@ -640,9 +641,20 @@ public class IncluirCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_radioPreferenciaActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
-        servico.cancelarSelecao();
-        limparFormulario();
-        parent.exibirPainel("listarCliente");
+        try
+        {            
+            servico.cancelarSelecao();
+            limparFormulario();
+            parent.exibirPainel("listarCliente");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível cancelar a ação.");
+        }
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

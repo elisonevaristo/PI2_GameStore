@@ -338,9 +338,20 @@ public class IniciarVenda extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
            
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
-        servico.cancelarPedido();            
-        limparFormulario();
-        parent.exibirPainel("selecaoInicial");
+        try
+        {
+            servico.cancelarPedido();            
+            limparFormulario();
+            parent.exibirPainel("selecaoInicial");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Erro ao cancelar a ação.");
+        }
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
@@ -360,28 +371,38 @@ public class IniciarVenda extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void textProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textProdutoKeyReleased
-        
-        DefaultListModel model = (DefaultListModel) listaProdutos.getModel();
-        model.setSize(0);
-        
-        scrollPaneProdutos.setVisible(false);
-        
-        if (textProduto.getText().length() <= 3)
-            return;
-        
-        List<Produto> produtos = servicoProduto.ObterProdutos(textProduto.getText());
-                              
-        int size = produtos.size();        
-        
-        for (int i = 0; i < size; i++){
-            Produto pro = produtos.get(i);
-            if (pro != null) {
-                model.addElement(String.format("%s - %s", pro.getId(), pro.getNome()));                
-            }            
-        }        
-        
-        scrollPaneProdutos.setVisible(true);
-        revalidate();
+        try
+        {            
+            DefaultListModel model = (DefaultListModel) listaProdutos.getModel();
+            model.setSize(0);
+
+            scrollPaneProdutos.setVisible(false);
+
+            if (textProduto.getText().length() <= 3)
+                return;
+
+            List<Produto> produtos = servicoProduto.ObterProdutos(textProduto.getText());
+
+            int size = produtos.size();        
+
+            for (int i = 0; i < size; i++){
+                Produto pro = produtos.get(i);
+                if (pro != null) {
+                    model.addElement(String.format("%s - %s", pro.getId(), pro.getNome()));                
+                }            
+            }        
+
+            scrollPaneProdutos.setVisible(true);
+            revalidate();
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(parent, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(parent, "Não foi possível carregar a lista de produtos.");
+        }
     }//GEN-LAST:event_textProdutoKeyReleased
 
     private void listaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaProdutosMouseClicked

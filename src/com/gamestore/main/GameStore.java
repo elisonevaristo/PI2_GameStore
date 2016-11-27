@@ -6,19 +6,19 @@
 package com.gamestore.main;
 
 import com.gamestore.models.Cliente;
-import com.gamestore.models.ItemPedido;
-import com.gamestore.models.Pedido;
 import com.gamestore.models.PreferenciaContato;
 import com.gamestore.models.Produto;
 import com.gamestore.models.Sexo;
 
 import com.gamestore.database.ConnectionUtils;
+import com.gamestore.exceptions.DataAccessException;
 
 import java.awt.CardLayout;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,9 +30,21 @@ public class GameStore extends javax.swing.JFrame {
      * Creates new form GameStore
      */
     public GameStore() {
-        initComponents();
-        initComponentsForReal();
-        exibirPainel("selecaoInicial");       
+        
+        try
+        {
+            initComponents();
+            initComponentsForReal();
+            exibirPainel("selecaoInicial");       
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(rootPane, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Não foi possível atualizar o painel.");
+        }
     }
 
     /**
@@ -196,7 +208,18 @@ public class GameStore extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        exibirPainel("selecaoInicial");
+        try
+        {
+            exibirPainel("selecaoInicial");
+        }
+        catch(DataAccessException dax)
+        {
+            JOptionPane.showMessageDialog(rootPane, dax.getMessage());
+        }
+        catch(Exception x)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Não foi possível atualizar o painel.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //Preenchendo dados para teste, desabilitar antes de enviar
@@ -258,15 +281,13 @@ public class GameStore extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="Métodos para controle de interface">
         
-    public void exibirPainel(String painel)
-    {                
+    public void exibirPainel(String painel) throws DataAccessException {                
         CardLayout card = (CardLayout)backgroundPanel.getLayout();
         card.show(backgroundPanel, painel);
         alterarTitulo(painel);
     }    
     
-    public void alterarTitulo(String painel)
-    {
+    public void alterarTitulo(String painel) throws DataAccessException {
         switch (painel) {
             case "listarCliente":
                 labelTitulo.setText("LISTA DE CLIENTES");
