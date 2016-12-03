@@ -10,22 +10,22 @@ package com.gamestore.models;
  * @author roger
  */
 public class Telefone {
+
     private int id;
     private TipoTelefone tipo;
     private String ddd;
-    private String numero;    
-    
-    public Telefone(TipoTelefone tipo, String numero)
-    {
+    private String numero;
+    private Cliente cliente;
+
+    public Telefone(TipoTelefone tipo, String numero, Cliente cliente) {
         this.tipo = tipo;
         this.numero = numero;
+        this.cliente = cliente;
     }
-    
-    public Telefone(TipoTelefone tipo, String ddd, String numero)
-    {
-        this.tipo = tipo;
+
+    public Telefone(TipoTelefone tipo, String ddd, String numero, Cliente cliente) {
+        this(tipo, numero, cliente);
         this.ddd = ddd;
-        this.numero = numero;
     }
 
     /**
@@ -82,5 +82,19 @@ public class Telefone {
      */
     public String getNumero() {
         return numero;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

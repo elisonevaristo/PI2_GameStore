@@ -84,7 +84,6 @@ public class IncluirCliente extends javax.swing.JPanel {
         radioResidencial = new javax.swing.JRadioButton();
         radioComercial = new javax.swing.JRadioButton();
         textCpf = new javax.swing.JFormattedTextField();
-        textRg = new javax.swing.JFormattedTextField();
         textNascimento = new javax.swing.JFormattedTextField();
         textCep = new javax.swing.JFormattedTextField();
         textTelefoneResidencial = new javax.swing.JFormattedTextField();
@@ -94,6 +93,7 @@ public class IncluirCliente extends javax.swing.JPanel {
         jLabel29 = new javax.swing.JLabel();
         botaoSalvar = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
+        textRg = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -238,12 +238,6 @@ public class IncluirCliente extends javax.swing.JPanel {
         }
 
         try {
-            textRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-A")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
             textNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
@@ -300,23 +294,14 @@ public class IncluirCliente extends javax.swing.JPanel {
             .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
                 .addContainerGap(168, Short.MAX_VALUE)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(591, Short.MAX_VALUE))
-                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(599, Short.MAX_VALUE))
-                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap(569, Short.MAX_VALUE))
-                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(612, Short.MAX_VALUE))
-                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addContainerGap(569, Short.MAX_VALUE))))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +324,7 @@ public class IncluirCliente extends javax.swing.JPanel {
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabel26)))
                                             .addGap(56, 56, 56))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
                                 .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel14)
@@ -373,8 +358,7 @@ public class IncluirCliente extends javax.swing.JPanel {
                                             .addComponent(textNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
                                             .addComponent(jLabel7)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(textRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGap(176, 176, 176))))
                                 .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
                                     .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(textApelido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -402,13 +386,12 @@ public class IncluirCliente extends javax.swing.JPanel {
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textUf, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(botaoSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(botaoSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textRg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel28)
                     .addComponent(jLabel29))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
-
-        panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {comboSexo, textRg});
 
         panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {comboEstadoCivil, textNome});
 
@@ -513,8 +496,6 @@ public class IncluirCliente extends javax.swing.JPanel {
         );
 
         panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {textApelido, textCpf, textNome});
-
-        panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comboSexo, textRg});
 
         panelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botaoCancelar, botaoSalvar});
 
@@ -702,7 +683,7 @@ public class IncluirCliente extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField textNascimento;
     private javax.swing.JTextField textNome;
     private javax.swing.JTextField textNumero;
-    private javax.swing.JFormattedTextField textRg;
+    private javax.swing.JTextField textRg;
     private javax.swing.JTextField textSobreNome;
     private javax.swing.JFormattedTextField textTelefoneCelular;
     private javax.swing.JFormattedTextField textTelefoneComercial;

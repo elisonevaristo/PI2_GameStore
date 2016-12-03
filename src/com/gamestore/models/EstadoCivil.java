@@ -36,7 +36,23 @@ public enum EstadoCivil {
         return this.descricao;
     }
     
-        public static EstadoCivil getByDescricao(String descricao)
+    public static EstadoCivil getById(int id)
+    {
+        switch (id) {
+            case 1:
+                return EstadoCivil.solteiro;
+            case 2:
+                return EstadoCivil.casado;
+            case 3:
+                return EstadoCivil.divorciado;
+            case 4:
+                return EstadoCivil.viuvo;                    
+            default:
+                return EstadoCivil.naoInformado;
+        }
+    }
+    
+    public static EstadoCivil getByDescricao(String descricao)
     {
         switch (descricao) {
             case "Solteiro":

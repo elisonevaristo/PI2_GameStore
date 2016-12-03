@@ -98,11 +98,11 @@ public class ServicoCliente extends ServicoBase<Cliente> {
         List<Telefone> telefones = new ArrayList<>();
         
         if (!foneResidencial.isEmpty())
-            telefones.add(new Telefone(TipoTelefone.residencial, foneResidencial));
+            telefones.add(new Telefone(TipoTelefone.residencial, foneResidencial, novoCliente));
         if (!foneCelular.isEmpty())
-            telefones.add(new Telefone(TipoTelefone.celular, foneCelular));
+            telefones.add(new Telefone(TipoTelefone.celular, foneCelular, novoCliente));
         if (!foneComercial.isEmpty())
-            telefones.add(new Telefone(TipoTelefone.comercial, foneComercial));
+            telefones.add(new Telefone(TipoTelefone.comercial, foneComercial, novoCliente));
             
         novoCliente.setTelefones(telefones);        
         

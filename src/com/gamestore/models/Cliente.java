@@ -37,15 +37,8 @@ public class Cliente implements ItemComId {
     
     public Cliente(int id, String apelido, String nome, String sobreNome, Sexo sexo, String cpf, Calendar nascimento, PreferenciaContato preferencia)
     {
+        this(apelido, nome, sobreNome, sexo, cpf, nascimento, preferencia);        
         setId(id);
-        setApelido(apelido);
-        setNome(nome);
-        setSobreNome(sobreNome);
-        setSexo(sexo);
-        setCpf(cpf);
-        setNascimento(nascimento);
-        setPreferencia(preferencia);
-        setAtivo(true);
     }
     
     public Cliente(String apelido, String nome, String sobreNome, Sexo sexo, String cpf, Calendar nascimento, PreferenciaContato preferencia)
@@ -57,7 +50,8 @@ public class Cliente implements ItemComId {
         setCpf(cpf);
         setNascimento(nascimento);
         setPreferencia(preferencia);
-        setAtivo(true);
+        setAtivo(true);        
+        setEndereco(new Endereco());
     }
 
     /**
