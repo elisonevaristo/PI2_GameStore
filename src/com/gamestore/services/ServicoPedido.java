@@ -7,6 +7,7 @@ package com.gamestore.services;
 
 import com.gamestore.database.ConnectionUtils;
 import com.gamestore.database.DaoPedido;
+import com.gamestore.exceptions.PedidoException;
 import com.gamestore.exceptions.ProdutoException;
 import com.gamestore.models.Cliente;
 import com.gamestore.models.ItemPedido;
@@ -31,45 +32,22 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
     public ServicoPedido(ConnectionUtils conn){
         this.conn = conn;
     }
-    
-    public List<Pedido> ObterPedidos(){
-        return itens;
-    }    
-    
-    public List<ItemRelatorio> ObterRelatorio(String dataInicial, String dataFinal, String plataforma, String categoria, String produto) throws Exception {
+        
+    public List<ItemRelatorio> ObterRelatorio(String dataInicial, String dataFinal, String plataforma, String categoria, String produto) throws PedidoException, Exception {
         
         List<ItemRelatorio> itensRelatorio = new ArrayList<>();
         
         if (dataInicial.trim().isEmpty() || dataFinal.trim().isEmpty())
-            throw new Exception("A data é obrigatória para gerar o relatório.");
+            throw new PedidoException("A data é obrigatória para gerar o relatório.");
                 
-        Calendar dataFim = getDateFromString(dataFinal);
-        dataFim.add(Calendar.DATE, 1);
+        Calendar inicio = getDateFromString(dataInicial);
+        Calendar fim = getDateFromString(dataFinal);
+        fim.add(Calendar.DATE, 1);
         
-        
-        for (Pedido p : itens) {
-            for (ItemPedido i : p.getItens()) {
-                                
-                if (!p.getData().after(getDateFromString(dataInicial)) || !p.getData().before(dataFim))
-                    continue;
-                
-                if (!plataforma.trim().isEmpty())
-                    if(!i.getProduto().getPlataforma().equalsIgnoreCase(plataforma))
-                        continue;
-                
-                if (!categoria.trim().isEmpty())
-                    if (!i.getProduto().getCategoria().getDescricao().equalsIgnoreCase(categoria))
-                        continue;
-                
-                if (!produto.trim().isEmpty())
-                    if(!i.getProduto().getNome().toUpperCase().contains(produto.toUpperCase()))
-                        continue;
-                
-                itensRelatorio.add(new ItemRelatorio(String.valueOf(p.getId()), p.getCliente().getNome(), i.getProduto().getNome(), i.getQuantidade(), getStringFromDate(p.getData()), i.getProduto().getPreco()));
-            }
-        }
-                
-        return itensRelatorio;        
+        if (dao == null)
+            dao = new DaoPedido(conn);
+                        
+        return dao.obterLista(inicio, fim, plataforma, categoria, produto);  
     }    
     
     /*

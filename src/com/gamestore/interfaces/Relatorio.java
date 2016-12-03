@@ -272,7 +272,7 @@ public class Relatorio extends javax.swing.JPanel {
     private void botaoGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarRelatorioActionPerformed
         try
         {                        
-            List<ItemRelatorio> pedidos = servico.ObterRelatorio(textDataInicial.getText(), textDataFinal.getText(), comboPlataforma.getSelectedItem().toString(), comboCategoria.getSelectedItem().toString(), textProduto.getText());
+            List<ItemRelatorio> pedidos = servico.ObterRelatorio(textDataInicial.getText(), textDataFinal.getText(), comboPlataforma.getSelectedItem().toString().trim(), comboCategoria.getSelectedItem().toString().trim(), textProduto.getText().trim());
             DefaultTableModel model = (DefaultTableModel) tablePedidos.getModel();
             model.setRowCount(0);
 

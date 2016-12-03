@@ -13,6 +13,7 @@ import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -130,10 +131,11 @@ public class DaoPedido extends DaoBase<Pedido> {
         throw new UnsupportedOperationException("Atualização de pedido não implementada."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<ItemRelatorio> obterLista(String dataInicial, String dataFinal, String plataforma, String categoria, String produto) throws DataAccessException {        
+    public List<ItemRelatorio> obterLista(Calendar dataInicial, Calendar dataFinal, String plataforma, String categoria, String produto) throws DataAccessException {        
         
         PreparedStatement stt = null;
         ResultSet result = null;
+        int indexParams = 2;
         
         try
         {            
@@ -151,20 +153,30 @@ public class DaoPedido extends DaoBase<Pedido> {
                         + "inner join produto_pedido item_pedido on (item_pedido.codigo_pedido = pedido.codigo) "
                         + "inner join produto on (produto.codigo = item_pedido.codigo_produto) "
                     + "where "
-                        + "pedido.data between " + dataInicial + " and " + dataFinal + " ";
-                       
-            if (!produto.isEmpty())            
-                command += " and UPPER(produto.nome) like UPPER('%" + produto + "%') ";
-                        
-            if (!plataforma.isEmpty())            
-                command += " and plataforma = " + plataforma;            
-                        
-            if (!categoria.isEmpty())            
-                command += " and categoria = " + categoria;            
-                        
-            System.out.println(command);
+                        + "pedido.data between ? and ? ";
             
-            result  = getList(command);
+            if (produto != null && !produto.isEmpty()){            
+                command += " and UPPER(produto.nome) like UPPER(?) ";
+                indexParams++;
+            }
+                                   
+            stt = obterStatement(command);
+            
+            stt.setDate(1, new java.sql.Date(dataInicial.getTimeInMillis()));  
+            stt.setDate(2, new java.sql.Date(dataFinal.getTimeInMillis()));  
+            
+            if (produto != null && !produto.isEmpty()){                
+                stt.setString(indexParams, "%" + produto + "%");  
+                indexParams--;
+            }
+//                        
+//            if (plataforma != null && !plataforma.isEmpty())            
+//                command += " and plataforma = " + plataforma;            
+//                        
+//            if (categoria != null && !categoria.isEmpty())            
+//                command += " and categoria = " + categoria;            
+                                    
+            result  = stt.executeQuery();
             
             ArrayList lista = new ArrayList<>();
             
