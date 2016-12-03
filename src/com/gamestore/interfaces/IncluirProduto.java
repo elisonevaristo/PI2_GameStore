@@ -8,6 +8,7 @@ package com.gamestore.interfaces;
 import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.main.GameStore;
 import com.gamestore.models.Categoria;
+import com.gamestore.models.Genero;
 import com.gamestore.models.Produto;
 import com.gamestore.services.ServicoProduto;
 import java.text.ParseException;
@@ -57,7 +58,7 @@ public class IncluirProduto extends javax.swing.JPanel {
         comboPlataforma = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        comboGenero = new javax.swing.JComboBox<>();
+        comboGenero = new javax.swing.JComboBox(Genero.getDescricoes());
         jLabel8 = new javax.swing.JLabel();
         textGarantia = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -372,7 +373,7 @@ public class IncluirProduto extends javax.swing.JPanel {
 
         comboCategoria.setSelectedItem(selecionado.getCategoria().getDescricao());
         comboClassificacao.setSelectedItem(selecionado.getClassificacao());
-        comboGenero.setSelectedItem(selecionado.getGenero());
+        comboGenero.setSelectedItem(selecionado.getGenero().getDescricao());
         comboPlataforma.setSelectedItem(selecionado.getPlataforma());
     }
     

@@ -7,6 +7,7 @@ package com.gamestore.database;
 
 import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.models.Categoria;
+import com.gamestore.models.Genero;
 import com.gamestore.models.Produto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,7 +61,7 @@ public class DaoProduto extends DaoBase<Produto> {
             stt.setBoolean(7, true);  
             stt.setInt(8, obj.getCategoria().getId());  
             stt.setInt(9, obj.getQuantidade());  
-            stt.setString(10, obj.getGenero());  
+            stt.setInt(10, obj.getGenero().getId());  
             stt.setString(11, obj.getPlataforma());  
             stt.setString(12, obj.getClassificacao());  
             stt.setString(13, obj.getGarantiaFornecedor());              
@@ -131,7 +132,7 @@ public class DaoProduto extends DaoBase<Produto> {
             stt.setBoolean(7, true);  
             stt.setInt(8, obj.getCategoria().getId());  
             stt.setInt(9, obj.getQuantidade());  
-            stt.setString(10, obj.getGenero());  
+            stt.setInt(10, obj.getGenero().getId());  
             stt.setString(11, obj.getPlataforma());  
             stt.setString(12, obj.getClassificacao());  
             stt.setString(13, obj.getGarantiaFornecedor());    
@@ -273,7 +274,7 @@ public class DaoProduto extends DaoBase<Produto> {
                         result.getFloat("preco"),
                         result.getInt("quantidade"),
                         Categoria.getById(result.getInt("categoria")),
-                        result.getString("genero"),
+                        Genero.getById(result.getInt("genero")),
                         result.getString("plataforma"),
                         result.getString("classificacao"),
                         result.getString("garantia_fornecedor"),
@@ -357,7 +358,7 @@ public class DaoProduto extends DaoBase<Produto> {
                         result.getFloat("preco"),
                         result.getInt("quantidade"),
                         Categoria.getById(result.getInt("categoria")),
-                        result.getString("genero"),
+                        Genero.getById(result.getInt("genero")),
                         result.getString("plataforma"),
                         result.getString("classificacao"),
                         result.getString("garantia_fornecedor"),

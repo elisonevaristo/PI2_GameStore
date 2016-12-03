@@ -9,6 +9,7 @@ import com.gamestore.database.ConnectionUtils;
 import com.gamestore.database.DaoProduto;
 import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.models.Categoria;
+import com.gamestore.models.Genero;
 import com.gamestore.models.Produto;
 import java.util.List;
 
@@ -132,7 +133,7 @@ public class ServicoProduto extends ServicoBase<Produto> {
                 Float.parseFloat(preco.replace(",", ".")), 
                 Integer.parseInt(quantidade), 
                 Categoria.getByDescricao(categoria), 
-                genero, 
+                Genero.getByDescricao(genero), 
                 plataforma, 
                 classificacao, 
                 garantia, 

@@ -22,18 +22,18 @@ public class Produto implements ItemComId {
     private Boolean ativo;
     private Categoria categoria;
     private int quantidade;//em estoque
-    private String genero;
+    private Genero genero;
     private String plataforma;
     private String classificacao;
     private String garantiaFornecedor;
     //private java.awt.Image foto;    
     
-    public Produto(int id, String nome, String fabricante, float custo, float preco, int quantidade, Categoria categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){        
+    public Produto(int id, String nome, String fabricante, float custo, float preco, int quantidade, Categoria categoria, Genero genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){        
         this(nome, fabricante, custo, preco, quantidade, categoria, genero, plataforma, classificacao, garantia, codigoEan, descricao);
         setId(id);
     }
     
-    public Produto(String nome, String fabricante, float custo, float preco, int quantidade, Categoria categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){
+    public Produto(String nome, String fabricante, float custo, float preco, int quantidade, Categoria categoria, Genero genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){
         setNome(nome);
         setFabricante(fabricante);
         setCusto(custo);
@@ -206,14 +206,14 @@ public class Produto implements ItemComId {
     /**
      * @return the genero
      */
-    public String getGenero() {
+    public Genero getGenero() {
         return genero;
     }
 
     /**
      * @param genero the genero to set
      */
-    public void setGenero(String genero) {
+    public void setGenero(Genero genero) {
         this.genero = genero;
     }
 

@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `gamestore`.`PRODUTO` (
   `ativo` INT(1) NOT NULL DEFAULT 1,
   `categoria` INT NOT NULL,
   `quantidade` INT NOT NULL DEFAULT 0,
-  `genero` VARCHAR(45) NULL,
+  `genero` INT NULL,
   `plataforma` VARCHAR(45) NULL,
   `classificacao` VARCHAR(45) NULL,
   `garantia_fornecedor` VARCHAR(45) NULL,
