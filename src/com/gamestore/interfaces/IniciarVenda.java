@@ -359,6 +359,7 @@ public class IniciarVenda extends javax.swing.JPanel {
         {            
             servico.salvarPedido();            
             limparFormulario();
+            JOptionPane.showMessageDialog(parent, "Pedido concluído!");
         }
         catch(ParseException pex)
         {
@@ -490,7 +491,7 @@ public class IniciarVenda extends javax.swing.JPanel {
 
             int selectedId = Integer.parseInt(selectedCliente.substring(0, selectedCliente.indexOf("-")).trim());
 
-            Cliente cliente = servicoCliente.obterItemPorId(selectedId);
+            Cliente cliente = servicoCliente.obterPorId(selectedId);
             
             labelNomeClienteSelecionado.setText(cliente.getNome());
             labelIdadeClienteSelecionado.setText(cliente.getIdade());
@@ -515,7 +516,7 @@ public class IniciarVenda extends javax.swing.JPanel {
 
             int selectedProdutoId = Integer.parseInt(selectedProduto.substring(0, selectedProduto.indexOf("-")).trim());
 
-            incluirNovoProduto(servicoProduto.obterItemPorId(selectedProdutoId));
+            incluirNovoProduto(servicoProduto.obterPorId(selectedProdutoId));
             scrollPaneProdutos.setVisible(false);
             textProduto.setText("");
         }

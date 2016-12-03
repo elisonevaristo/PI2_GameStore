@@ -271,18 +271,62 @@ public class DaoCliente extends DaoBase<Cliente> {
         }
     }
     
-    public Cliente obterClientePorId(int id) throws DataAccessException {        
+    public void inativar(int id) throws DataAccessException  {        
+        PreparedStatement stt = null;
+        
+        try
+        {            
+            String command = "update cliente set ativo = 0 where codigo = ?";
+
+            stt = obterStatement(command);
+              
+            stt.setInt(1, id);  
+            
+            stt.execute();
+        }
+        catch(java.sql.SQLException sqlex)
+        {
+            sqlex.printStackTrace();
+            throw new DataAccessException("Não foi possível excluir o cliente.");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw new DataAccessException("Não foi possível excluir o cliente.");
+        }
+        finally
+        {
+            try
+            {
+                if (stt != null && !stt.isClosed())
+                    stt.close();
+                
+                fecharConexao();
+            }
+            catch(Exception ex)
+            {
+                ex.printStackTrace();
+                throw new DataAccessException("Não foi possível excluir o cliente.");
+            }
+        }
+    }
+    
+    /*Por algum motivo que não sei explicar, o prepared statement está disparando
+        uma exception de sintaxe quando utilizo os parametros com interrogação (?)
+      Isso não acontece no produto... logo não sei o que pode estar acontecendo, 
+        talvez algum problema no mysql. Sendo assim, utilizei uma query normal,
+        mesmo sabendo que é uma prática incorreta por permitir sql injection.
+    */
+    public Cliente obterPorId(int id) throws DataAccessException {        
         
         PreparedStatement stt = null;
         ResultSet result = null;
         
         try
         {               
-            String command = "select * from cliente where codigo = ?";
+            String command = "select * from cliente where codigo = " + id;
                       
             stt = obterStatement(command);
-            
-            stt.setInt(1, id);
             
             result  = stt.executeQuery(command);
             
@@ -359,53 +403,31 @@ public class DaoCliente extends DaoBase<Cliente> {
         }
     }
     
+    /*Por algum motivo que não sei explicar, o prepared statement está disparando
+        uma exception de sintaxe quando utilizo os parametros com interrogação (?)
+      Isso não acontece no produto... logo não sei o que pode estar acontecendo, 
+        talvez algum problema no mysql. Sendo assim, utilizei uma query normal,
+        mesmo sabendo que é uma prática incorreta por permitir sql injection.
+    */
     public List<Cliente> obterLista(String nome, String cpf) throws DataAccessException {        
         
         PreparedStatement stt = null;
         ResultSet result = null;
-        
-        int indexParam = 0;
         
         try
         {            
             if (nome == null && cpf == null)
                 return new ArrayList<>();
             
-            String command = 
-                    "select "
-                    + "codigo, "
-                    + "apelido, "
-                    + "nome, "
-                    + "sobrenome, "
-                    + "cpf, "
-                    + "rg, "
-                    + "sexo, "
-                    + "estado_civil, "
-                    + "nascimento, "
-                    + "preferencia_contato "
-                    + "from "
-                    + "cliente "
-                    + "where ativo = 1 ";
+            String command = "select * from cliente where ativo = 1 ";
             
-            if (cpf != null && !cpf.isEmpty())            
-                command += " and cpf = ? " + cpf;            
+            if (cpf != null && !cpf.isEmpty())
+                command += " and cpf = " + cpf;
             
-            if (nome != null && !nome.isEmpty())            
-            command += " and UPPER(nome_completo) like UPPER('%?%') ";
-                      
-            stt = obterStatement(command);
+            if (nome != null && !nome.isEmpty())
+                command += " and UPPER(nome_completo) like UPPER('%" + nome + "%') ";
             
-            if (cpf != null && !cpf.isEmpty()) {
-                stt.setString(indexParam, cpf);
-                indexParam++;
-            }
-            
-            if (nome != null && !nome.isEmpty()){            
-                stt.setString(indexParam, nome);
-                indexParam++;
-            }
-            
-            result  = stt.executeQuery(command);
+            result  = getList(command);
             
             ArrayList lista = new ArrayList<>();
             

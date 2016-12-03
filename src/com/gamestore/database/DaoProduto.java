@@ -203,7 +203,7 @@ public class DaoProduto extends DaoBase<Produto> {
             catch(Exception ex)
             {
                 ex.printStackTrace();
-                throw new DataAccessException("Não foi possível atualizar o produto.");
+                throw new DataAccessException("Não foi possível excluir o produto.");
             }
         }
     }
@@ -321,30 +321,53 @@ public class DaoProduto extends DaoBase<Produto> {
         
         PreparedStatement stt = null;
         ResultSet result = null;
+        int indexParam = 0;
         
         try
         {            
-            String command = 
-                    "select * from produto where ativo = 1 ";
+            String command = "select * from produto where ativo = 1 ";
                        
-            if (!nome.isEmpty())            
-                command += " and UPPER(nome) like UPPER('%" + nome + "%') ";
+            if (nome != null && !nome.isEmpty()){
+                command += " and UPPER(nome) like UPPER(?) ";
+                indexParam++;
+            }
                         
-            if (!plataforma.trim().isEmpty())            
-                command += " and plataforma = " + plataforma;            
+            if (plataforma != null && !plataforma.trim().isEmpty()){
+                command += " and plataforma = ?";            
+                indexParam++;
+            }
             
-            if (!fabricante.isEmpty())            
-                command += " and fabricante = " + fabricante;            
+            if (fabricante != null && !fabricante.isEmpty()) {                     
+                command += " and fabricante = ?";            
+                indexParam++;
+            }
             
-            if (!categoria.trim().isEmpty())            
-                command += " and categoria = " + categoria;            
+            if (categoria != null && !categoria.trim().isEmpty()) {                 
+                command += " and categoria = ?";            
+                indexParam++;
+            }
+            if (ean != null && !ean.isEmpty()) {
+                command += " and ean = ?";            
+                indexParam++;
+            }            
+            stt = obterStatement(command);
             
-            if (!ean.isEmpty())            
-                command += " and ean = " + ean;            
+            if (nome != null && !nome.isEmpty())            
+                stt.setString(indexParam, "%" + nome + "%");
+                        
+            if (plataforma != null && !plataforma.trim().isEmpty())            
+                stt.setString(indexParam, plataforma);
             
-            System.out.println(command);
+            if (fabricante != null && !fabricante.isEmpty())            
+                stt.setString(indexParam, fabricante);
             
-            result  = getList(command);
+            if (categoria != null && !categoria.trim().isEmpty())            
+                stt.setString(indexParam, categoria);
+            
+            if (ean != null && !ean.isEmpty())            
+                stt.setString(indexParam, ean);
+            
+            result  = stt.executeQuery();
             
             ArrayList lista = new ArrayList<>();
             

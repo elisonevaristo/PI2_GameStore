@@ -5,19 +5,11 @@
  */
 package com.gamestore.main;
 
-import com.gamestore.models.Cliente;
-import com.gamestore.models.PreferenciaContato;
-import com.gamestore.models.Produto;
-import com.gamestore.models.Sexo;
 
 import com.gamestore.database.ConnectionUtils;
 import com.gamestore.exceptions.DataAccessException;
 
 import java.awt.CardLayout;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -60,7 +52,7 @@ public class GameStore extends javax.swing.JFrame {
         /* Inicializa os serviços */        
         servicoCliente = new com.gamestore.services.ServicoCliente(conn);
         servicoProduto = new com.gamestore.services.ServicoProduto(conn);
-        servicoPedido = new com.gamestore.services.ServicoPedido();
+        servicoPedido = new com.gamestore.services.ServicoPedido(conn);
         
         selecaoInicial = new com.gamestore.interfaces.SelecaoInicial(this);
         listarCliente = new com.gamestore.interfaces.ListarCliente(this, servicoCliente);

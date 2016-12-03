@@ -27,6 +27,7 @@ public class ServicoCliente extends ServicoBase<Cliente> {
         
     DaoCliente dao = null;
     ConnectionUtils conn = null;
+    Cliente cliente = null;
             
     public ServicoCliente(ConnectionUtils conn){
         this.conn = conn;
@@ -39,11 +40,51 @@ public class ServicoCliente extends ServicoBase<Cliente> {
         dao.insert(cliente);
     }
     
+    public void atualizar(Cliente produto) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoCliente(conn);
+        
+        dao.update(produto);
+    }
+    
+    public void selecionar(int id) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoCliente(conn);
+        
+        cliente = dao.obterPorId(id);
+    }
+        
+    public Cliente obterSelecionado(){
+        return cliente;
+    }
+    
+    public Boolean validarExisteSelecionado(){        
+        return cliente != null && cliente.getId() != 0;
+    }
+    
+    public void cancelarSelecao(){        
+        cliente = null;
+    }
+    
+    public void excluir(int id) throws DataAccessException  {
+        if (dao == null)
+            dao = new DaoCliente(conn);
+        
+        dao.inativar(id);
+    } 
+    
     public List<Cliente> obterClientes(String nome) throws DataAccessException {        
         if (dao == null)
             dao = new DaoCliente(conn);
         
         return dao.obterLista(nome, null);
+    }
+    
+    public Cliente obterPorId(int id) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoCliente(conn);
+        
+        return dao.obterPorId(id);
     }
     
     public List<Cliente> ObterClientes(String nome, String cpf) throws DataAccessException {

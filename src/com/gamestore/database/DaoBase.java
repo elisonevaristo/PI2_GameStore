@@ -29,6 +29,11 @@ public abstract class DaoBase<T> {
         this.connUtil = connUtil;
     }
     
+    protected PreparedStatement obterStatementRetornaId(String command) throws java.sql.SQLException, Exception {
+        validarConexao();                
+        return connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
+    }    
+    
     protected PreparedStatement obterStatement(String command) throws java.sql.SQLException, Exception {
         validarConexao();                
         return connection.prepareStatement(command);

@@ -522,7 +522,7 @@ public class IncluirCliente extends javax.swing.JPanel {
                 servico.cadastrar(cliente);
             else{
                 cliente.setId(servico.obterSelecionado().getId());
-                servico.atualizarCadastroItem(cliente);
+                servico.atualizar(cliente);
             }
             
             limparFormulario();

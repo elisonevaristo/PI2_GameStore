@@ -34,14 +34,19 @@ public class DaoPedido extends DaoBase<Pedido> {
         
         try
         {
-            String command = 
-                    "insert into pedido (data, codigo_cliente) values (sysdate(), ?)";
+            String command = "insert into pedido (data, codigo_cliente) values (sysdate(), ?)";
 
-            stt = obterStatement(command);
+            stt = obterStatementRetornaId(command);
             
             stt.setInt(1, obj.getCliente().getId());
             
             stt.execute();
+                        
+            ResultSet rs = stt.getGeneratedKeys();
+            rs.next();
+            int id = rs.getInt(1);
+            
+            obj.setId(id);
             
             for (ItemPedido item : obj.getItens())
                 insertItem(item);

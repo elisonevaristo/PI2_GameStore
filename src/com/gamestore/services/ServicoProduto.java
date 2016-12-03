@@ -41,7 +41,6 @@ public class ServicoProduto extends ServicoBase<Produto> {
         dao.update(produto);
     }
     
-    @Override
     public void selecionar(int id) throws DataAccessException {
         if (dao == null)
             dao = new DaoProduto(conn);
@@ -49,28 +48,31 @@ public class ServicoProduto extends ServicoBase<Produto> {
         produto = dao.obterPorId(id);
     }
         
-    @Override
     public Produto obterSelecionado(){
         return produto;
     }
     
-    @Override
     public Boolean validarExisteSelecionado(){        
         return produto != null && produto.getId() != 0;
     }
     
-    @Override
     public void cancelarSelecao(){        
         produto = null;
     }
     
-    @Override
     public void excluir(int id) throws DataAccessException  {
         if (dao == null)
             dao = new DaoProduto(conn);
         
         dao.inativar(id);
     } 
+    
+    public Produto obterPorId(int id) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoProduto(conn);
+        
+        return dao.obterPorId(id);
+    }
     
     public List<Produto> ObterProdutos(String nome) throws DataAccessException {
         if (dao == null)

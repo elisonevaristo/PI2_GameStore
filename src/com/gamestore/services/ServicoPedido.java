@@ -5,6 +5,9 @@
  */
 package com.gamestore.services;
 
+import com.gamestore.database.ConnectionUtils;
+import com.gamestore.database.DaoPedido;
+import com.gamestore.exceptions.ProdutoException;
 import com.gamestore.models.Cliente;
 import com.gamestore.models.ItemPedido;
 import com.gamestore.models.ItemRelatorio;
@@ -20,7 +23,14 @@ import java.util.List;
  */
 public class ServicoPedido  extends ServicoBase<Pedido> {
         
+    DaoPedido dao = null;
+    ConnectionUtils conn = null;
     Pedido pedidoPendente;
+    List<Pedido> itens;
+    
+    public ServicoPedido(ConnectionUtils conn){
+        this.conn = conn;
+    }
     
     public List<Pedido> ObterPedidos(){
         return itens;
@@ -71,7 +81,6 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
             throw new Exception("É obrigatório informar o cliente ao iniciar um novo pedido.");
                                 
         pedidoPendente = new Pedido(cliente);
-        cadastrarItem(pedidoPendente);
     }
     
     /**
@@ -83,10 +92,10 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
     public Boolean adicionarItem(Produto produto) throws Exception {
         
         if (pedidoPendente == null)
-            throw new Exception("É obrigatório informar o cliente ao iniciar um novo pedido.");
+            throw new ProdutoException("É obrigatório informar o cliente ao iniciar um novo pedido.");
         
         if (produto == null)
-            throw new Exception("Informe um produto válido.");
+            throw new ProdutoException("Informe um produto válido.");
         
         for (ItemPedido i : pedidoPendente.getItens()) {
             if (i.getProduto().getId() == produto.getId())
@@ -123,7 +132,10 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
         if (pedidoPendente.getItens().isEmpty())
             throw new Exception("Um pedido sem itens não pode ser salvo!");
         
-        pedidoPendente = null;
+        if (dao == null)
+            dao = new DaoPedido(conn);
+        
+        dao.insert(pedidoPendente);
     }
     
     public void cancelarPedido(){
