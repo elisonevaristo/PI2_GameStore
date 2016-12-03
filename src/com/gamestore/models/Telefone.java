@@ -13,7 +13,6 @@ public class Telefone {
 
     private int id;
     private TipoTelefone tipo;
-    private String ddd;
     private String numero;
     private Cliente cliente;
 
@@ -21,11 +20,6 @@ public class Telefone {
         this.tipo = tipo;
         this.numero = numero;
         this.cliente = cliente;
-    }
-
-    public Telefone(TipoTelefone tipo, String ddd, String numero, Cliente cliente) {
-        this(tipo, numero, cliente);
-        this.ddd = ddd;
     }
 
     /**
@@ -40,13 +34,6 @@ public class Telefone {
      */
     public void setTipo(TipoTelefone tipo) {
         this.tipo = tipo;
-    }
-
-    /**
-     * @param ddd the ddd to set
-     */
-    public void setDdd(String ddd) {
-        this.ddd = ddd;
     }
 
     /**
@@ -68,13 +55,6 @@ public class Telefone {
      */
     public TipoTelefone getTipo() {
         return tipo;
-    }
-
-    /**
-     * @return the ddd
-     */
-    public String getDdd() {
-        return ddd;
     }
 
     /**

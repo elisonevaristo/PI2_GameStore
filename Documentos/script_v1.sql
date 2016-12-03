@@ -78,9 +78,8 @@ DROP TABLE IF EXISTS `gamestore`.`TELEFONE` ;
 
 CREATE TABLE IF NOT EXISTS `gamestore`.`TELEFONE` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `tipo` INT NULL,
-  `ddd` VARCHAR(3) NULL,
-  `numero` VARCHAR(9) NULL,
+  `tipo` INT NOT NULL,
+  `numero` VARCHAR(15) NOT NULL,
   `codigo_cliente` INT NOT NULL,
   PRIMARY KEY (`codigo`),
   CONSTRAINT `fk_TELEFONE_CLIENTE1`

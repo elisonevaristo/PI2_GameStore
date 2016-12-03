@@ -12,6 +12,7 @@ import com.gamestore.models.EstadoCivil;
 import com.gamestore.models.PreferenciaContato;
 import com.gamestore.models.Sexo;
 import com.gamestore.models.Telefone;
+import com.gamestore.models.TipoTelefone;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class DaoCliente extends DaoBase<Cliente> {
                     + "values "
                     + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-            stt = obterStatement(command);
+            stt = obterStatementRetornaId(command);
             
             stt.setString(1, obj.getApelido().isEmpty() ? obj.getNome() : obj.getApelido());
             stt.setString(2, obj.getNome());
@@ -90,16 +91,14 @@ public class DaoCliente extends DaoBase<Cliente> {
                         
             stt.execute();
             
-            //stt.executeUpdate(command, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stt.getGeneratedKeys();
             
-//            ResultSet rs = stt.getGeneratedKeys();
-//            
-//            if (rs.next())
-//            {
-//                int id = rs.getInt(1);
-//                obj.setId(id);
-//                insertTelefones(obj);
-//            }
+            rs.next();                        
+            int id = rs.getInt(1);
+            
+            obj.setId(id);
+            
+            insertTelefones(obj);
         }
         catch(java.sql.SQLException sqlex)
         {
@@ -147,14 +146,13 @@ public class DaoCliente extends DaoBase<Cliente> {
         try
         {
             String command = 
-                    "insert into telefone (tipo, ddd, numero, codigo_cliente) values (?, ?, ?, ?);";
+                    "insert into telefone (tipo, numero, codigo_cliente) values (?, ?, ?);";
 
             stt = obterStatement(command);
             
             stt.setInt(1, obj.getTipo().getId());
-            stt.setString(2, obj.getDdd());
-            stt.setString(3, obj.getNumero());
-            stt.setInt(4, obj.getCliente().getId());           
+            stt.setString(2, obj.getNumero());
+            stt.setInt(3, obj.getCliente().getId());           
             
             stt.execute();
         }
@@ -243,6 +241,11 @@ public class DaoCliente extends DaoBase<Cliente> {
             stt.setInt(21, obj.getId());  
             
             stt.execute();
+            
+            //Sempre deleta os anteriores antes de atualizar pois não estou gravando o id do telefone na tela.
+            //Não é a melhor implementação...
+            deleteTelefones(obj);
+            insertTelefones(obj);
         }
         catch(java.sql.SQLException sqlex)
         {
@@ -253,6 +256,47 @@ public class DaoCliente extends DaoBase<Cliente> {
         {
             e.printStackTrace();
             throw new DataAccessException("Não foi possível atualizar o cliente.");
+        }
+        finally
+        {
+            try
+            {
+                if (stt != null && !stt.isClosed())
+                    stt.close();
+                
+                fecharConexao();
+            }
+            catch(Exception ex)
+            {
+                ex.printStackTrace();
+                throw new DataAccessException("Não foi possível atualizar o cliente.");
+            }
+        }
+    }
+    
+    private void deleteTelefones(Cliente cliente) throws DataAccessException {
+        
+        PreparedStatement stt = null;
+        
+        try
+        {
+            String command ="delete from telefone where codigo_cliente = ? ";
+
+            stt = obterStatement(command);
+            
+            stt.setInt(1, cliente.getId());
+            
+            stt.execute();
+        }
+        catch(java.sql.SQLException sqlex)
+        {
+            sqlex.printStackTrace();
+            throw new DataAccessException("Não foi possível atualizar o telefone do cliente.");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw new DataAccessException("Não foi possível atualizar o telefone do cliente.");
         }
         finally
         {
@@ -330,8 +374,6 @@ public class DaoCliente extends DaoBase<Cliente> {
             
             result  = stt.executeQuery(command);
             
-            ArrayList lista = new ArrayList<>();
-            
             while(result.next()){
                 
                 Calendar cal = new GregorianCalendar();
@@ -359,19 +401,21 @@ public class DaoCliente extends DaoBase<Cliente> {
                 Endereco endereco = new Endereco();
                 
                 endereco.setCep(result.getString("cep"));
-                endereco.setCep(result.getString("logradouro"));
-                endereco.setCep(result.getString("numero"));
-                endereco.setCep(result.getString("complemento"));
-                endereco.setCep(result.getString("bairro"));
-                endereco.setCep(result.getString("cidade"));
-                endereco.setCep(result.getString("uf"));
+                endereco.setLogradouro(result.getString("logradouro"));
+                endereco.setNumero(result.getString("numero"));
+                endereco.setComplemento(result.getString("complemento"));
+                endereco.setBairro(result.getString("bairro"));
+                endereco.setCidade(result.getString("cidade"));
+                endereco.setUf(result.getString("uf"));
                 
                 cliente.setEndereco(endereco);
                 
-                lista.add(cliente);
+                cliente.setTelefones(obterTelefones(cliente));
+                
+                return cliente;
             }
             
-            return lista.size() == 0 ? null : (Cliente)lista.get(0);
+            return null;
         }
         catch(java.sql.SQLException sqlex)
         {
@@ -401,6 +445,34 @@ public class DaoCliente extends DaoBase<Cliente> {
                 throw new DataAccessException("Não foi possível obter a lista de clientes.");
             }
         }
+    }
+    
+    private List<Telefone> obterTelefones(Cliente cliente) throws DataAccessException, java.sql.SQLException, Exception {
+        PreparedStatement stt = null;
+        ResultSet result = null;
+        
+        String command = "select * from telefone where codigo_cliente = ? ";
+
+        stt = obterStatement(command);
+
+        stt.setInt(1, cliente.getId());
+
+        result = stt.executeQuery();
+
+        ArrayList lista = new ArrayList<>();
+
+        while(result.next()){
+
+            Telefone tel = new Telefone(
+                    TipoTelefone.getById(result.getInt("tipo")),
+                    result.getString("numero"),
+                    cliente             
+            );
+
+            lista.add(tel);
+        }
+
+        return lista;
     }
     
     /*Por algum motivo que não sei explicar, o prepared statement está disparando
