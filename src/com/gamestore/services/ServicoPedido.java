@@ -48,7 +48,7 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
                         continue;
                 
                 if (!categoria.trim().isEmpty())
-                    if (!i.getProduto().getCategoria().equalsIgnoreCase(categoria))
+                    if (!i.getProduto().getCategoria().getDescricao().equalsIgnoreCase(categoria))
                         continue;
                 
                 if (!produto.trim().isEmpty())

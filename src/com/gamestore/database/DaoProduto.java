@@ -6,6 +6,7 @@
 package com.gamestore.database;
 
 import com.gamestore.exceptions.DataAccessException;
+import com.gamestore.models.Categoria;
 import com.gamestore.models.Produto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,7 +58,7 @@ public class DaoProduto extends DaoBase<Produto> {
             stt.setString(5, obj.getDescricao());
             stt.setString(6, obj.getCodigoEan());
             stt.setBoolean(7, true);  
-            stt.setString(8, obj.getCategoria());  
+            stt.setInt(8, obj.getCategoria().getId());  
             stt.setInt(9, obj.getQuantidade());  
             stt.setString(10, obj.getGenero());  
             stt.setString(11, obj.getPlataforma());  
@@ -128,7 +129,7 @@ public class DaoProduto extends DaoBase<Produto> {
             stt.setString(5, obj.getDescricao());
             stt.setString(6, obj.getCodigoEan());
             stt.setBoolean(7, true);  
-            stt.setString(8, obj.getCategoria());  
+            stt.setInt(8, obj.getCategoria().getId());  
             stt.setInt(9, obj.getQuantidade());  
             stt.setString(10, obj.getGenero());  
             stt.setString(11, obj.getPlataforma());  
@@ -166,23 +167,57 @@ public class DaoProduto extends DaoBase<Produto> {
         }
     }
     
+    public void inativar(int id) throws DataAccessException  {        
+        PreparedStatement stt = null;
+        
+        try
+        {            
+            String command = "update produto set ativo = 0 where codigo = ?";
+
+            stt = obterStatement(command);
+              
+            stt.setInt(1, id);  
+            
+            stt.execute();
+        }
+        catch(java.sql.SQLException sqlex)
+        {
+            sqlex.printStackTrace();
+            throw new DataAccessException("Não foi possível excluir o produto.");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw new DataAccessException("Não foi possível excluir o produto.");
+        }
+        finally
+        {
+            try
+            {
+                if (stt != null && !stt.isClosed())
+                    stt.close();
+                
+                fecharConexao();
+            }
+            catch(Exception ex)
+            {
+                ex.printStackTrace();
+                throw new DataAccessException("Não foi possível atualizar o produto.");
+            }
+        }
+    }
+    
     public void updateSaldo(Produto obj) throws DataAccessException  {        
         PreparedStatement stt = null;
         
         try
         {            
-            String command = 
-                    "update "
-                    + "produto "
-                    + "set "
-                        + "quantidade = ? "
-                    + "where "
-                    + "codigo = ?";
+            String command = "update produto set quantidade = ? where codigo = ?";
 
             stt = obterStatement(command);
              
             stt.setInt(1, obj.getQuantidade());            
-            stt.setInt(14, obj.getId());  
+            stt.setInt(2, obj.getId());  
             
             stt.execute();
         }
@@ -213,32 +248,36 @@ public class DaoProduto extends DaoBase<Produto> {
         }
     }
     
-    public Produto obterPorCodigo(int codigo) throws DataAccessException {        
+    public Produto obterPorId(int id) throws DataAccessException {        
         
         PreparedStatement stt = null;
         ResultSet result = null;
         
         try
         {            
-            String command = 
-                    "select * from produto where codigo = " + codigo;
+            String command = "select * from produto where codigo = ?";
             
-            result  = getList(command);
+            stt = obterStatement(command);
+            
+            stt.setInt(1, id);  
+            
+            result = stt.executeQuery();
                         
             while(result.next()){
                                
                 Produto produto = new Produto(
+                        result.getInt("codigo"),
                         result.getString("nome"),
                         result.getString("fabricante"),
                         result.getFloat("custo"),
                         result.getFloat("preco"),
                         result.getInt("quantidade"),
-                        result.getString("categoria"),
+                        Categoria.getById(result.getInt("categoria")),
                         result.getString("genero"),
                         result.getString("plataforma"),
                         result.getString("classificacao"),
-                        result.getString("garantia"),
-                        result.getString("codigoEan"),
+                        result.getString("garantia_fornecedor"),
+                        result.getString("codigo_ean"),
                         result.getString("descricao")
                 );
                 
@@ -317,7 +356,7 @@ public class DaoProduto extends DaoBase<Produto> {
                         result.getFloat("custo"),
                         result.getFloat("preco"),
                         result.getInt("quantidade"),
-                        result.getString("categoria"),
+                        Categoria.getById(result.getInt("categoria")),
                         result.getString("genero"),
                         result.getString("plataforma"),
                         result.getString("classificacao"),

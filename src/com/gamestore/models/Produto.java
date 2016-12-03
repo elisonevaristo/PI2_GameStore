@@ -20,7 +20,7 @@ public class Produto implements ItemComId {
     private String descricao;
     private String codigoEan;        
     private Boolean ativo;
-    private String categoria;
+    private Categoria categoria;
     private int quantidade;//em estoque
     private String genero;
     private String plataforma;
@@ -28,12 +28,12 @@ public class Produto implements ItemComId {
     private String garantiaFornecedor;
     //private java.awt.Image foto;    
     
-    public Produto(int id, String nome, String fabricante, float custo, float preco, int quantidade, String categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){        
+    public Produto(int id, String nome, String fabricante, float custo, float preco, int quantidade, Categoria categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){        
         this(nome, fabricante, custo, preco, quantidade, categoria, genero, plataforma, classificacao, garantia, codigoEan, descricao);
         setId(id);
     }
     
-    public Produto(String nome, String fabricante, float custo, float preco, int quantidade, String categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){
+    public Produto(String nome, String fabricante, float custo, float preco, int quantidade, Categoria categoria, String genero, String plataforma, String classificacao, String garantia, String codigoEan, String descricao){
         setNome(nome);
         setFabricante(fabricante);
         setCusto(custo);
@@ -192,14 +192,14 @@ public class Produto implements ItemComId {
     /**
      * @return the categoria
      */
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
     /**
      * @param categoria the categoria to set
      */
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 

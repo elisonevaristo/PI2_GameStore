@@ -8,6 +8,7 @@ package com.gamestore.services;
 import com.gamestore.database.ConnectionUtils;
 import com.gamestore.database.DaoProduto;
 import com.gamestore.exceptions.DataAccessException;
+import com.gamestore.models.Categoria;
 import com.gamestore.models.Produto;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class ServicoProduto extends ServicoBase<Produto> {
             
     DaoProduto dao = null;
     ConnectionUtils conn = null;
+    Produto produto = null;
     
     public ServicoProduto(ConnectionUtils conn){
         this.conn = conn;
@@ -30,6 +32,44 @@ public class ServicoProduto extends ServicoBase<Produto> {
         
         dao.insert(produto);
     }
+    
+    public void atualizar(Produto produto) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoProduto(conn);
+        
+        dao.update(produto);
+    }
+    
+    @Override
+    public void selecionar(int id) throws DataAccessException {
+        if (dao == null)
+            dao = new DaoProduto(conn);
+        
+        produto = dao.obterPorId(id);
+    }
+        
+    @Override
+    public Produto obterSelecionado(){
+        return produto;
+    }
+    
+    @Override
+    public Boolean validarExisteSelecionado(){        
+        return produto != null && produto.getId() != 0;
+    }
+    
+    @Override
+    public void cancelarSelecao(){        
+        produto = null;
+    }
+    
+    @Override
+    public void excluir(int id) throws DataAccessException  {
+        if (dao == null)
+            dao = new DaoProduto(conn);
+        
+        dao.inativar(id);
+    } 
     
     public List<Produto> ObterProdutos(String nome) throws DataAccessException {
         if (dao == null)
@@ -87,7 +127,17 @@ public class ServicoProduto extends ServicoBase<Produto> {
         if (fabricante.isEmpty())
             throw new Exception("É obrigatório informar o fabricante do produto.");
         
-        Produto novoProduto = new Produto(nome, fabricante, Float.parseFloat(custo.replace(",", ".")), Float.parseFloat(preco.replace(",", ".")), Integer.parseInt(quantidade), categoria, genero, plataforma, classificacao, garantia, codigoEan, descricao);
+        Produto novoProduto = new Produto(nome, fabricante, 
+                Float.parseFloat(custo.replace(",", ".")), 
+                Float.parseFloat(preco.replace(",", ".")), 
+                Integer.parseInt(quantidade), 
+                Categoria.getByDescricao(categoria), 
+                genero, 
+                plataforma, 
+                classificacao, 
+                garantia, 
+                codigoEan, 
+                descricao);
                         
         return novoProduto;        
     }    

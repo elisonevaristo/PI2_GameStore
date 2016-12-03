@@ -5,6 +5,7 @@
  */
 package com.gamestore.services;
 
+import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.models.ItemComId;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,7 +25,7 @@ public class ServicoBase<T extends ItemComId> {
     
     T selecionado;
         
-    public void selecionar(int id){
+    public void selecionar(int id)  throws DataAccessException {
         selecionado = obterItemPorId(id);
     }
     
@@ -61,7 +62,7 @@ public class ServicoBase<T extends ItemComId> {
         item.setAtivo(false);
     }
     
-    public void excluir(int id){
+    public void excluir(int id) throws DataAccessException {
         int index = -1;
         
         for (int i = 0; i < itens.size(); i++) {

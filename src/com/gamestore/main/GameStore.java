@@ -77,8 +77,6 @@ public class GameStore extends javax.swing.JFrame {
         backgroundPanel.add(incluirProduto, "incluirProduto");
         backgroundPanel.add(iniciarVenda, "iniciarVenda");
         backgroundPanel.add(exibirRelatorio, "exibirRelatorio");
-        
-        //teste();
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -221,63 +219,6 @@ public class GameStore extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Não foi possível atualizar o painel.");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    //Preenchendo dados para teste, desabilitar antes de enviar
-    private void teste(){
-        
-        try
-        {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = sdf.parse("10/01/1986");
-            Calendar calendarDate = Calendar.getInstance();
-            calendarDate.setTime(date);
-        
-            Cliente c1 = new Cliente(1, "Roger", "Roger", "Rodrigues de Oliveira", Sexo.masculino, "00000000000", calendarDate, PreferenciaContato.email);
-            Cliente c2 = new Cliente(2, "Mario", "Mario", "Mario Pereira", Sexo.masculino, "11111111111", calendarDate, PreferenciaContato.comercial);
-            Cliente c3 = new Cliente(3, "Maria", "Maria", "Maria de Oliveira", Sexo.feminino, "22222222222", calendarDate, PreferenciaContato.residencial);
-            Cliente c4 = new Cliente(4, "Stênio", "Stênio", "Stênio de Oliveira", Sexo.masculino, "33333333333", calendarDate, PreferenciaContato.comercial);
-            Cliente c5 = new Cliente(5, "Diego", "Diego", "Diego de Oliveira", Sexo.masculino, "44444444444", calendarDate, PreferenciaContato.email);
-            
-            servicoCliente.cadastrarItem(c1);
-            servicoCliente.cadastrarItem(c2);
-            servicoCliente.cadastrarItem(c3);
-            servicoCliente.cadastrarItem(c4);
-            servicoCliente.cadastrarItem(c5);
-            
-            Produto p1 = new Produto("Uncharted 2", "Naugthy Dog", 230f, 250f, 100, "", "", "", "", "", "", "");
-            Produto p2 = new Produto("Uncharted 3", "Naugthy Dog", 150f, 180f, 10, "", "", "", "", "", "", "");
-            Produto p3 = new Produto("Uncharted 4", "Naugthy Dog", 130f, 150f, 150, "", "", "", "", "", "", "");
-            Produto p4 = new Produto("Bioshock 2", "2K", 100f, 120f, 100, "", "", "", "", "", "", "");
-            Produto p5 = new Produto("Civilization VI", "Sei lá", 250f, 300f, 100, "", "", "", "", "", "", "");
-            
-            servicoProduto.cadastrarItem(p1);
-            servicoProduto.cadastrarItem(p2);
-            servicoProduto.cadastrarItem(p3);
-            servicoProduto.cadastrarItem(p4);
-            servicoProduto.cadastrarItem(p5);      
-                        
-            servicoPedido.novoPedido(c1);
-            servicoPedido.adicionarItem(p1);
-            servicoPedido.adicionarItem(p2);
-            servicoPedido.adicionarItem(p3);
-            servicoPedido.salvarPedido();
-            
-            servicoPedido.novoPedido(c3);
-            servicoPedido.adicionarItem(p4);
-            servicoPedido.adicionarItem(p5);
-            servicoPedido.adicionarItem(p3);
-            servicoPedido.salvarPedido();
-        }
-        catch(ParseException pe)
-        {
-            System.out.println(pe);
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
-    }
-    
     
     //<editor-fold defaultstate="collapsed" desc="Métodos para controle de interface">
         
