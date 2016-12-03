@@ -208,7 +208,7 @@ public class DaoProduto extends DaoBase<Produto> {
         }
     }
     
-    public void updateSaldo(Produto obj) throws DataAccessException  {        
+    public void updateSaldo(Produto obj, int quantidade) throws DataAccessException  {        
         PreparedStatement stt = null;
         
         try
@@ -217,7 +217,7 @@ public class DaoProduto extends DaoBase<Produto> {
 
             stt = obterStatement(command);
              
-            stt.setInt(1, obj.getQuantidade());            
+            stt.setInt(1, obj.getQuantidade() - quantidade);            
             stt.setInt(2, obj.getId());  
             
             stt.execute();

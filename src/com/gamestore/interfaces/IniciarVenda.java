@@ -6,6 +6,7 @@
 package com.gamestore.interfaces;
 
 import com.gamestore.exceptions.DataAccessException;
+import com.gamestore.exceptions.ProdutoException;
 import com.gamestore.main.GameStore;
 import com.gamestore.models.Cliente;
 import com.gamestore.models.Produto;
@@ -519,6 +520,10 @@ public class IniciarVenda extends javax.swing.JPanel {
             incluirNovoProduto(servicoProduto.obterPorId(selectedProdutoId));
             scrollPaneProdutos.setVisible(false);
             textProduto.setText("");
+        }
+        catch(ProdutoException px)
+        {
+            JOptionPane.showMessageDialog(this, px.getMessage());
         }
         catch(Exception ex)
         {

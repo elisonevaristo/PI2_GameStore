@@ -245,14 +245,13 @@ public class Produto implements ItemComId {
         this.garantiaFornecedor = garantiaFornecedor;
     }
     
-    public void retirarEstoque(int quantidade) throws ProdutoException {
+    public void validarEstoque(int quantidade) throws ProdutoException {
         if (quantidade > this.quantidade){
-            throw new ProdutoException(String.format("O saldo em estoque do produto %s "
+            throw new ProdutoException(
+                String.format("O saldo em estoque do produto %s "
                     + "é inferior à quantidade solicitada. "
                     + "\n Solicitado: %s "
-                    + "\n Disponível: %s", this.nome, this.quantidade, quantidade));
+                    + "\n Disponível: %s", this.nome, quantidade, this.quantidade));
         }
-        
-        this.quantidade -= quantidade;
     }
 }

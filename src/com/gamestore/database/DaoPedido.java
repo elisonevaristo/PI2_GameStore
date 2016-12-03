@@ -97,7 +97,7 @@ public class DaoPedido extends DaoBase<Pedido> {
             
             stt.execute();            
             
-            daoProduto.updateSaldo(obj.getProduto());
+            daoProduto.updateSaldo(obj.getProduto(), obj.getQuantidade());
         }
         catch(java.sql.SQLException sqlex)
         {

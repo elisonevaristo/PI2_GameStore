@@ -34,9 +34,7 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
     }
         
     public List<ItemRelatorio> ObterRelatorio(String dataInicial, String dataFinal, String plataforma, String categoria, String produto) throws PedidoException, Exception {
-        
-        List<ItemRelatorio> itensRelatorio = new ArrayList<>();
-        
+                
         if (dataInicial.trim().isEmpty() || dataFinal.trim().isEmpty())
             throw new PedidoException("A data é obrigatória para gerar o relatório.");
                 
@@ -67,7 +65,7 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
      * @return True quando o produto já tiver sido incluído anteriormente. Falso quando for a primeira vez.
      * @throws Exception 
      */
-    public Boolean adicionarItem(Produto produto) throws Exception {
+    public Boolean adicionarItem(Produto produto) throws ProdutoException, Exception {
         
         if (pedidoPendente == null)
             throw new ProdutoException("É obrigatório informar o cliente ao iniciar um novo pedido.");
@@ -77,12 +75,14 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
         
         for (ItemPedido i : pedidoPendente.getItens()) {
             if (i.getProduto().getId() == produto.getId())
-            {                
+            {
+                i.getProduto().validarEstoque(i.getQuantidade() + 1);
                 i.setQuantidade(i.getQuantidade() + 1);
                 return true;
             }
         }
         
+        produto.validarEstoque(1);
         pedidoPendente.adicionarItem(new ItemPedido(pedidoPendente, produto, 1));
         
         return false;

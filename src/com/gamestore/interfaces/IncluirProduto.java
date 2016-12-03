@@ -6,6 +6,7 @@
 package com.gamestore.interfaces;
 
 import com.gamestore.exceptions.DataAccessException;
+import com.gamestore.exceptions.ProdutoException;
 import com.gamestore.main.GameStore;
 import com.gamestore.models.Categoria;
 import com.gamestore.models.Genero;
@@ -329,7 +330,7 @@ public class IncluirProduto extends javax.swing.JPanel {
             
             parent.exibirPainel("listarProduto");
         }
-        catch(ParseException pex)
+        catch(ProdutoException pex)
         {
             JOptionPane.showMessageDialog(this, pex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);            
         }
