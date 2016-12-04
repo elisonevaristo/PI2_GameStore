@@ -30,6 +30,7 @@ public class IncluirProduto extends javax.swing.JPanel {
         initComponents();
         this.parent = parent;
         this.servico = servico;
+        desabilitarJogo();
     }
 
     /**
@@ -113,7 +114,7 @@ public class IncluirProduto extends javax.swing.JPanel {
         textDesenvolvedora.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
         comboPlataforma.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        comboPlataforma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PC", "Playstation 4", "XBox One", "Playstation 3", "XBox 360", "Wii", "Wii U" }));
+        comboPlataforma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "PC", "Playstation 4", "XBox One", "Playstation 3", "XBox 360", "Wii", "Wii U" }));
 
         jLabel6.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel6.setText("Plataforma");
@@ -122,7 +123,7 @@ public class IncluirProduto extends javax.swing.JPanel {
         jLabel7.setText("Gênero");
 
         comboGenero.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        comboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ação", "Aventura", "Estratégia", "Esportes", "FPS", "MMO", "Plataforma", "RPG" }));
+        comboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Ação", "Aventura", "Estratégia", "Esportes", "FPS", "MMO", "Plataforma", "RPG" }));
 
         jLabel8.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel8.setText("Garantia Fornecedor");
@@ -133,7 +134,7 @@ public class IncluirProduto extends javax.swing.JPanel {
         jLabel9.setText("Classificação Indicativa");
 
         comboClassificacao.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        comboClassificacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LIVRE", "10 ANOS", "12 ANOS", "14 ANOS", "16 ANOS", "18 ANOS", " " }));
+        comboClassificacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "LIVRE", "10 ANOS", "12 ANOS", "14 ANOS", "16 ANOS", "18 ANOS", " " }));
 
         jLabel10.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel10.setText("EAN");
@@ -149,6 +150,11 @@ public class IncluirProduto extends javax.swing.JPanel {
         jLabel12.setText("Categoria");
 
         comboCategoria.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        comboCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCategoriaActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel13.setText("Estoque");
@@ -347,6 +353,28 @@ public class IncluirProduto extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
+    private void comboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoriaActionPerformed
+        if (Categoria.getByDescricao(comboCategoria.getSelectedItem().toString().trim()) != Categoria.jogo)
+            desabilitarJogo();
+        else
+            habilitarJogo();
+    }//GEN-LAST:event_comboCategoriaActionPerformed
+
+    private void desabilitarJogo(){
+        comboGenero.setSelectedIndex(0);
+        comboGenero.setEnabled(false);
+        comboPlataforma.setSelectedIndex(0);
+        comboPlataforma.setEnabled(false);
+        comboClassificacao.setSelectedIndex(0);
+        comboClassificacao.setEnabled(false);
+    }
+    
+    private void habilitarJogo(){
+        comboGenero.setEnabled(true);
+        comboPlataforma.setEnabled(true);
+        comboClassificacao.setEnabled(true);
+    }
+    
     public void carregarFormulario(){    
         Produto selecionado = servico.obterSelecionado();
     

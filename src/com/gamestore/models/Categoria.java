@@ -12,7 +12,7 @@ package com.gamestore.models;
 public enum Categoria {
     naoInformado(0, "Não Informada"),
     console(1, "Console"),
-    acessorio(2, "Acessorio"),
+    acessorio(2, "Acessório"),
     jogo(3, "Jogo")
     ;
     
@@ -58,7 +58,7 @@ public enum Categoria {
         switch (descricao) {
             case "Console":
                 return Categoria.console;
-            case "Acessorio":
+            case "Acessório":
                 return Categoria.acessorio;
             case "Jogo":
                 return Categoria.jogo;            

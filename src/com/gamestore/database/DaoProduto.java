@@ -317,7 +317,7 @@ public class DaoProduto extends DaoBase<Produto> {
         }
     }
     
-    public List<Produto> obterLista(String nome, String plataforma, String fabricante, String categoria, String ean) throws DataAccessException {        
+    public List<Produto> obterLista(String nome, String plataforma, String fabricante, int categoria, String ean) throws DataAccessException {        
         
         PreparedStatement stt = null;
         ResultSet result = null;
@@ -342,30 +342,40 @@ public class DaoProduto extends DaoBase<Produto> {
                 indexParam++;
             }
             
-            if (categoria != null && !categoria.trim().isEmpty()) {                 
+            if (categoria != 0) {                 
                 command += " and categoria = ?";            
                 indexParam++;
             }
             if (ean != null && !ean.isEmpty()) {
-                command += " and ean = ?";            
+                command += " and codigo_ean = ?";            
                 indexParam++;
             }            
             stt = obterStatement(command);
             
-            if (nome != null && !nome.isEmpty())            
-                stt.setString(indexParam, "%" + nome + "%");
-                        
-            if (plataforma != null && !plataforma.trim().isEmpty())            
-                stt.setString(indexParam, plataforma);
-            
-            if (fabricante != null && !fabricante.isEmpty())            
-                stt.setString(indexParam, fabricante);
-            
-            if (categoria != null && !categoria.trim().isEmpty())            
-                stt.setString(indexParam, categoria);
-            
-            if (ean != null && !ean.isEmpty())            
+            if (ean != null && !ean.isEmpty()) {                           
                 stt.setString(indexParam, ean);
+                indexParam--;
+            }
+            
+            if (categoria != 0){            
+                stt.setInt(indexParam, categoria);
+                indexParam--;
+            }
+            
+            if (fabricante != null && !fabricante.isEmpty()){            
+                stt.setString(indexParam, fabricante);
+                indexParam--;
+            }
+                        
+            if (plataforma != null && !plataforma.trim().isEmpty()){            
+                stt.setString(indexParam, plataforma);
+                indexParam--;
+            }
+            
+            if (nome != null && !nome.isEmpty()) {                
+                stt.setString(indexParam, "%" + nome + "%");
+                indexParam--;
+            }
             
             result  = stt.executeQuery();
             

@@ -7,6 +7,7 @@ package com.gamestore.interfaces;
 
 import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.main.GameStore;
+import com.gamestore.models.Categoria;
 import com.gamestore.models.Produto;
 import com.gamestore.services.ServicoProduto;
 import java.awt.Font;
@@ -54,7 +55,7 @@ public class ListarProduto extends javax.swing.JPanel {
         textFabricante = new javax.swing.JTextField();
         botaoBuscar = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
-        comboCategoria = new javax.swing.JComboBox<>();
+        comboCategoria = new javax.swing.JComboBox(Categoria.getDescricoes());
         jLabel8 = new javax.swing.JLabel();
         comboPlataforma = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
@@ -109,7 +110,6 @@ public class ListarProduto extends javax.swing.JPanel {
         jLabel14.setText("Categoria");
 
         comboCategoria.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Console", "Jogo", "Acessório" }));
 
         jLabel8.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel8.setText("Plataforma");
@@ -275,7 +275,8 @@ public class ListarProduto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void AtualizarTabela() throws DataAccessException {
-        List<Produto> produtos = servico.ObterProdutos(textNome.getText(), comboPlataforma.getSelectedItem().toString(), textFabricante.getText(), comboCategoria.getSelectedItem().toString(), textEan.getText());
+        List<Produto> produtos = servico.ObterProdutos(textNome.getText(), comboPlataforma.getSelectedItem().toString(), textFabricante.getText(), 
+                Categoria.getByDescricao(comboCategoria.getSelectedItem().toString()).getId(), textEan.getText());
         DefaultTableModel model = (DefaultTableModel) tableProdutos.getModel();
         model.setRowCount(0);
                        

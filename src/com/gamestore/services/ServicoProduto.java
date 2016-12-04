@@ -79,10 +79,10 @@ public class ServicoProduto extends ServicoBase<Produto> {
         if (dao == null)
             dao = new DaoProduto(conn);
         
-        return dao.obterLista(nome, null, null, null, null);
+        return dao.obterLista(nome, null, null, 0, null);
     }
     
-    public List<Produto> ObterProdutos(String nome, String plataforma, String fabricante, String categoria, String ean) throws DataAccessException {
+    public List<Produto> ObterProdutos(String nome, String plataforma, String fabricante, int categoria, String ean) throws DataAccessException {
         if (dao == null)
             dao = new DaoProduto(conn);
         
