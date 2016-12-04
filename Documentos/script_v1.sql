@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `gamestore`.`CLIENTE` (
   `apelido` VARCHAR(50) NULL,
   `nome` VARCHAR(50) NOT NULL,
   `sobrenome` VARCHAR(100) NOT NULL,
-  `foto` VARCHAR(100) NULL,
   `cpf` VARCHAR(11) NOT NULL,
   `rg` VARCHAR(15) NULL,
   `sexo` CHAR(1) NOT NULL,

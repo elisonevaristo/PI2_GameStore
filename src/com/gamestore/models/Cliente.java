@@ -35,6 +35,8 @@ public class Cliente implements ItemComId {
     
     private Boolean ativo;
     
+    private int comprasRealizadas;
+    
     public Cliente(int id, String apelido, String nome, String sobreNome, Sexo sexo, String cpf, Calendar nascimento, PreferenciaContato preferencia)
     {
         this(apelido, nome, sobreNome, sexo, cpf, nascimento, preferencia);        
@@ -254,10 +256,6 @@ public class Cliente implements ItemComId {
     public PreferenciaContato getPreferencia() {
         return preferencia;
     }
-    
-    public int getNumeroPedidos(){
-        return 0;
-    }
 
     /**
      * @param preferencia the preferencia to set
@@ -293,4 +291,18 @@ public class Cliente implements ItemComId {
     public void setFoto(java.awt.Image foto) {
         this.foto = foto;
     }    
+
+    /**
+     * @return the comprasRealizadas
+     */
+    public int getComprasRealizadas() {
+        return comprasRealizadas;
+    }
+
+    /**
+     * @param comprasRealizadas the comprasRealizadas to set
+     */
+    public void setComprasRealizadas(int comprasRealizadas) {
+        this.comprasRealizadas = comprasRealizadas;
+    }
 }

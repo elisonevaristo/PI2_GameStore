@@ -71,7 +71,6 @@ public class IniciarVenda extends javax.swing.JPanel {
         listaProdutos = new javax.swing.JList<>();
         panelCliente = new javax.swing.JPanel();
         piCliente = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
         labelNomeClienteSelecionado = new javax.swing.JLabel();
         labelEmailClienteSelecionado = new javax.swing.JLabel();
         labelFidelidadeClienteSelecionado = new javax.swing.JLabel();
@@ -171,9 +170,6 @@ public class IniciarVenda extends javax.swing.JPanel {
 
         piCliente.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel18.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gamestore/resources/will-smith-pequeno.jpg"))); // NOI18N
-
         labelNomeClienteSelecionado.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         labelNomeClienteSelecionado.setText("WILL SMITH DA SILVA");
 
@@ -181,7 +177,6 @@ public class IniciarVenda extends javax.swing.JPanel {
         labelEmailClienteSelecionado.setText("will.smith@gmail.com");
 
         labelFidelidadeClienteSelecionado.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        labelFidelidadeClienteSelecionado.setText("CLIENTE DESDE 10/2010");
 
         labelIdadeClienteSelecionado.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         labelIdadeClienteSelecionado.setText("45 Anos");
@@ -191,9 +186,7 @@ public class IniciarVenda extends javax.swing.JPanel {
         piClienteLayout.setHorizontalGroup(
             piClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(piClienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(66, 66, 66)
                 .addGroup(piClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(piClienteLayout.createSequentialGroup()
                         .addComponent(labelNomeClienteSelecionado)
@@ -201,23 +194,20 @@ public class IniciarVenda extends javax.swing.JPanel {
                         .addComponent(labelIdadeClienteSelecionado))
                     .addComponent(labelEmailClienteSelecionado)
                     .addComponent(labelFidelidadeClienteSelecionado))
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         piClienteLayout.setVerticalGroup(
             piClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(piClienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(piClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(piClienteLayout.createSequentialGroup()
-                        .addGroup(piClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelNomeClienteSelecionado)
-                            .addComponent(labelIdadeClienteSelecionado))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelEmailClienteSelecionado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelFidelidadeClienteSelecionado))
-                    .addComponent(jLabel18))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(piClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNomeClienteSelecionado)
+                    .addComponent(labelIdadeClienteSelecionado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelEmailClienteSelecionado)
+                .addGap(16, 16, 16)
+                .addComponent(labelFidelidadeClienteSelecionado)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         panelCliente.add(piCliente, "card2");
@@ -497,7 +487,7 @@ public class IniciarVenda extends javax.swing.JPanel {
             labelNomeClienteSelecionado.setText(cliente.getNome());
             labelIdadeClienteSelecionado.setText(cliente.getIdade());
             labelEmailClienteSelecionado.setText(cliente.getEmail());
-            labelFidelidadeClienteSelecionado.setText("Cliente está comprando pela primeira vez");
+            //labelFidelidadeClienteSelecionado.setText("Cliente está comprando pela primeira vez");
             
             servico.novoPedido(cliente);            
             
@@ -557,7 +547,6 @@ public class IniciarVenda extends javax.swing.JPanel {
     private javax.swing.JButton botaoIncluirProduto;
     private javax.swing.JButton botaoSalvar;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

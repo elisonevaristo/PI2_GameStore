@@ -131,7 +131,7 @@ public class DaoPedido extends DaoBase<Pedido> {
         throw new UnsupportedOperationException("Atualização de pedido não implementada."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<ItemRelatorio> obterLista(Calendar dataInicial, Calendar dataFinal, String plataforma, String categoria, String produto) throws DataAccessException {        
+    public List<ItemRelatorio> obterLista(Calendar dataInicial, Calendar dataFinal, String plataforma, int categoria, String produto) throws DataAccessException {        
         
         PreparedStatement stt = null;
         ResultSet result = null;
@@ -159,22 +159,36 @@ public class DaoPedido extends DaoBase<Pedido> {
                 command += " and UPPER(produto.nome) like UPPER(?) ";
                 indexParams++;
             }
+            
+            if (plataforma != null && !plataforma.isEmpty()){            
+                command += " and plataforma = ? ";         
+                indexParams++;
+            }   
+                        
+            if (categoria != 0){            
+                command += " and categoria = ? ";            
+                indexParams++;
+            }
                                    
             stt = obterStatement(command);
             
             stt.setDate(1, new java.sql.Date(dataInicial.getTimeInMillis()));  
             stt.setDate(2, new java.sql.Date(dataFinal.getTimeInMillis()));  
+                                    
+            if (categoria != 0) {                
+                stt.setInt(indexParams, categoria);  
+                indexParams--;
+            }            
+                        
+            if (plataforma != null && !plataforma.isEmpty()) {                
+                stt.setString(indexParams, plataforma);  
+                indexParams--;
+            }
             
             if (produto != null && !produto.isEmpty()){                
                 stt.setString(indexParams, "%" + produto + "%");  
                 indexParams--;
             }
-//                        
-//            if (plataforma != null && !plataforma.isEmpty())            
-//                command += " and plataforma = " + plataforma;            
-//                        
-//            if (categoria != null && !categoria.isEmpty())            
-//                command += " and categoria = " + categoria;            
                                     
             result  = stt.executeQuery();
             

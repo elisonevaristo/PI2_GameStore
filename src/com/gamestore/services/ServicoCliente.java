@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import com.gamestore.database.DaoCliente;
 import com.gamestore.database.ConnectionUtils;
+import com.gamestore.exceptions.ClienteException;
 import com.gamestore.exceptions.DataAccessException;
+import java.util.Calendar;
 
 /**
  *
@@ -97,31 +99,49 @@ public class ServicoCliente extends ServicoBase<Cliente> {
     /*
         Valida se as informações obrigatórias foram preenchidas corretamente
     */
-    public Cliente validarCliente(String apelido, String nome, String sobreNome, String sexo, String cpf, String nascimento, String preferencia, String cep, String logradouro, String numero, String complemento, String bairro, 
-            String cidade, String uf, String email, String foneResidencial, String foneCelular, String foneComercial, String estadoCivil) throws Exception {                
+    public Cliente validarCliente(String apelido, String nome, String sobreNome, String sexo, String cpf, String rg, String nascimento, 
+            String preferencia, String cep, String logradouro, String numero, String complemento, String bairro, 
+            String cidade, String uf, String email, String foneResidencial, String foneCelular, String foneComercial, String estadoCivil) throws ClienteException, ParseException {                
         
         if (nome.isEmpty())
-            throw new Exception("É obrigatório informar o nome do cliente.");
+            throw new ClienteException("É obrigatório informar o nome do cliente.");
         
         if (sobreNome.isEmpty())
-            throw new Exception("É obrigatório informar o sobrenome do cliente.");
-                        
+            throw new ClienteException("É obrigatório informar o sobrenome do cliente.");
+        
+        if (rg.length() > 15)
+            throw new ClienteException("É obrigatório informar o sobrenome do cliente.");
+        
         if (sexo.isEmpty() || !validarSexo(sexo))
-            throw new Exception("É obrigatório informar o sexo do cliente.");
+            throw new ClienteException("É obrigatório informar o sexo do cliente.");
         
         String cpfFormatado = cpf.replaceAll("[^\\d]", "");
         System.out.println(cpfFormatado);
         
         if (cpfFormatado.isEmpty() || !validarCpf(cpfFormatado))
-            throw new Exception("É obrigatório informar o CPF do cliente.");
+            throw new ClienteException("É obrigatório informar o CPF do cliente.");
         
         if (nascimento.isEmpty() || !validarNascimento(nascimento))
-            throw new Exception("É obrigatório informar a data de nascimento do cliente.");
+            throw new ClienteException("É obrigatório informar a data de nascimento do cliente.");
         
         if (preferencia.isEmpty() || !validarPreferencia(preferencia))
-            throw new Exception("É obrigatório informar a preferencia de contato do cliente.");                
+            throw new ClienteException("É obrigatório informar a preferencia de contato do cliente.");                
         
-        Cliente novoCliente = new Cliente(apelido, nome, sobreNome, Sexo.getById(sexo.toUpperCase().charAt(0)), cpfFormatado, getDateFromString(nascimento), PreferenciaContato.getById(Integer.parseInt(preferencia)));
+        Calendar dNascimento = getDateFromString(nascimento);
+        
+        Calendar agora = Calendar.getInstance();
+        Calendar crianca = (Calendar)agora.clone();
+        Calendar idoso = (Calendar)agora.clone();
+        crianca.add(Calendar.YEAR, -16);
+        idoso.add(Calendar.YEAR, -120);
+        
+        if (dNascimento.after(crianca))
+            throw new ClienteException("O cliente deve ter ao menos 16 anos de idade para que o cadastro seja aprovado.");                
+        
+        if (dNascimento.before(idoso))
+            throw new ClienteException("O cliente deve estar vivo para que o cadastro seja aprovado.");                
+        
+        Cliente novoCliente = new Cliente(apelido, nome, sobreNome, Sexo.getById(sexo.toUpperCase().charAt(0)), cpfFormatado, dNascimento, PreferenciaContato.getById(Integer.parseInt(preferencia)));
         
         Endereco endereco = new Endereco();
         endereco.setCep(cep);
@@ -133,6 +153,7 @@ public class ServicoCliente extends ServicoBase<Cliente> {
         endereco.setUf(uf);        
         
         novoCliente.setEndereco(endereco);
+        novoCliente.setRg(rg);
         
         novoCliente.setEmail(email);
         

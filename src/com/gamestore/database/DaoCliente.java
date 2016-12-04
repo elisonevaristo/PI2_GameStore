@@ -44,7 +44,6 @@ public class DaoCliente extends DaoBase<Cliente> {
                         + "apelido, "
                         + "nome, "
                         + "sobrenome, "
-                        + "foto, "
                         + "cpf, "
                         + "rg, "
                         + "sexo, "
@@ -63,31 +62,30 @@ public class DaoCliente extends DaoBase<Cliente> {
                         + "uf "
                     + ") "
                     + "values "
-                    + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             stt = obterStatementRetornaId(command);
             
             stt.setString(1, obj.getApelido().isEmpty() ? obj.getNome() : obj.getApelido());
             stt.setString(2, obj.getNome());
             stt.setString(3, obj.getSobreNome());
-            stt.setString(4, null);
-            stt.setString(5, obj.getCpf());
-            stt.setString(6, obj.getRg());
-            stt.setString(7, String.valueOf(obj.getSexo().getId()));
-            stt.setInt(8, obj.getEstadoCivil().getId());
-            stt.setDate(9, new java.sql.Date(obj.getNascimento().getTimeInMillis()));  
-            stt.setString(10, obj.getEmail());            
-            stt.setInt(11, obj.getPreferencia().getId());  
-            stt.setBoolean(12, true);  
-            stt.setString(13, String.format("%s %s", obj.getNome(), obj.getSobreNome()));
+            stt.setString(4, obj.getCpf());
+            stt.setString(5, obj.getRg());
+            stt.setString(6, String.valueOf(obj.getSexo().getId()));
+            stt.setInt(7, obj.getEstadoCivil().getId());
+            stt.setDate(8, new java.sql.Date(obj.getNascimento().getTimeInMillis()));  
+            stt.setString(9, obj.getEmail());            
+            stt.setInt(10, obj.getPreferencia().getId());  
+            stt.setBoolean(11, true);  
+            stt.setString(12, String.format("%s %s", obj.getNome(), obj.getSobreNome()));
             
-            stt.setString(14, obj.getEndereco().getCep());
-            stt.setString(15, obj.getEndereco().getLogradouro());
-            stt.setString(16, obj.getEndereco().getNumero());
-            stt.setString(17, obj.getEndereco().getComplemento());
-            stt.setString(18, obj.getEndereco().getBairro());
-            stt.setString(19, obj.getEndereco().getCidade());
-            stt.setString(20, obj.getEndereco().getUf());            
+            stt.setString(13, obj.getEndereco().getCep());
+            stt.setString(14, obj.getEndereco().getLogradouro());
+            stt.setString(15, obj.getEndereco().getNumero());
+            stt.setString(16, obj.getEndereco().getComplemento());
+            stt.setString(17, obj.getEndereco().getBairro());
+            stt.setString(18, obj.getEndereco().getCidade());
+            stt.setString(19, obj.getEndereco().getUf());            
                         
             stt.execute();
             
@@ -194,7 +192,6 @@ public class DaoCliente extends DaoBase<Cliente> {
                         + "apelido = ?, "
                         + "nome = ?, "
                         + "sobrenome = ?, "
-                        + "foto = ?, "
                         + "cpf = ?, "
                         + "rg = ?, "
                         + "sexo = ?, "
@@ -219,26 +216,25 @@ public class DaoCliente extends DaoBase<Cliente> {
             stt.setString(1, obj.getApelido().isEmpty() ? obj.getNome() : obj.getApelido());
             stt.setString(2, obj.getNome());
             stt.setString(3, obj.getSobreNome());
-            stt.setString(4, null);
-            stt.setString(5, obj.getCpf());
-            stt.setString(6, obj.getRg());
-            stt.setString(7, String.valueOf(obj.getSexo().getId()));
-            stt.setInt(8, obj.getEstadoCivil().getId());
-            stt.setDate(9, new java.sql.Date(obj.getNascimento().getTimeInMillis()));  
-            stt.setString(10, obj.getEmail());            
-            stt.setInt(11, obj.getPreferencia().getId());  
-            stt.setBoolean(12, true);  
-            stt.setString(13, String.format("%s %s", obj.getNome(), obj.getSobreNome()));
+            stt.setString(4, obj.getCpf());
+            stt.setString(5, obj.getRg());
+            stt.setString(6, String.valueOf(obj.getSexo().getId()));
+            stt.setInt(7, obj.getEstadoCivil().getId());
+            stt.setDate(8, new java.sql.Date(obj.getNascimento().getTimeInMillis()));  
+            stt.setString(9, obj.getEmail());            
+            stt.setInt(10, obj.getPreferencia().getId());  
+            stt.setBoolean(11, true);  
+            stt.setString(12, String.format("%s %s", obj.getNome(), obj.getSobreNome()));
             
-            stt.setString(14, obj.getEndereco().getCep());
-            stt.setString(15, obj.getEndereco().getLogradouro());
-            stt.setString(16, obj.getEndereco().getNumero());
-            stt.setString(17, obj.getEndereco().getComplemento());
-            stt.setString(18, obj.getEndereco().getBairro());
-            stt.setString(19, obj.getEndereco().getCidade());
-            stt.setString(20, obj.getEndereco().getUf());      
+            stt.setString(13, obj.getEndereco().getCep());
+            stt.setString(14, obj.getEndereco().getLogradouro());
+            stt.setString(15, obj.getEndereco().getNumero());
+            stt.setString(16, obj.getEndereco().getComplemento());
+            stt.setString(17, obj.getEndereco().getBairro());
+            stt.setString(18, obj.getEndereco().getCidade());
+            stt.setString(19, obj.getEndereco().getUf());      
             
-            stt.setInt(21, obj.getId());  
+            stt.setInt(20, obj.getId());  
             
             stt.execute();
             
@@ -491,13 +487,27 @@ public class DaoCliente extends DaoBase<Cliente> {
             if (nome == null && cpf == null)
                 return new ArrayList<>();
             
-            String command = "select * from cliente where ativo = 1 ";
+            String command = "select "
+                    + "c.codigo, "
+                    + "c.apelido, "
+                    + "c.nome, "
+                    + "c.sobrenome, "
+                    + "c.sexo, "
+                    + "c.cpf, "
+                    + "c.nascimento, "
+                    + "c.preferencia_contato, "
+                    + "count(p.codigo) as qtd_pedidos "
+                    + "from cliente c "
+                    + "left outer join pedido p on (c.codigo = p.codigo_cliente) "
+                    + "where c.ativo = 1 ";
             
             if (cpf != null && !cpf.isEmpty())
                 command += " and cpf = " + cpf;
             
             if (nome != null && !nome.isEmpty())
                 command += " and UPPER(nome_completo) like UPPER('%" + nome + "%') ";
+            
+            command += " group by c.codigo, c.apelido, c.nome, c.sobrenome, c.sexo, c.cpf, c.nascimento, c.preferencia_contato ";
             
             result  = getList(command);
             
@@ -522,6 +532,8 @@ public class DaoCliente extends DaoBase<Cliente> {
                         cal,
                         pref                        
                 );
+                
+                cliente.setComprasRealizadas(result.getInt("qtd_pedidos"));
                 
                 lista.add(cliente);
             }

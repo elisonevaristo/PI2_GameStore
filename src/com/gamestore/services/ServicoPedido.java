@@ -33,7 +33,7 @@ public class ServicoPedido  extends ServicoBase<Pedido> {
         this.conn = conn;
     }
         
-    public List<ItemRelatorio> ObterRelatorio(String dataInicial, String dataFinal, String plataforma, String categoria, String produto) throws PedidoException, Exception {
+    public List<ItemRelatorio> ObterRelatorio(String dataInicial, String dataFinal, String plataforma, int categoria, String produto) throws PedidoException, Exception {
                 
         if (dataInicial.trim().isEmpty() || dataFinal.trim().isEmpty())
             throw new PedidoException("A data é obrigatória para gerar o relatório.");

@@ -6,6 +6,7 @@
 package com.gamestore.interfaces;
 
 import com.gamestore.main.GameStore;
+import com.gamestore.models.Categoria;
 import com.gamestore.models.ItemRelatorio;
 import com.gamestore.services.ServicoPedido;
 import java.text.SimpleDateFormat;
@@ -59,7 +60,7 @@ public class Relatorio extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         comboPlataforma = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        comboCategoria = new javax.swing.JComboBox<>();
+        comboCategoria = new javax.swing.JComboBox(Categoria.getDescricoes());
         jLabel8 = new javax.swing.JLabel();
         textProduto = new javax.swing.JTextField();
         botaoGerarRelatorio = new javax.swing.JButton();
@@ -157,7 +158,6 @@ public class Relatorio extends javax.swing.JPanel {
         jLabel13.setText("Categoria");
 
         comboCategoria.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Console", "Jogo", "Acessório" }));
 
         jLabel8.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel8.setText("Produto");
@@ -272,7 +272,8 @@ public class Relatorio extends javax.swing.JPanel {
     private void botaoGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarRelatorioActionPerformed
         try
         {                        
-            List<ItemRelatorio> pedidos = servico.ObterRelatorio(textDataInicial.getText(), textDataFinal.getText(), comboPlataforma.getSelectedItem().toString().trim(), comboCategoria.getSelectedItem().toString().trim(), textProduto.getText().trim());
+            List<ItemRelatorio> pedidos = servico.ObterRelatorio(textDataInicial.getText(), textDataFinal.getText(), 
+                    comboPlataforma.getSelectedItem().toString().trim(), Categoria.getByDescricao(comboCategoria.getSelectedItem().toString()).getId(), textProduto.getText().trim());
             DefaultTableModel model = (DefaultTableModel) tablePedidos.getModel();
             model.setRowCount(0);
 

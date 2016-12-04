@@ -218,7 +218,7 @@ public class ListarCliente extends javax.swing.JPanel {
                     row[1] = cli.getNome() + " " + cli.getSobreNome();
                     row[2] = cli.getCpf();
                     row[3] = cli.getIdade();
-                    row[4] = cli.getNumeroPedidos();
+                    row[4] = cli.getComprasRealizadas();
                     model.addRow(row);                
                 }            
             }
