@@ -18,7 +18,7 @@ import java.util.Date;
  */
 public class ServicoBase<T extends ItemComId> {
             
-    protected Calendar getDateFromString(String stringDate) throws ParseException { 
+    public static Calendar getDateFromString(String stringDate) throws ParseException { 
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date = sdf.parse(stringDate);
@@ -28,11 +28,11 @@ public class ServicoBase<T extends ItemComId> {
         return calendarDate;
     }
     
-    protected String getStringFromDate(Calendar date){        
+    public static String getStringFromDate(Calendar date){        
         return new SimpleDateFormat("dd/MM/yyyy").format(date.getTime());
     }
     
-    protected Boolean validarInteger(String numero){
+    public static Boolean validarInteger(String numero){
         try
         {
             Integer.parseInt(numero);
@@ -45,7 +45,7 @@ public class ServicoBase<T extends ItemComId> {
         }
     }
     
-    protected Boolean validarFloat(String numero){
+    public static Boolean validarFloat(String numero){
         try
         {
             Float.parseFloat(numero.replace(",", "."));

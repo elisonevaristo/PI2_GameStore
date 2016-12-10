@@ -311,7 +311,7 @@ public class IncluirProduto extends javax.swing.JPanel {
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         try
         {            
-            Produto produto = servico.validarProduto(textTitulo.getText(), textDesenvolvedora.getText(), textCusto.getText(), textPreco.getText(), textEstoque.getText(), comboCategoria.getSelectedItem().toString(),
+            Produto produto = validarProduto(textTitulo.getText(), textDesenvolvedora.getText(), textCusto.getText(), textPreco.getText(), textEstoque.getText(), comboCategoria.getSelectedItem().toString(),
                     comboGenero.getSelectedItem().toString(), comboPlataforma.getSelectedItem().toString(), comboClassificacao.getSelectedItem().toString(), textGarantia.getText(), textCodigoEan.getText(), textDescricao.getText());
             
             if (!servico.validarExisteSelecionado())
@@ -409,6 +409,71 @@ public class IncluirProduto extends javax.swing.JPanel {
         comboClassificacao.setSelectedIndex(0);
         comboGenero.setSelectedIndex(0);
         comboPlataforma.setSelectedIndex(0);
+    }    
+       
+    /*
+        Valida se as informações obrigatórias foram preenchidas corretamente
+    */
+    public Produto validarProduto(String nome, String fabricante, String custo, String preco, String quantidade, String categoria, String genero, String plataforma, String classificacao, String garantia, 
+                                  String codigoEan, String descricao) throws ProdutoException {                
+        
+        if (nome.isEmpty())
+            throw new ProdutoException("É obrigatório informar a nome do produto.");
+        
+        if (descricao.isEmpty())
+            throw new ProdutoException("É obrigatório informar a descrição do produto.");
+        
+        if (custo.isEmpty() || !ServicoProduto.validarFloat(custo))
+            throw new ProdutoException("É obrigatório informar o custo de compra do produto.");
+        
+        if (preco.isEmpty() || !ServicoProduto.validarFloat(preco))
+            throw new ProdutoException("É obrigatório informar um preço para o produto.");
+                
+        if (quantidade.isEmpty() || !ServicoProduto.validarInteger(quantidade))
+            throw new ProdutoException("É obrigatório informar a quantidade em estoque do produto.");     
+        
+        if (Integer.parseInt(quantidade) < 0)
+            throw new ProdutoException("A quantidade do produto não pode ser um número negativo.");     
+        
+        if (categoria.isEmpty() || Categoria.getByDescricao(categoria) == Categoria.naoInformado)
+            throw new ProdutoException("É obrigatório informar a categoria do produto.");
+        
+        if (Categoria.getByDescricao(categoria) == Categoria.jogo){            
+            if (genero.trim().isEmpty())
+                throw new ProdutoException("É obrigatório informar o gênero do produto.");
+
+            if (plataforma.trim().isEmpty())
+                throw new ProdutoException("É obrigatório informar a plataforma do produto.");
+
+            if (classificacao.trim().isEmpty())
+                throw new ProdutoException("É obrigatório informar a classificação indicativa do produto.");
+        }
+        
+        if (garantia.isEmpty())
+            throw new ProdutoException("É obrigatório informar a garantia do produto.");
+        
+        if (codigoEan.isEmpty())
+            throw new ProdutoException("É obrigatório informar o código EAN do produto.");
+        
+        if (codigoEan.length() < 13 || codigoEan.length() > 14)
+            throw new ProdutoException("O código EAN deve ter entre 13 e 14 caracteres.");
+        
+        if (fabricante.isEmpty())
+            throw new ProdutoException("É obrigatório informar o fabricante do produto.");
+        
+        Produto novoProduto = new Produto(nome, fabricante, 
+                Float.parseFloat(custo.replace(",", ".")), 
+                Float.parseFloat(preco.replace(",", ".")), 
+                Integer.parseInt(quantidade), 
+                Categoria.getByDescricao(categoria), 
+                Genero.getByDescricao(genero), 
+                plataforma, 
+                classificacao, 
+                garantia, 
+                codigoEan, 
+                descricao);
+                        
+        return novoProduto;        
     }    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

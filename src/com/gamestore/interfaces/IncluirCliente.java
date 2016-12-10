@@ -10,11 +10,17 @@ import com.gamestore.exceptions.DataAccessException;
 import com.gamestore.main.GameStore;
 import com.gamestore.models.Cliente;
 import com.gamestore.models.Endereco;
+import com.gamestore.models.EstadoCivil;
 import com.gamestore.models.PreferenciaContato;
+import com.gamestore.models.Sexo;
+import com.gamestore.models.Telefone;
 import com.gamestore.models.TipoTelefone;
 import com.gamestore.services.ServicoCliente;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 /**
@@ -347,26 +353,25 @@ public class IncluirCliente extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textUf, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(botaoSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(textSobreNome, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
-                                        .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(comboEstadoCivil, 0, 226, Short.MAX_VALUE))
-                                            .addComponent(textApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textNome, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
-                                        .addGap(57, 57, 57)
-                                        .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel16))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(textRg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(textSobreNome)
+                            .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(panelDadosPessoaisLayout.createSequentialGroup()
+                                    .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(comboEstadoCivil, 0, 226, Short.MAX_VALUE))
+                                        .addComponent(textApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textNome, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                                    .addGap(57, 57, 57)
+                                    .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel16))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(textNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(comboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(textRg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosPessoaisLayout.createSequentialGroup()
                         .addGroup(panelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -500,9 +505,27 @@ public class IncluirCliente extends javax.swing.JPanel {
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         try
         {            
-            Cliente cliente = servico.validarCliente(textApelido.getText(), textNome.getText(), textSobreNome.getText(), comboSexo.getSelectedItem().toString(), textCpf.getText(), textRg.getText(), textNascimento.getText(), preferencia,
-                    textCep.getText(), textLogradouro.getText(), textNumero.getText(), textComplemento.getText(), textBairro.getText(), textCidade.getText(), textUf.getText(), textEmail.getText(),
-                    textTelefoneResidencial.getText(), textTelefoneCelular.getText(), textTelefoneComercial.getText(), comboEstadoCivil.getSelectedItem().toString());
+            Cliente cliente = validarCliente(
+                    textApelido.getText(), 
+                    textNome.getText(), 
+                    textSobreNome.getText(), 
+                    comboSexo.getSelectedItem().toString(), 
+                    textCpf.getText(), 
+                    textRg.getText(), 
+                    textNascimento.getText(), 
+                    preferencia,
+                    textCep.getText(), 
+                    textLogradouro.getText(), 
+                    textNumero.getText(), 
+                    textComplemento.getText(), 
+                    textBairro.getText(), 
+                    textCidade.getText(), 
+                    textUf.getText(), 
+                    textEmail.getText(),
+                    textTelefoneResidencial.getText(), 
+                    textTelefoneCelular.getText(), 
+                    textTelefoneComercial.getText(), 
+                    comboEstadoCivil.getSelectedItem().toString());
             
             if (!servico.validarExisteSelecionado())
                 servico.cadastrar(cliente);
@@ -529,6 +552,87 @@ public class IncluirCliente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
+    
+    /*
+        Valida se as informações obrigatórias foram preenchidas corretamente
+    */
+    private Cliente validarCliente(String apelido, String nome, String sobreNome, String sexo, String cpf, String rg, String nascimento, 
+            String preferencia, String cep, String logradouro, String numero, String complemento, String bairro, 
+            String cidade, String uf, String email, String foneResidencial, String foneCelular, String foneComercial, String estadoCivil) throws ClienteException, ParseException {                
+        
+        if (nome.isEmpty())
+            throw new ClienteException("É obrigatório informar o nome do cliente.");
+        
+        if (sobreNome.isEmpty())
+            throw new ClienteException("É obrigatório informar o sobrenome do cliente.");
+        
+        if (rg.length() > 15)
+            throw new ClienteException("O RG deve ter no máximo 15 dígitos.");
+        
+        if (sexo.isEmpty() || !ServicoCliente.validarSexo(sexo))
+            throw new ClienteException("É obrigatório informar o sexo do cliente.");
+        
+        String cpfFormatado = cpf.replaceAll("[^\\d]", "");
+        System.out.println(cpfFormatado);
+        
+        if (cpfFormatado.isEmpty() || !ServicoCliente.validarCpf(cpfFormatado))
+            throw new ClienteException("É obrigatório informar o CPF do cliente.");
+        
+        if (nascimento.isEmpty() || !servico.validarNascimento(nascimento))
+            throw new ClienteException("É obrigatório informar a data de nascimento do cliente.");
+        
+        if(Integer.parseInt(nascimento.substring(0, 2)) > 31 || Integer.parseInt(nascimento.substring(3, 5)) > 12)
+            throw new ClienteException("Data de nascimento inválida.");    
+        
+        if (preferencia.isEmpty() || !ServicoCliente.validarPreferencia(preferencia))
+            throw new ClienteException("É obrigatório informar a preferencia de contato do cliente.");                
+        
+        Calendar dNascimento = servico.getDateFromString(nascimento);
+        
+        Calendar agora = Calendar.getInstance();
+        Calendar crianca = (Calendar)agora.clone();
+        Calendar idoso = (Calendar)agora.clone();
+        crianca.add(Calendar.YEAR, -16);
+        idoso.add(Calendar.YEAR, -120);
+        
+        if (dNascimento.after(crianca))
+            throw new ClienteException("O cliente deve ter ao menos 16 anos de idade para que o cadastro seja aprovado.");                
+        
+        if (dNascimento.before(idoso))
+            throw new ClienteException("O cliente deve estar vivo para que o cadastro seja aprovado.");                
+        
+        Cliente novoCliente = new Cliente(apelido, nome, sobreNome, Sexo.getById(sexo.toUpperCase().charAt(0)), cpfFormatado, dNascimento, PreferenciaContato.getById(Integer.parseInt(preferencia)));
+        
+        Endereco endereco = new Endereco();
+        endereco.setCep(cep);
+        endereco.setLogradouro(logradouro);
+        endereco.setNumero(numero);
+        endereco.setComplemento(complemento);
+        endereco.setBairro(bairro);
+        endereco.setCidade(cidade);
+        endereco.setUf(uf);        
+        
+        novoCliente.setEndereco(endereco);
+        novoCliente.setRg(rg);
+        
+        novoCliente.setEmail(email);
+        
+        List<Telefone> telefones = new ArrayList<>();
+        
+        if (!foneResidencial.isEmpty())
+            telefones.add(new Telefone(TipoTelefone.residencial, foneResidencial, novoCliente));
+        if (!foneCelular.isEmpty())
+            telefones.add(new Telefone(TipoTelefone.celular, foneCelular, novoCliente));
+        if (!foneComercial.isEmpty())
+            telefones.add(new Telefone(TipoTelefone.comercial, foneComercial, novoCliente));
+            
+        novoCliente.setTelefones(telefones);        
+        
+        novoCliente.setEstadoCivil(EstadoCivil.getByDescricao(estadoCivil));
+                
+        return novoCliente;        
+    }
+    
     public void carregarFormulario(){
     
         Cliente selecionado = servico.obterSelecionado();

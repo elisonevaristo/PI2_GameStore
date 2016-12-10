@@ -130,32 +130,30 @@
                                   <Component id="textUf" min="-2" pref="72" max="-2" attributes="0"/>
                               </Group>
                               <Component id="botaoSalvar" linkSize="10" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="textSobreNome" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="textCpf" min="-2" pref="226" max="-2" attributes="0"/>
-                                                  <Component id="comboEstadoCivil" linkSize="7" pref="226" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Component id="textApelido" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
-                                              <Component id="textNome" linkSize="7" alignment="0" pref="224" max="32767" attributes="0"/>
+                              <Component id="textSobreNome" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="textCpf" min="-2" pref="226" max="-2" attributes="0"/>
+                                              <Component id="comboEstadoCivil" linkSize="7" pref="226" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="textNascimento" linkSize="12" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
-                                              <Component id="comboSexo" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="textApelido" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
+                                          <Component id="textNome" linkSize="7" alignment="0" pref="224" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="textRg" linkSize="12" alignment="1" min="-2" pref="155" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="textNascimento" linkSize="12" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
+                                          <Component id="comboSexo" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
+                                  <Component id="textRg" linkSize="12" alignment="1" min="-2" pref="155" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
