@@ -19,7 +19,7 @@ import java.util.Date;
 
 /**
  *
- * @author Roger
+ * @author Elison Evaristo
  */
 public class GameStore extends javax.swing.JFrame {
 

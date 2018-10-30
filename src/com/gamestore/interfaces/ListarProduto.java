@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Roger
+ * @author Elison Evaristo
  */
 public class ListarProduto extends javax.swing.JPanel {
 

@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Roger
+ * @author Elison Evaristo
  */
 public class ListarCliente extends javax.swing.JPanel {
     

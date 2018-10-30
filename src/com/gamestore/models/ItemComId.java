@@ -7,7 +7,7 @@ package com.gamestore.models;
 
 /**
  *
- * @author roger
+ * @author Elison Evaristo
  */
 public interface ItemComId {
     int getId();

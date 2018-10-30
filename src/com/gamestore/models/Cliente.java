@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author roger
+ * @author Elison Evaristo
  */
 public class Cliente implements ItemComId {
     

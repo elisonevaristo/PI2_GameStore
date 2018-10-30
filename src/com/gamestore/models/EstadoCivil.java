@@ -7,7 +7,7 @@ package com.gamestore.models;
 
 /**
  *
- * @author roger
+ * @author Elison Evaristo
  */
 public enum EstadoCivil {
     solteiro(1, "Solteiro"),

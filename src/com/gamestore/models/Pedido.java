@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author roger
+ * @author Elison Evaristo
  */
 public class Pedido implements ItemComId {
 

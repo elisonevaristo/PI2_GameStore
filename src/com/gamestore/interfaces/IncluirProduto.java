@@ -12,7 +12,7 @@ import java.text.ParseException;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Roger
+ * @author Elison Evaristo
  */
 public class IncluirProduto extends javax.swing.JPanel {
 

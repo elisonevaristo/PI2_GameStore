@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Roger
+ * @author Elison Evaristo
  */
 public class IniciarVenda extends javax.swing.JPanel {
 

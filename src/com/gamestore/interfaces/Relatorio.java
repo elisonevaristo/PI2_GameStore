@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Roger
+ * @author Elison Evaristo
  */
 public class Relatorio extends javax.swing.JPanel {
 

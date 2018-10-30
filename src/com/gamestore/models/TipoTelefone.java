@@ -7,7 +7,7 @@ package com.gamestore.models;
 
 /**
  *
- * @author roger
+ * @author Elison Evaristo
  */
 public enum TipoTelefone {
     residencial(1, "Residencial", "Res."),

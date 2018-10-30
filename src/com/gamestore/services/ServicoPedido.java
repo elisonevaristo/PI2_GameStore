@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author roger
+ * @author Elison Evaristo
  */
 public class ServicoPedido  extends ServicoBase<Pedido> {
         

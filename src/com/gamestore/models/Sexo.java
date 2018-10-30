@@ -2,7 +2,7 @@ package com.gamestore.models;
 
 /**
  *
- * @author roger
+ * @author Elison Evaristo
  * Este Enum tem a função de representar o domínio "Sexo" para a classe cliente;
  */
 public enum Sexo {

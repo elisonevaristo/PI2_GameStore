@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author roger
+ * @author Elison Evaristo
  * @param <T> A classe filha que implementa as funções mais específicas do serviço.
  */
 public class ServicoBase<T extends ItemComId> {

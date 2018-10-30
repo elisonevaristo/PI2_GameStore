@@ -9,7 +9,7 @@ import com.gamestore.main.GameStore;
 
 /**
  *
- * @author Roger
+ * @author Elison Evaristo
  */
 public class SelecaoInicial extends javax.swing.JPanel {
 

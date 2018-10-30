@@ -7,7 +7,8 @@ package com.gamestore.models;
 
 /**
  *
- * @author roger
+ * @author Elison Evaristoe
+ * 
  */
 //public class Console extends Produto implements IProduto {
 //    private String fabricante;    
